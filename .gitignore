@@ -5,6 +5,9 @@
 
 *.bbl
 *.blg
+*.glo
+*.ist
+*.toc
 *.aux
 *.fdb_latexmk
 *.fls
