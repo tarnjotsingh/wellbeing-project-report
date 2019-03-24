@@ -1,3 +1,10 @@
+=== Visual Studio Code ===
+.vscode
+
+=== LaTeX build ===
+
+*.bbl
+*.blg
 *.aux
 *.fdb_latexmk
 *.fls

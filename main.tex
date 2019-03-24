@@ -1,15 +1,19 @@
 % !TeX root = ./main.tex
-\documentclass[a4paper, 12pt]{article}
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{glossaries}
+\makeglossaries
 
-\begin{document}
 \title{\Large{\textbf{Student Wellbeing Project}}}
 \author{By Tarnjot Virdee}
 \date{29th April 2019}
 
+\begin{document}
+
 \maketitle
-
-\newpage
-
+\clearpage
+\tableofcontents
+\clearpage
 
 \input{sections/introduction.tex}
 \input{sections/problemArticulationAndObjective.tex}
@@ -21,7 +25,7 @@
 \input{sections/slease.tex}
 
 
-\bibliographystyle{plain}
+\bibliographystyle{ieeetr}
 \bibliography{bibliography/references}
 
 \end{document}
