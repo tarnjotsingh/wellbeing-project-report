@@ -9,7 +9,7 @@ Since this report revolves around the topic of student wellbeing, it is importan
 It is defined as a sustainable state of positive mood and attitude, resilience, and satisfaction with self, relationships and experiences at school \cite{noble2008scoping}.
 The part referring to a sustainable state is important to focus on. All humans endure fluctuations their emotional state within their lives, but a real problem occurs when their emotional state is not sustainable.
 There are many factors that can play into poor mental health. Stress tends to be one of the main issues. 
-Stress arouses feelings of fear, incompetence, uselessness, anger and guilt \cite{turunen2014indoor}. 
+Stress arouses feelings of fear, incompetence, uselessness, anger and guilt \cite{turunen2014indoor}, it can be expected that this will lead to behavioural changes. 
 To some, these attributes that stem from stress can act as a form of motivation, however not all are able to do such a thing.
 Those that are unable to cope with stresses from university studies will, unfortunately, struggle to focus on assignments and revision for exams.
 A study by HSBC, found a correlation between disadvantaged social circumstances with increased health risks \cite{currie2009social}.
@@ -18,30 +18,92 @@ While talking about students, it is important to recognise that there may be dee
 Most disorders that pertain to mental health first start developing between the ages of 15 and 20 years of age \cite{kessler2005lifetime}.
 By taking this fact into account, 15\% to 20\% of individuals who fall into this category (youth\cite{youth2017definition}) are affect by some sort of mental disorder; the majority whom suffer from an anxiety order. 
 The study, conducted by The university Of British Columbia, therefore came an approximate figure of 140,000 children and youth who suffer from a mental disorder. 
-Considering that, in 2017/18, there were X number of youth that progress into higher education....
+UCAS have reported that, on average across the United Kingdom, that 27\% of people aged 18 years old had been accepted into universities \cite{ucas_2018}.
+This percentage makes up a total of 353,960 students. 
+After applying the 15\% estimate, there are likely around 53,000 students that are starting their university life, in 2018, with undiagnosed mental health problems.
 
-% Ways to measure the affects of the mental health of students
+Stigmas/stereotypes associated with having such a condition are accepted in western societies\cite{corrigan2002paradox}.
+By acknowledging this, one can understand how it is difficult for these individuals to engage in constructive discussions.
+Anonymising feedback for those that wish to get help without anybody judging would be a good place to start. 
 
-% How much of a problem is it among students and how does it affect them?
+% \subsection{Creating meaningful surveys}
+\subsection{What makes a good survey creation tool?}
+
+The main objective of this project is to provide the necessary tools for health experts to curate surveys for students to respond to.
+Data from completed surveys can be used to direct students to appropriate resources depending on choices for each question.
 
 
+\subsection{Web-app architectures}
+In the world of software engineering, there are many approaches to solve a single problem.
+Throughout the years, along with the evolution of technology, approaches have changed to ensure that products are
+can be developed and maintained in a manner and time that allows businesses to adapt and react to ever changing markets. 
+One of the main concerns of a business is to grow [citation], this is why having an architecture in place that is scalable is
+critical to maintain a competitive edge and meet the demands of customers.
 
-\subsection{Creating meaningful surveys}
+There are common architecture approaches used when developing a web application.
+A recent article by Microsoft listed approaches typically taken as of 2019. 
+Monolithic and n-layer approaches are the typical avenues taken by software developers in recent years\cite{ardalis_common}.
+An architecture model is chosen based on what is required and how quickly an application needs to be developed.
 
-\subsection{Backend technologies}
+\subsubsection{Monolithic}
+Monolith applications is one that is entirely self-contained, in terms of its behaviour\cite{ardalis_common}.
+It may interact with other services or data stores, but the core functionality is shipped as a single unit.
+
+The main motivation for wanting to deploy an application built this way is how it is easier to deploy\cite{namiot2014micro}.
+Issues arise with this approach is when new features need to be added. The need to grow the feature set of an application likely means
+more developers need to be recruited. A large, intertwined, codebase generally requires new recruits to spend a lot more time learning
+how the existing codebase functions and understand how to correctly implement new code that does not compromise the existing stability.
+A lot of communication will be required by a team, while developing features, to ensure compatibility.
+This results in a lot of wasted time as it fundamentally compromises productivity and may result in poor quality code to meet deadlines.
+In order to scale such an application, the only clear approach would be to run multiple instances of it behind a load balancer.
+This is a very inflexible way to adapt to growing demand for a service.
+Due to how multiple instances of the same application will be required, the resources required will also need to scale at the same rate.
+For large companies, this is just un-feasible due to the costs for either buying or renting the resources. 
+
+Ideally monolith application should only be used while developing initial prototypes. If they are to be deployed in production environments,
+it should really only be for very small client bases that are unlikely to need extensive scaling.
+
+\subsubsection{N-layer}
+
+Modern web architectures, in production environments, typically adopt a three tier approach which is a client-server architecture approach.
+This approach to software design allows presentation, data processing and data storage functionalities to be separated.
+A result of this is that three distinct layers to the project can be worked on independently from one another; even separate teams for
+each product layer. 
+
+Less learning will be required for new recruits due to less code, compared with a monolith codebase, needing to be learned.
+Scaling an application that utilises a layered architecture approach would be a lot easier to scale due to the independence of each layer.
+
+\subsection{Web-app technologies}
+A presentation layer provides an interface, typically as a web user interface.
+The application layer is where all business logic would occur and facilitates features of an application.
+Majority of the time, applications will be required to store data produced by end users. A data store, typically a database, is
+used to do this.
+
+\subsubsection{Data layer technologies}
+Section talking about different ways to store data and discussing the different database types
+that will allow someone to store this data. Talk about relational and non-relational databases and
+state why one is better than the other. You don't have to come to a conclusion here, just discuss
+the different options.
+
+\subsubsection{Application layer technologies}
+Modern web architectures tend to rely on a three layer approach. 
 Covering topics of:
 \begin{enumerate}
-    \item Springboot
+    \item Java Springboot
+    \item Nodejs
+    \item Python
     \item RESTful APIs
     \item Microservice - might be worthwhile to look into breaking up user service from main service.
     \item Any other topics that pertain to how the backend has been built
 \end{enumerate}
 
 
-\subsection{Frontend technologies}
+\subsubsection{Presentation layer technologies}
 Covering topics of:
 \begin{enumerate}
     \item ReactJs for creating the front end
+    \item Angular Js 
+    \item Any other potential candidates for front end
     \item Discuss why this javascript framework was chosen (how it can be ported to react native in the future for example...
 \end{enumerate}
 
