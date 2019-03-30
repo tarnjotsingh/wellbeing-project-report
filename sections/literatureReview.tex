@@ -26,7 +26,6 @@ Stigmas/stereotypes associated with having such a condition are accepted in west
 By acknowledging this, one can understand how it is difficult for these individuals to engage in constructive discussions.
 Anonymising feedback for those that wish to get help without anybody judging would be a good place to start. 
 
-% \subsection{Creating meaningful surveys}
 \subsection{What makes a good survey creation tool?}
 
 The main objective of this project is to provide the necessary tools for health experts to curate surveys for students to respond to.
@@ -74,18 +73,40 @@ Less learning will be required for new recruits due to less code, compared with 
 Scaling an application that utilises a layered architecture approach would be a lot easier to scale due to the independence of each layer.
 
 \subsection{Web-app technologies}
-A presentation layer provides an interface, typically as a web user interface.
+
+\subsubsection{Presentation layer technologies}
+A user interface for a web based application is found as part of the presentation layer.
+This front end application will rely heavily on the need to send and receive requests from a server application (application layer) as 
+it drives the core business functions.
+As it is an application, technologies that allow for dynamic interactions with the web page are required.
+
+HTML (Hyper Text Markup Language) with CSS (Cascading Style Sheets) are core technologies for building web pages\cite{w3c_html_css}.
+Structure of a web page is defined by HTML whereas styling and layout is defined by the CSS used.
+Web applications need to enable interactivity with the end user; HTML and CSS alone cannot achieve this.
+Javascript is predominately used to provide dynamic behaviour and is based off the ECMAScript standard\cite{stefanov2010javascript}.
+Through the large amount of support Javascript has had over the years, a number of frameworks and libraries have come about.
+A focus will be made on three of the most popular tools for creating professional user interfaces; Angular, React and Vue\cite{stateofjs_2018}.
+
+\subsubsection*{Angular}
+Angular is a framework developed by Google and is TypeScript based open-source frontend application platform.
+\subsubsection*{React} 
+React was originally created by engineers at Facebook to solve the challenges involved when developing complex user interfaces with datasets 
+that change over time\cite{gackenheimer2015introduction}. 
+\subsubsection*{Vue}
+Talk about Vue.
+
+Covering topics of:
+\begin{enumerate}
+    \item ReactJs for creating the front end
+    \item Angular Js 
+    \item Any other potential candidates for front end
+    \item Discuss why this javascript framework was chosen (how it can be ported to react native in the future for example...
+\end{enumerate}
+
+\subsubsection{Application layer technologies}
 The application layer is where all business logic would occur and facilitates features of an application.
 Majority of the time, applications will be required to store data produced by end users. A data store, typically a database, is
 used to do this.
-
-\subsubsection{Data layer technologies}
-Section talking about different ways to store data and discussing the different database types
-that will allow someone to store this data. Talk about relational and non-relational databases and
-state why one is better than the other. You don't have to come to a conclusion here, just discuss
-the different options.
-
-\subsubsection{Application layer technologies}
 Modern web architectures tend to rely on a three layer approach. 
 Covering topics of:
 \begin{enumerate}
@@ -97,15 +118,28 @@ Covering topics of:
     \item Any other topics that pertain to how the backend has been built
 \end{enumerate}
 
+\subsubsection*{NodeJS Framework}
+NodeJS Javascript framework stuff here.
 
-\subsubsection{Presentation layer technologies}
-Covering topics of:
+\subsubsection*{Java Spring Framework}
+Java Spring Framework/SpringBoot stuff here.
+
+\subsubsection{Data layer technologies}
+Section talking about different ways to store data and discussing the different database types
+that will allow someone to store this data. Talk about relational and non-relational databases and
+state why one is better than the other. You don't have to come to a conclusion here, just discuss
+the different options.
+
+
+\subsection{Security concerns}
+
+Can do a section with regards to security concerns such as SQL Injection and other vulnerabilities.
+Can reference this later when arguing why using the technologies that you have are the best choice.
+Sub section to do with web security.
 \begin{enumerate}
-    \item ReactJs for creating the front end
-    \item Angular Js 
-    \item Any other potential candidates for front end
-    \item Discuss why this javascript framework was chosen (how it can be ported to react native in the future for example...
+    \item HTTPS, SSL, TLS
+    \item Oauth2 or just to do with signing in stuff.
+    \item JWT
+    \item Sessions
+    \item Possibly explore other common vulnerabilities in the web
 \end{enumerate}
-
-
-
