@@ -16,13 +16,13 @@ A study by HSBC, found a correlation between disadvantaged social circumstances 
 While talking about students, it is important to recognise that there may be deeper stemmed issues within the lives of certain students that may affect them when entering higher education.
 
 Most disorders that pertain to mental health first start developing between the ages of 15 and 20 years of age \cite{kessler2005lifetime}.
-By taking this fact into account, 15\% to 20\% of individuals who fall into this category (youth\cite{youth2017definition}) are affect by some sort of mental disorder; the majority whom suffer from an anxiety order. 
+By taking this fact into account, 15\% to 20\% of individuals who fall into this category (youth \cite{youth2017definition}) are affect by some sort of mental disorder; the majority whom suffer from an anxiety order. 
 The study, conducted by The university Of British Columbia, therefore came an approximate figure of 140,000 children and youth who suffer from a mental disorder. 
 UCAS have reported that, on average across the United Kingdom, that 27\% of people aged 18 years old had been accepted into universities \cite{ucas_2018}.
 This percentage makes up a total of 353,960 students. 
 After applying the 15\% estimate, there are likely around 53,000 students that are starting their university life, in 2018, with undiagnosed mental health problems.
 
-Stigmas/stereotypes associated with having such a condition are accepted in western societies\cite{corrigan2002paradox}.
+Stigmas/stereotypes associated with having such a condition are accepted in western societies \cite{corrigan2002paradox}.
 By acknowledging this, one can understand how it is difficult for these individuals to engage in constructive discussions.
 Anonymising feedback for those that wish to get help without anybody judging would be a good place to start. 
 
@@ -41,14 +41,14 @@ critical to maintain a competitive edge and meet the demands of customers.
 
 There are common architecture approaches used when developing a web application.
 A recent article by Microsoft listed approaches typically taken as of 2019. 
-Monolithic and n-layer approaches are the typical avenues taken by software developers in recent years\cite{ardalis_common}.
+Monolithic and n-layer approaches are the typical avenues taken by software developers in recent years \cite{ardalis_common}.
 An architecture model is chosen based on what is required and how quickly an application needs to be developed.
 
 \subsubsection{Monolithic}
-Monolith applications is one that is entirely self-contained, in terms of its behaviour\cite{ardalis_common}.
+Monolith applications is one that is entirely self-contained, in terms of its behaviour \cite{ardalis_common}.
 It may interact with other services or data stores, but the core functionality is shipped as a single unit.
 
-The main motivation for wanting to deploy an application built this way is how it is easier to deploy\cite{namiot2014micro}.
+The main motivation for wanting to deploy an application built this way is how it is easier to deploy \cite{namiot2014micro}.
 Issues arise with this approach is when new features need to be added. The need to grow the feature set of an application likely means
 more developers need to be recruited. A large, intertwined, codebase generally requires new recruits to spend a lot more time learning
 how the existing codebase functions and understand how to correctly implement new code that does not compromise the existing stability.
@@ -80,28 +80,61 @@ This front end application will rely heavily on the need to send and receive req
 it drives the core business functions.
 As it is an application, technologies that allow for dynamic interactions with the web page are required.
 
-HTML (Hyper Text Markup Language) with CSS (Cascading Style Sheets) are core technologies for building web pages\cite{w3c_html_css}.
+HTML (Hyper Text Markup Language) with CSS (Cascading Style Sheets) are core technologies for building web pages \cite{w3c_html_css}.
 Structure of a web page is defined by HTML whereas styling and layout is defined by the CSS used.
 Web applications need to enable interactivity with the end user; HTML and CSS alone cannot achieve this.
-Javascript is predominately used to provide dynamic behaviour and is based off the ECMAScript standard\cite{stefanov2010javascript}.
+Javascript is predominately used to provide dynamic behaviour and is based off the ECMAScript standard \cite{stefanov2010javascript}.
 Through the large amount of support Javascript has had over the years, a number of frameworks and libraries have come about.
-A focus will be made on three of the most popular tools for creating professional user interfaces; Angular, React and Vue\cite{stateofjs_2018}.
+A focus will be made on three of the most popular tools for creating professional user interfaces; Angular, React and Vue \cite{stateofjs_2018}.
+
+\subsubsection*{W3C Document Object Model (DOM)}
+It is important to define what DOM is before discussing JavaScript frameworks and technologies due to the reliance on the manipulation of the DOM to 
+create dynamic web pages that users can interact with.
+DOM is a W3C standard that defines a language and platform-neutral application programming interface (API) for accessing, navigating, and 
+manipulation of HTML and XML documents.
+It defines the logical structure of documents and the way a document is accessed and manipulated \cite{wood1999programming}.
+The main benefit of the DOM is the way it allows programmers to build documents, navigate its structure and manipulate elements on that page.
+JavaScript allows web pages to become dynamic as it facilitates the, on the fly, manipulation of the DOM for a HTML document.
 
 \subsubsection*{Angular}
-Angular is a framework developed by Google and is TypeScript based open-source frontend application platform.
+Angular is a JavaScript MVC framework created by Google to properly architecture and maintain web applications.
+It embraces extending HTML into a more expressive and readable format. 
+Since Angular is built and maintained by Google, there is a large community available that developers can learn from.
+Angular evaluates the markup of a HTML document only after it has been loaded into the DOM.
+This approach brings about three key benefits.
+
+As stated, Angular only starts evaluating a page after the main loading process has been completed.
+The main advantage of this is that it allows developers to start implementing Angular code into existing pages.
+Since Angular is completely rendered on the client-side, it removes the need for any server or build process. 
+If code has been added into a HTML page, it can be opened up into a browser and have scripts be executed straight away.
+Extensibility is another great feature of Angular where the option to create custom elements is available for developers.
+Developers can also define how an element is rendered and assign behaviours to it; allowing custom libraries to be built \cite{jain2015angularjs}.
+
 \subsubsection*{React} 
 React was originally created by engineers at Facebook to solve the challenges involved when developing complex user interfaces with datasets 
-that change over time\cite{gackenheimer2015introduction}. 
-\subsubsection*{Vue}
-Talk about Vue.
+that change over time \cite{gackenheimer2015introduction}. 
+Unlike Angular, which is a framework, React is a library of tools that developers can use to create interactive pages.
+Developers, over the years, have wanted to get away from directly interacting with the DOM due to how unfriendly it was for many.
+The aim of React is to avoid this direct interaction with the DOM and instead deal with a virtual DOM that abstracts away from
+the real one. This approach greatly simplifies the programming model involved while improving performance \cite{staff2016react}.
 
-Covering topics of:
-\begin{enumerate}
-    \item ReactJs for creating the front end
-    \item Angular Js 
-    \item Any other potential candidates for front end
-    \item Discuss why this javascript framework was chosen (how it can be ported to react native in the future for example...
-\end{enumerate}
+A big problem Facebook faced was keeping the user interface in sync with both the business logic and the state of the application.
+Normally you would have to use a centralised event bus, by putting events into the queue or by having listeners for the event that would then go
+ahead and make the necessary changes to a page. 
+For programmers, this was overly cumbersome. Hence the desire to innovate to solve this problem.
+React applications are able to automatically re-render themselves when there has been a change to the underlying data model.
+A diff (comparison between before and after) is conducted to observe what has actually changed. The components that have exhibited a change are the
+only ones to get re-rendered \cite{staff2016react}.
+
+\subsubsection*{Vue}
+Created by Evan You, Vue was created out of the need to quickly prototype a large user interface.
+Rather than writing out a lot of repeated HTML, there was a desire to find a framework or tool that may already exists that solves the exact problem Evan had.
+At that time Angular was widely used and React had only started. As great as these technologies were at the time, they were not flexible and lightweight
+enough for fast prototyping of user interfaces. Though Vue started off as a tool for fast prototyping, it has matured over the
+years to become something developers can use to build complex, scalable and reactive web pages \cite{filipova2016learning}.
+The core library, for Vue, is focused on the view layer only, and is very easy to pick up and integrate with other libraries or existing projects \cite{koetsier2016evaluation}.
+Similarities can be drawn to React where both use a virtual DOM and have components that can be reused.
+
 
 \subsubsection{Application layer technologies}
 The application layer is where all business logic would occur and facilitates features of an application.
