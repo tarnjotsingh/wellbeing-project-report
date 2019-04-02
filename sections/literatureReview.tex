@@ -142,41 +142,94 @@ Similarities can be drawn to React where both use a virtual DOM and have compone
 https://vuejs.org/v2/guide/comparison.html comparisons between React and Vue from official Vue website.
 
 
-\subsection{Web services API}
+\subsection{Web services API} \label{web services}
 An API (application programming interface) that allows two independent components of an application to communicate with one another.
-SOAP and REST are two widely used technologies that are used when developing a "web services" API.
+SOAP and REST are two widely used technologies that are used when developing a web services API.
+
+\subsubsection{Web 2.0}
+Before being able to understand why SOAP and REST have come about, it is important for the reader to have a basic understanding what is meant by Web 2.0 and how it.
+The term has been around since 2005 but has been a controversial subject. It has mostly been controversial due to a lack of agreement on what exactly is meant
+by the term \cite{constantinides2008web}. For the purposes of this paper, the following definition from Techopedia will be used:
+\begin{quotation}
+    \textit{
+        Web 2.0 is the name used to the describe the second generation of the world wide web, where it moved static HTML pages to a more interactive and 
+        dynamic web experience.
+        Web 2.0 is focused on the ability for people to collaborate and share information online via social media, blogging and Web-based
+    }
+    \cite{web2definition}. 
+    
+\end{quotation} 
 
 \subsubsection{SOAP}
-SOAP
+SOAP (Simple Object Access Protocol) is a lightweight protocol for exchange of information in a decentralised, distributed environment.
+It is, exclusively, an XML based protocol and has three distinct parts to it: an envelope defining a framework for what is in a message and how to process it, 
+a set of encoding rules for expressing instances of application-defined datatypes, and a convention for representing remove procedure calls and responses \cite{box2000simple}.
+Version 1.1 of SOAP specification, published on 8 May 2000, did not pass W3C recommendation status. It was only 24 June 2003 that it finally became a W3C recommendation;
+making it accepted as an industry standard. 
 
 \subsubsection{REST}
-REST
+REST (Representational State Transfer) is a pattern of resource operations that has emerged as the standard for service service design in Web 2.0 applications.
+REST’s simplicity, along with its natural fit over HTTP, has contributed to its status as a method of choice for Web 2.0 applications.
+to expose their data. 
+Resources in a RESTful service are both identified by and resolved with a URL \cite{battle2008bridging}.
+The typical form you would see a URL in is: 
+
+\begin{quotation}
+    http://localhost:8080/Host/ApplicationPath/ResourceType/ResourceID
+\end{quotation}
+
+The core of any REST based design are CRUD (Create Read Update Delete) operations to deal with data stored on system.
+In order to perform CRUD operations, REST utilises HTTP requests POST, GET, PUT and DELETE.
+A great benefit of REST-based web design is the ability to use HTTP Headers to provide request context around each of theCRUD operations.
+A request to a particular resource might result in HTML, XML, or JSON (compared to exclusively using XML with SOAP) depending on the desired
+media type transmitted in the HTTP Accept header \cite{battle2008bridging}.
+
+% Table to show a simple representation between CRUD to HTTP requests...
+\begin{table} [h]
+    \begin{center}
+        \begin{tabular}{ |l|l|l| }
+            \hline
+            CRUD Operation & HTTP Request & Response format\\
+            \hline
+            Create & POST & 201 CREATED\\ 
+            Read & GET & Determined by request headers\\  
+            Update & PUT & 200 OK \\   
+            Delete & DELETE & 200 OK \\
+            \hline
+        \end{tabular}
+        \caption{CRUD operation to HTTP request mapping}
+        \label{Table:1}
+    \end{center}           
+\end{table}
 
 \subsection{Application layer (back-end) technologies}
 The application layer is where all business logic would occur and facilitates features of an application.
 Majority of the time, applications will be required to store data produced by end users. A data store, typically a database, is
 used to do this.
 In order for a front end component of the application to request data from the application layer, an API(application programming interface) needs
-to be provided. The API provided, is what will allow the client-side JavaScript application to "plug" into the server as all the main 
-business logic will be executed server side.
-For web applications, there are two standards for creating an API; SOAP and REST.
+to be provided. The API provided, is what will allow the client-side JavaScript application to ``plug'' into the server to provide the business
+logic. 
+Modern web applications (Web 2.0), as discussed in section \ref{web services}, adopt REST as the standard way providing an API that can be used
+by client-side applications.
 
 
+This section will cover some technologies that are commonly used in industry to create the application layer for a web application.
 
-
-Modern web architectures tend to rely on a three layer approach. 
-Covering topics of:
-\begin{enumerate}
-    \item Java Springboot
-    \item Nodejs
-    \item Python
-    \item RESTful APIs
-    \item Microservice - might be worthwhile to look into breaking up user service from main service.
-    \item Any other topics that pertain to how the backend has been built
-\end{enumerate}
+% \begin{enumerate}
+%     \item Java Springboot
+%     \item Nodejs
+%     \item Python
+%     \item Microservice - might be worthwhile to look into breaking up user service from main service.
+%     \item Any other topics that pertain to how the backend has been built
+% \end{enumerate}
 
 \subsubsection{NodeJS Framework}
-NodeJS Javascript framework stuff here.
+NodeJS is a server-side JavaScript environment. It is based on Google's runtime implementation called the ``V8'' engine.
+V8 and Node are mostly implemented in C and C++, allowing for high-performance runtime with low memory usage.
+The difference between V8 and Node is where V8 mainly supports JavaScript in the browser, Node aims to support long-running 
+server processes \cite{tilkov2010node}.
+Compared to most other modern environments, instead of using multithreading, an asynchronous I/O eventing model is used.
+
 
 \subsubsection{Java Spring Framework}
 Java Spring Framework/SpringBoot stuff here.
