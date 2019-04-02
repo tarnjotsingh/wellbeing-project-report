@@ -72,9 +72,7 @@ each product layer.
 Less learning will be required for new recruits due to less code, compared with a monolith codebase, needing to be learned.
 Scaling an application that utilises a layered architecture approach would be a lot easier to scale due to the independence of each layer.
 
-\subsection{Web-app technologies}
-
-\subsubsection{Presentation layer technologies}
+\subsection{Presentation layer (front-end) technologies}
 A user interface for a web based application is found as part of the presentation layer.
 This front end application will rely heavily on the need to send and receive requests from a server application (application layer) as 
 it drives the core business functions.
@@ -87,7 +85,7 @@ Javascript is predominately used to provide dynamic behaviour and is based off t
 Through the large amount of support Javascript has had over the years, a number of frameworks and libraries have come about.
 A focus will be made on three of the most popular tools for creating professional user interfaces; Angular, React and Vue \cite{stateofjs_2018}.
 
-\subsubsection*{W3C Document Object Model (DOM)}
+\subsubsection{W3C Document Object Model (DOM)}
 It is important to define what DOM is before discussing JavaScript frameworks and technologies due to the reliance on the manipulation of the DOM to 
 create dynamic web pages that users can interact with.
 DOM is a W3C standard that defines a language and platform-neutral application programming interface (API) for accessing, navigating, and 
@@ -96,7 +94,7 @@ It defines the logical structure of documents and the way a document is accessed
 The main benefit of the DOM is the way it allows programmers to build documents, navigate its structure and manipulate elements on that page.
 JavaScript allows web pages to become dynamic as it facilitates the, on the fly, manipulation of the DOM for a HTML document.
 
-\subsubsection*{Angular}
+\subsubsection{Angular}
 Angular is a JavaScript MVC framework created by Google to properly architecture and maintain web applications.
 It embraces extending HTML into a more expressive and readable format. 
 Since Angular is built and maintained by Google, there is a large community available that developers can learn from.
@@ -110,7 +108,7 @@ If code has been added into a HTML page, it can be opened up into a browser and 
 Extensibility is another great feature of Angular where the option to create custom elements is available for developers.
 Developers can also define how an element is rendered and assign behaviours to it; allowing custom libraries to be built \cite{jain2015angularjs}.
 
-\subsubsection*{React} 
+\subsubsection{React} 
 React was originally created by engineers at Facebook to solve the challenges involved when developing complex user interfaces with datasets 
 that change over time \cite{gackenheimer2015introduction}. 
 Unlike Angular, which is a framework, React is a library of tools that developers can use to create interactive pages.
@@ -125,8 +123,14 @@ For programmers, this was overly cumbersome. Hence the desire to innovate to sol
 React applications are able to automatically re-render themselves when there has been a change to the underlying data model.
 A diff (comparison between before and after) is conducted to observe what has actually changed. The components that have exhibited a change are the
 only ones to get re-rendered \cite{staff2016react}.
+ 
+An extension to React, for creating native mobile applications, is called React Native. Unlike ReactJS, which is a JavaScript library,
+React Native is a framework. 
+This framework is based on ReactJS, but instead of targeting a browser application, it targets mobile platforms.
+The idea behind this is to allow developers to write, fluid, native applications from the comfort and familiarity of an established library.
+Code can be shared between platforms; making it easy to develop for both iOS and Android \cite{eisenman2015learning}.
 
-\subsubsection*{Vue}
+\subsubsection{Vue}
 Created by Evan You, Vue was created out of the need to quickly prototype a large user interface.
 Rather than writing out a lot of repeated HTML, there was a desire to find a framework or tool that may already exists that solves the exact problem Evan had.
 At that time Angular was widely used and React had only started. As great as these technologies were at the time, they were not flexible and lightweight
@@ -135,13 +139,31 @@ years to become something developers can use to build complex, scalable and reac
 The core library, for Vue, is focused on the view layer only, and is very easy to pick up and integrate with other libraries or existing projects \cite{koetsier2016evaluation}.
 Similarities can be drawn to React where both use a virtual DOM and have components that can be reused.
 
-https://vuejs.org/v2/guide/comparison.html comparisions between React and Vue from official Vue website.
+https://vuejs.org/v2/guide/comparison.html comparisons between React and Vue from official Vue website.
 
 
-\subsubsection{Application layer technologies}
+\subsection{Web services API}
+An API (application programming interface) that allows two independent components of an application to communicate with one another.
+SOAP and REST are two widely used technologies that are used when developing a "web services" API.
+
+\subsubsection{SOAP}
+SOAP
+
+\subsubsection{REST}
+REST
+
+\subsection{Application layer (back-end) technologies}
 The application layer is where all business logic would occur and facilitates features of an application.
 Majority of the time, applications will be required to store data produced by end users. A data store, typically a database, is
 used to do this.
+In order for a front end component of the application to request data from the application layer, an API(application programming interface) needs
+to be provided. The API provided, is what will allow the client-side JavaScript application to "plug" into the server as all the main 
+business logic will be executed server side.
+For web applications, there are two standards for creating an API; SOAP and REST.
+
+
+
+
 Modern web architectures tend to rely on a three layer approach. 
 Covering topics of:
 \begin{enumerate}
@@ -153,13 +175,13 @@ Covering topics of:
     \item Any other topics that pertain to how the backend has been built
 \end{enumerate}
 
-\subsubsection*{NodeJS Framework}
+\subsubsection{NodeJS Framework}
 NodeJS Javascript framework stuff here.
 
-\subsubsection*{Java Spring Framework}
+\subsubsection{Java Spring Framework}
 Java Spring Framework/SpringBoot stuff here.
 
-\subsubsection{Data layer technologies}
+\subsection{Data layer technologies}
 Section talking about different ways to store data and discussing the different database types
 that will allow someone to store this data. Talk about relational and non-relational databases and
 state why one is better than the other. You don't have to come to a conclusion here, just discuss
