@@ -223,11 +223,13 @@ This section will cover some technologies that are commonly used in industry to 
 %     \item Any other topics that pertain to how the backend has been built
 % \end{enumerate}
 
-\subsubsection{NodeJS Framework}
+\subsubsection{NodeJS}
 NodeJS is a server-side JavaScript environment. It is based on Google's runtime implementation called the ``V8'' engine.
 V8 and Node are mostly implemented in C and C++, allowing for high-performance runtime with low memory usage.
 The difference between V8 and Node is where V8 mainly supports JavaScript in the browser, Node aims to support long-running 
 server processes \cite{tilkov2010node}.
+As an asynchronous event driven JavaScript runtime, Node is designed to build scalable network applications. 
+Upon each connection the callback is fired, but if there is no work to be done, Node will sleep; freeing resources \cite{nodejs2019}.
 Compared to most other modern environments, instead of using multithreading, an asynchronous I/O eventing model is used.
 
 
