@@ -198,7 +198,6 @@ media type transmitted in the HTTP Accept header \cite{battle2008bridging}.
             \hline
         \end{tabular}
         \caption{CRUD operation to HTTP request mapping}
-        \label{Table:1}
     \end{center}           
 \end{table}
 
@@ -215,26 +214,68 @@ by client-side applications.
 
 This section will cover some technologies that are commonly used in industry to create the application layer for a web application.
 
-% \begin{enumerate}
-%     \item Java Springboot
-%     \item Nodejs
-%     \item Python
-%     \item Microservice - might be worthwhile to look into breaking up user service from main service.
-%     \item Any other topics that pertain to how the backend has been built
-% \end{enumerate}
-
 \subsubsection{NodeJS}
 NodeJS is a server-side JavaScript environment. It is based on Google's runtime implementation called the ``V8'' engine.
 V8 and Node are mostly implemented in C and C++, allowing for high-performance runtime with low memory usage.
 The difference between V8 and Node is where V8 mainly supports JavaScript in the browser, Node aims to support long-running 
 server processes \cite{tilkov2010node}.
 As an asynchronous event driven JavaScript runtime, Node is designed to build scalable network applications. 
-Upon each connection the callback is fired, but if there is no work to be done, Node will sleep; freeing resources \cite{nodejs2019}.
-Compared to most other modern environments, instead of using multithreading, an asynchronous I/O eventing model is used.
+Upon each connection the callback is fired, but if there is no work to be done, Node will sleep; freeing resources \cite{nodejs2016}.
 
+One of the key advantages that NodeJS has over other solutions is the way it handles I/O.
+Servers that implement multi-threading dedicate a thread to each browser connection in an attempt to prevent blocking calls being made \cite{frees2015place}.
+Blocking is when the execution of additional JavaScript in the Node.js process must wait until a non-JavaScript operation completes \cite{nodejs2019blocking}. 
+Managing resources can be challenging with this approach, especially when dealing with a large number of connections.
+NodeJS only runs on a single thread and deals with the blocking issue by exposing asynchronous APIs.
+Asynchronous operations are generally a ``fire and forget'' type of operation; the reason why it solves the issue of blocking.
+Node Package Manager (NPM) has also been a key tool in increasing the popularity of NodeJS. 
+
+A simple HTTP server is very easy to create; only taking a few lines of code to get running. 
+This type of simplicity that NodeJS provides a more productive environment for developers as there is little configuration to do;
+especially when developing initial prototypes.
+
+\begin{figure}[htb]
+    \begin{lstlisting}[language=JavaScript]
+    var http = require("http")
+
+    /* Create a server that returns a basic html response
+     * Runs on localhost on port 3000 */
+    http.createServer(function(req, res){
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end("<!doctype html><html><body><p>Hello World!</p></body></html>");
+    }).listen(3000, "127.0.0.1");
+    \end{lstlisting}
+    \caption{Simple NodeJS HTTP server listening on port 3000}
+\end{figure}
+
+Though NodeJS has strong benefits, there are many problems surrounding it that prevent it being used more widely in industry.
+Due to the single threaded nature, performance is poor when performing CPU intensive operations.
+Several simple tasks (such as read/write database queries) can be queued in the background without blocking the main thread while
+maintain fast execution speed. 
+Due to the asynchronous nature of JavaScript, NodeJS relies heavily on callbacks to know when an operation has completed.
+The term "callback hell" is prominent in the JavaScript community due to cumbersome nature of having to deal with them \cite{altexsoftnodejs}.
+An example developers face, is to do with error-handling. The built in try/catch mechanism does network with asynchronous callbacks \cite{gallaba2015don}.
+Instead workarounds are used to address issues such as this and are taken as a standard approach for performing such actions.
+For developers that are used writing code that executes on multiple threads in a synchronous fashion, it can be difficult for them to
+develop with asynchronous calls in mind.
 
 \subsubsection{Java Spring Framework}
+%Advantages, disadvantages, basic overview of features
 Java Spring Framework/SpringBoot stuff here.
+
+\begin{enumerate}
+    \item fast
+    \item can implement multithreading if required
+    \item Supports everything node js does; async is available in Java
+    \item mature set of tools that are tried and tested over the years; standards in place.
+    \item lots of support
+    \item biggest drawback being that there is a lot of configuration involved in Java
+    \item But that's where springboot comes in and solves the problem; can get a server running very quickly
+    \item Is a lot more verbose than than nodejs. More like C/C++ with statically typed code.
+    \item Probably uses more resources
+    \item Spring is more secure, lots of security options available to developers.
+\end{enumerate}
+
 
 \subsection{Data layer technologies}
 Section talking about different ways to store data and discussing the different database types
