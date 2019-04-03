@@ -228,7 +228,8 @@ Blocking is when the execution of additional JavaScript in the Node.js process m
 Managing resources can be challenging with this approach, especially when dealing with a large number of connections.
 NodeJS only runs on a single thread and deals with the blocking issue by exposing asynchronous APIs.
 Asynchronous operations are generally a ``fire and forget'' type of operation; the reason why it solves the issue of blocking.
-Node Package Manager (NPM) has also been a key tool in increasing the popularity of NodeJS. 
+Node Package Manager (NPM) has also been a key tool in increasing the popularity of NodeJS.
+In 2017, NPM had been reported to have over 350,000 packages \cite{linux2016stateofnpm}; demonstrating how active the community is.
 
 A simple HTTP server is very easy to create; only taking a few lines of code to get running. 
 This type of simplicity that NodeJS provides a more productive environment for developers as there is little configuration to do;
@@ -247,11 +248,11 @@ especially when developing initial prototypes.
     \end{lstlisting}
     \caption{Simple NodeJS HTTP server listening on port 3000}
 \end{figure}
-
 Though NodeJS has strong benefits, there are many problems surrounding it that prevent it being used more widely in industry.
 Due to the single threaded nature, performance is poor when performing CPU intensive operations.
 Several simple tasks (such as read/write database queries) can be queued in the background without blocking the main thread while
 maintain fast execution speed. 
+
 Due to the asynchronous nature of JavaScript, NodeJS relies heavily on callbacks to know when an operation has completed.
 The term "callback hell" is prominent in the JavaScript community due to cumbersome nature of having to deal with them \cite{altexsoftnodejs}.
 An example developers face, is to do with error-handling. The built in try/catch mechanism does network with asynchronous callbacks \cite{gallaba2015don}.
