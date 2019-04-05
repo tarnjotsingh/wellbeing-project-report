@@ -185,7 +185,7 @@ A request to a particular resource might result in HTML, XML, or JSON (compared 
 media type transmitted in the HTTP Accept header \cite{battle2008bridging}.
 
 % Table to show a simple representation between CRUD to HTTP requests...
-\begin{table} [h]
+\begin{table} [ht]
     \begin{center}
         \begin{tabular}{ |l|l|l| }
             \hline
@@ -248,6 +248,7 @@ especially when developing initial prototypes.
     \end{lstlisting}
     \caption{Simple NodeJS HTTP server listening on port 3000}
 \end{figure}
+
 Though NodeJS has strong benefits, there are many problems surrounding it that prevent it being used more widely in industry.
 Due to the single threaded nature, performance is poor when performing CPU intensive operations.
 Several simple tasks (such as read/write database queries) can be queued in the background without blocking the main thread while
@@ -261,39 +262,115 @@ For developers that are used writing code that executes on multiple threads in a
 develop with asynchronous calls in mind.
 
 \subsubsection{Java Spring Framework}
-%Advantages, disadvantages, basic overview of features
-Java Spring Framework/SpringBoot stuff here.
+% Basic introduction
+Java Spring is a framework designed to provide comprehensive infrastructure support for developing Java applications.
+Infrastructure is handled by Spring, allowing developers to be more productive in application development.
+The framework takes advantage of \textit{plain old java objects} (POJO) for building applications \cite{johnson2004spring}.
+SpringBoot makes creating a standalone Spring based application trivial. Minimal code and effort is required to create a SpringBoot 
+project \cite{webb2013spring}.
+Spring Initializer is a service provided by the creators as a way to quickly generate a SpringBoot application with a desired
+configuration and is available at: https://start.spring.io/.
+Integrated development environments (IDEs), such as IDEA's Intellij, also provide in-built tools for generating such projects.
 
-\begin{enumerate}
-    \item fast
-    \item can implement multithreading if required
-    \item Supports everything node js does; async is available in Java
-    \item mature set of tools that are tried and tested over the years; standards in place.
-    \item lots of support
-    \item biggest drawback being that there is a lot of configuration involved in Java
-    \item But that's where springboot comes in and solves the problem; can get a server running very quickly
-    \item Is a lot more verbose than than nodejs. More like C/C++ with statically typed code.
-    \item Probably uses more resources
-    \item Spring is more secure, lots of security options available to developers.
-\end{enumerate}
+% Advantages
+Just like with other technologies, such as NodeJS, creating a SpringBoot application is very easy. 
+A simple server, that will listen on a specified port, can be generated using the Initializer tool and be executed in little time.
+Java has a mature set of dependencies available that are widely used by many Java developers and can be dragged into a project with
+dependency managers (i.e Maven or Gradle).
+Unlike JavaScript, Java supports multi-threading which can be very useful in operations that are compute heavy.
+For certain operations that may cause blocking, Java has support for asynchronous executions though Java Futures.
+The Spring framework has great support for interfacing with databases.
+Users can create database entities as classes, allowing developers to and repository interfaces that removes the need for any SQL statements in the code itself.
+Spring security is an entire component to the Spring framework that focuses on providing security features to a Spring application.
 
+% Disadvantages
+Lots of learning is involved when creating a Spring based application.
+Due to how Java is a statically-typed language, this can prove overwhelming for some developers who are more used to dynamic languages 
+such as Python and Javascript.
+Java is not as productive to work in compared to other, simpler, languages such as Python and NodeJS.
+For quick prototyping, Java SpringBoot may not be the right choice for those that are not familiar with Spring already.
 
 \subsection{Data layer technologies}
 Section talking about different ways to store data and discussing the different database types
 that will allow someone to store this data. Talk about relational and non-relational databases and
 state why one is better than the other. You don't have to come to a conclusion here, just discuss
 the different options.
+\subsubsection{Relational databases}
+Stuff to do with relational databases with examples
+%Brief explanation with examples
 
+\subsubsection{Non-relational databases}
+% Brief explanation with examples.
 
-\subsection{Security concerns}
+Stuff to do with non-relational databses with examples
 
-Can do a section with regards to security concerns such as SQL Injection and other vulnerabilities.
-Can reference this later when arguing why using the technologies that you have are the best choice.
-Sub section to do with web security.
+\subsection{Web security}
+With any web application, security is a big concern that needs to be addressed.
+This section will cover some of the main methods, that have been adopted by industry, of securing a web application.
+
+\subsubsection{HTTPS, SSL and TLS}
+The security extension to the Hyper Text Transfer Protocol (HTTP), is known as HTTPS.
+It is used to establish a secure connection between two computers over a computer network and is used extensively used in the modern web.
+Many services that require secure connections, such as banking and e-mail, rely on HTTPS.
+HTTPS is based on the Transfer Layer Security (TLS) encrypted security protocol and supporting public key infrastructure (PKI).
+The public key infrastructure is composed of thousands of trusted Certificate Authorities (CAs).
+A Certificate Authority is an entity that issues digital certificates by associating a website public key with the respective domain name.
+
+The Secure Sockets Layer (SSL) has been succeeded by the Transport Layer Security (TLS) protocol.
+TLS and SSL are cryptographic protocols that operate below the application layer and provides end-to-end cryptographic security for
+applications protocols such as HTTPS and SMTP.
+On a client's first connection, both the client and server perform a TLS handshake. During the handshake process, the server will present
+the client with a X.509 digital certificate which is used to identify and authenticate the server to the client.
+The client will ensure that the certificate's identity matches the requested domain name, the certificate has not expired and the digital 
+signature of the certificate is valid.
+There is a public key that is associated with the certificate which is used by the client to share a session secret (session password)
+with the server to establish the secure connection  \cite{durumeric2013analysis}\cite{thomas2000ssl}.
+% Might reference more papers to ensure this section is sufficiently backed up.
+
+\subsubsection{Oauth2 and JSON Web Tokens}
+In the modern web, many applications rely on the use of Oauth2 based authentication to grant limited access to a HTTP service.
+Oauth2 allows authentication for secure HTTP requests to a resource to be done with a token.
+These tokens are known as access tokens and are issued to clients by an authorisation server with the approval of the resource
+owner.
+An authorisation grant is used by a client to request a new access token to use in future requests.
+Oauth2 allows for a range of grant types to support as many possible scenarios and use cases \cite{jones2015json}. 
+Definitions for client names with an associated client secret can be defined to only allow requests from trusted clients.
+Typically the client credentials will be sent as basic auth (base 64 encoded) with user credentials being sent in the header 
+of the request along with the grant type.
+
+% Good examples of this are how you can sign in with Google or Facebook for certain applications.
+JSON Web Tokens have been widely adopted as a way to provide a session-less authorisation method.
+It serves as an alternative token type to issue to clients.
+JWT is a compact claims representation format intended for space constrained environments such as HTTP authorisation headers.
+There are three main parts to a JSON Web Token are the header, payload and a signature for the token which are all encoded
+JSON objects. 
+JWTs encode the parts of the token to be transmitted as a JSON object that is used as the JSON Web Signature (JWS).
+A secret can also be defined in JWS, which is to be shared by the client and server, to ensure the validity of the token.
+The secret is to be shared through another process, before the JWT is shared to a client.
+A payload specifies user details and what authorities (permissions) are granted to that user. The payload also includes a
+JTI (JWT Id) which ensures that an already issued JWT is not issued again (preventing replay) \cite{bradley2015json}.
+
+Key advantages to using JWT \cite{raju2017jwt} over other solutions are that it is:
 \begin{enumerate}
-    \item HTTPS, SSL, TLS
-    \item Oauth2 or just to do with signing in stuff.
-    \item JWT
-    \item Sessions
-    \item Possibly explore other common vulnerabilities in the web
+    \item Stateless:
+    \begin{itemize}
+        \item JWT is a self contained token which includes details about authentication and expiry time.
+    \end{itemize}
+    \item Portable:
+    \begin{itemize}
+        \item One token can be used with multiple backends.
+    \end{itemize}
+    \item Mobile friendly:
+    \begin{itemize}
+        \item No cookies are required which makes it great for use in mobile applications.
+    \end{itemize} 
+    \item Good performance:
+    \begin{itemize}
+        \item Network round-time is reduce which increases performance.
+    \end{itemize} 
+    \item Decoupled/decentralised:
+    \begin{itemize}
+        \item Tokens can be generated anywhere (e.g. Google or Facebook login)
+        \item Authentication can happen on the resource server or be separated into a standalone service.
+    \end{itemize} 
 \end{enumerate}
