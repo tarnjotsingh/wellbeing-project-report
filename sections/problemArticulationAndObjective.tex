@@ -5,16 +5,6 @@
 
 \subsection{Problem statement}
 
-% Monitoring Student Well-being: The project will develop a database server application, a web-based application and an Android 
-% application to captures student well-being information. The expert will use the interface to prepare a questionnaire for a survey.
-% The questionnaire is uploaded into the database. The server application will push the questionnaire into the Android app in the 
-% smart-phones of the students who have joined the well-being survey. Anonymous data is then collected and stored in the database. 
-% In addition to collecting information from the students, the App may be used to direct students to sources of help if they are 
-% in need. The system should be scalable as large amount of data will be collected and stored from a large number of students. 
-% The system may also provide information back to the students to allow them to monitor their own well-being. For example, their 
-% well-being at different times of the year/term, their well-being compared to other students at the University of Reading
-
-
 % Introduction to the problem
 Pressures from University life can cause a number of health issues in students.
 In some cases students may experience stress attributed to not understanding topic and meeting deadlines.
@@ -34,12 +24,36 @@ It is difficult to direct students to the appropriate resources, depending on th
 provided by existing tools.
 This project aims to create a web application that can be used across all devices and allow surveys to be created and pushed to students.
 It would be useful, to students, to have an application that produce a score from completing a survey and have them directed to relevant
-resources. The resources, that students can be directed to, should be configurable by the survey creator.
+resources. 
+The resources, that students can be directed to, should be configurable by the survey creator.
+
+% Discuss the plateau-to-be/solution-to-be, specifying why it would be a good solution to the current issues with the available things already.
+The aim of this project is to provide a solution that is tailored for measuring student wellbeing. 
+In order to do this, there are some key features that need to be implemented.
+For this solution to be effective, the survey creation tool needs to allow an \textit{expert} to create a survey with answers that have 
+a weighted score associated with it. 
+Being able to calculate an overall score allows users, both the creator and student that answered the survey, to understand the level of 
+wellbeing that the student is at; identifying potential issues that may need to be addressed.
+Understanding what potential issues could be present can allow a survey creator to specify resources for different scoring thresholds.
+Just like other solutions, a web application would be the ideal approach as it will allow it to be used across all platforms through a web
+browser.
+An android application would be ideal to include, as a part of this solution, as it can allow notifications to be pushed to devices; allowing
+users to know when a new survey is available to participate in.
+Displaying analytic data to students, based on survey responses, can allow them to have a better way of monitoring their wellbeing.
+It can also facilitate a way for people to compare their scores, and wellbeing status, with other users if they choose to as user data should be
+anonymous by default.
+
+\subsection{Objectives}
+To implement the \textit{plateau-to-be}, it is important to set out the main objectives for this project.
+
+\begin{enumerate}
+    \item The project will develop a database server application, a web-based application and an Android application.
+    \item The system should be scalable as large amount of data will be collected and stored from a large number of students. 
+    \item The system may also provide information back to the students to allow them to monitor their own well-being.
+    \item For example, their well-being at different times of the year/term, their well-being compared to other students at the University of Reading
+\end{enumerate}
 
 
-
-
-    
 % \subsection{Technical specification \textbf{TEMPORARY FROM PID}}
 % Server-side application
 % Managing databases
@@ -69,10 +83,3 @@ Stakeholders mainly consist of:
     \item mental health experts - Interest in helping the students using the tool to be made for this project.
     \item Think of someone else potentially...  
 \end{enumerate}
-
-
-\subsection{Project motivation}
-
-Again just continue on from the stakeholders as they have active interests into the projet and the output of the project.
-
-\subsection{Project constraints}
