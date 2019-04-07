@@ -1,1 +1,41 @@
 \section{Solution Approach}
+The software solution is going to be a web application that connects to some sort of data storage.
+In the modern web, there are many different approaches developers can take for creating scalable web applications.
+An \textit{n-layered} architecture approach will be taken as this can provide the most flexibility for future scalability 
+due to how vertical (more compute resources) or horizontal (more instances) scaling can be performed at each layer.
+
+The 3 layer approach, typically used in industry, will be used for this project.
+A presentation layer, application layer and data layer will therefore have to be created.
+
+\subsection{Presentation layer}
+Talking about how ReactJS is going to be used.
+Also mention how React is just a library, it should be easy to port over the code to Android to build a native
+android application that is consistent in design with the main web application.
+
+
+\subsection{Application layer}
+Functionality of the presentation layer will be dependant on the requests made to the application layer.
+An application programming interface (API) will need to be exposed to provide that desired functionality.
+As a modern web application, a set of RESTful API endpoints will be created.
+The Java Spring Framework will be used to create a library of RESTful API endpoints for managing the contents of a connected database.
+
+
+\subsubsection{Gradle}
+Gradle is an open-source build automation tool for Java, just like Apache Maven, and was initially release in 2007 \cite{muschko2014gradle}.
+Considering the vast number of dependencies available for Java, a built tool such as Gradle makes it much easier to bring in
+a variety of different open-source components.
+The idea behind Gradle was to take the best aspects of existing tools, such as Apache Ant and Maven, and improve on them.
+Gradle is JVM native which allows for developers to write plugins and scripts with Java or Groovy; whichever is more convenient. 
+
+\subsubsection{Springboot}
+
+Stuff to do with springboot 
+
+\subsubsection{REST API endpoints}
+
+Stuff to do with rest api endpoints.
+
+
+\subsection{Data layer}
+
+Talk about the use of a relational database and include details about the initial approach to the schema.
