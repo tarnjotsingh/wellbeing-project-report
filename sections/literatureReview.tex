@@ -1,4 +1,4 @@
-\section{Literature Review}
+\section{Literature Review} \label{litreview}
 
 In the early stages of this project research was conducted of existing literature and technologies to grasp a better understanding of the problem and what would be the best approach to solve it.
 This section will cover the main areas that this project will focus on.
@@ -26,8 +26,8 @@ Stigmas/stereotypes associated with having such a condition are accepted in west
 By acknowledging this, one can understand how it is difficult for these individuals to engage in constructive discussions.
 Anonymising feedback for those that wish to get help without anybody judging would be a good place to start. 
 
-\subsection{What makes a good survey creation tool?}
-
+\subsection{Existing survey creation tools}
+% Still need to do this bit
 The main objective of this project is to provide the necessary tools for health experts to curate surveys for students to respond to.
 Data from completed surveys can be used to direct students to appropriate resources depending on choices for each question.
 
@@ -44,7 +44,7 @@ A recent article by Microsoft listed approaches typically taken as of 2019.
 Monolithic and n-layer approaches are the typical avenues taken by software developers in recent years \cite{ardalis_common}.
 An architecture model is chosen based on what is required and how quickly an application needs to be developed.
 
-\subsubsection{Monolithic}
+\subsubsection{Monolithic} \label{monolithic}
 Monolith applications is one that is entirely self-contained, in terms of its behaviour \cite{ardalis_common}.
 It may interact with other services or data stores, but the core functionality is shipped as a single unit.
 
@@ -62,7 +62,7 @@ For large companies, this is just un-feasible due to the costs for either buying
 Ideally monolith application should only be used while developing initial prototypes. If they are to be deployed in production environments,
 it should really only be for very small client bases that are unlikely to need extensive scaling.
 
-\subsubsection{N-layer}
+\subsubsection{N-layer} \label{nlayer}
 
 Modern web architectures, in production environments, typically adopt a three tier approach which is a client-server architecture approach.
 This approach to software design allows presentation, data processing and data storage functionalities to be separated.
@@ -158,19 +158,55 @@ by the term \cite{constantinides2008web}. For the purposes of this paper, the fo
         Web 2.0 is focused on the ability for people to collaborate and share information online via social media, blogging and Web-based
     }
     \cite{web2definition}. 
-    
 \end{quotation} 
 
 \subsubsection{SOAP}
+
+% Version 1.1 of SOAP specification, published on 8 May 2000, did not pass W3C recommendation status. It was only 24 June 2003 that it finally became a W3C recommendation;
+% making it accepted as an industry standard.
 SOAP (Simple Object Access Protocol) is a lightweight protocol for exchange of information in a decentralised, distributed environment.
-It is, exclusively, an XML based protocol and has three distinct parts to it: an envelope defining a framework for what is in a message and how to process it, 
-a set of encoding rules for expressing instances of application-defined datatypes, and a convention for representing remove procedure calls and responses \cite{box2000simple}.
-Version 1.1 of SOAP specification, published on 8 May 2000, did not pass W3C recommendation status. It was only 24 June 2003 that it finally became a W3C recommendation;
-making it accepted as an industry standard. 
+Though SOAP is a method of transferring data between a server and client, it is seen as messaging protocol rather than something that actually defines
+an API.
+A point, which may matter to developers, is that XML is the only representation format supported. 
+SOAP messages are sent as an \textit{envelope} and encompasses \textit{header} and \textit{body} elements \cite{gruschka2006protecting}\cite{box2000simple}. 
+An example of how SOAP messages are structured, in XML, can be seen below. 
+
+\begin{figure}[ht]
+    \begin{lstlisting}[language=XML, numbers=none]
+<?xml version = "1.0"?>
+    <SOAP-ENV:Envelope xmlns:SOAP-ENV = "http://www.w3.org/2001/12/soap-envelope" 
+     SOAP-ENV:encodingStyle = "http://www.w3.org/2001/12/soap-encoding">
+        <SOAP-ENV:Header>
+        ...
+        </SOAP-ENV:Header>
+        <SOAP-ENV:Body>      
+        ...
+            <SOAP-ENV:Fault>
+            ...
+            </SOAP-ENV:Fault>
+        ...
+        </SOAP-ENV:Body>
+    </SOAP_ENV:Envelope>
+    \end{lstlisting}
+    \caption{Example SOAP message structure from TutorialsPoint.com}
+\end{figure}
+
+Web Services Description Language (WSDL) is typically used in combination with SOAP as a means to define the API. 
+WSDL is an XML format for describing network services as a set of endpoints operating on messages containing either document-oriented or procedure-oriented
+information \cite{christensen2001web}
+
 
 \subsubsection{REST}
-REST (Representational State Transfer) is a pattern of resource operations that has emerged as the standard for service service design in Web 2.0 applications.
-REST’s simplicity, along with its natural fit over HTTP, has contributed to its status as a method of choice for Web 2.0 applications.
+Representational State Transfer (REST) is a pattern of resource operations that has emerged as the (unofficial) standard for service service
+design in Web 2.0 applications. Another way of describing REST is that it is an architectural style and a design for network-based
+software architectures.
+It is also important to state that unlike SOAP, REST is an architectural style rather than a standardised protocol.
+The term ``architectural style'' is defined as a context-free graph grammar.
+The architecture itself is seen as the skeleton of an application and in order to be executable there needs to be a mapping between nodes
+to entities in a given language \cite{le1998describing} .
+In the case of REST it would be to map exposed URL endpoints to a definition of what it needs to do in the codebase itself.
+
+The simplicity involved with REST, along with its natural fit over HTTP, has contributed to its status as a method of choice for Web 2.0 applications.
 to expose their data. 
 Resources in a RESTful service are both identified by and resolved with a URL \cite{battle2008bridging}.
 The typical form you would see a URL in is: 
@@ -179,11 +215,14 @@ The typical form you would see a URL in is:
     http://localhost:8080/Host/ApplicationPath/ResourceType/ResourceID
 \end{quotation}
 
-The core of any REST based design are CRUD (Create Read Update Delete) operations to deal with data stored on system.
-In order to perform CRUD operations, REST utilises HTTP requests POST, GET, PUT and DELETE.
+The core of any REST based design are CRUD (Create Read Update Delete) operations to deal with resources (data stored on the system).
+Resources are a REST concept and are stateless and can be represented in a variety of forms such as HTML, XML or JSON.
+The resources themselves can be manipulated through REST components. These components carry out requests and manipulate data through some kind
+of uniform interface. HTTP, as an example interface, uses \textit{GET}, \textit{PUT}, \textit{POST} and \textit{DELETE} operations \cite{cdimascio2013restdesign}.
 A great benefit of REST-based web design is the ability to use HTTP Headers to provide request context around each of theCRUD operations.
 A request to a particular resource might result in HTML, XML, or JSON (compared to exclusively using XML with SOAP) depending on the desired
 media type transmitted in the HTTP Accept header \cite{battle2008bridging}.
+
 
 % Table to show a simple representation between CRUD to HTTP requests...
 \begin{table} [ht]
@@ -211,8 +250,6 @@ to be provided. The API provided, is what will allow the client-side JavaScript 
 logic. 
 Modern web applications (Web 2.0), as discussed in section \ref{web services}, adopt REST as the standard way providing an API that can be used
 by client-side applications.
-
-
 This section will cover some technologies that are commonly used in industry to create the application layer for a web application.
 
 \subsubsection{NodeJS}
@@ -237,7 +274,7 @@ This type of simplicity that NodeJS provides a more productive environment for d
 especially when developing initial prototypes.
 
 \begin{figure}[htb]
-    \begin{lstlisting}[language=JavaScript]
+    \begin{lstlisting}[language=JavaScript, numbers=none]
     var http = require("http")
 
     /* Create a server that returns a basic html response
@@ -290,20 +327,6 @@ Due to how Java is a statically-typed language, this can prove overwhelming for 
 such as Python and Javascript.
 Java is not as productive to work in compared to other, simpler, languages such as Python and NodeJS.
 For quick prototyping, Java SpringBoot may not be the right choice for those that are not familiar with Spring already.
-
-\subsection{Data layer technologies}
-Section talking about different ways to store data and discussing the different database types
-that will allow someone to store this data. Talk about relational and non-relational databases and
-state why one is better than the other. You don't have to come to a conclusion here, just discuss
-the different options.
-\subsubsection{Relational databases}
-Stuff to do with relational databases with examples
-%Brief explanation with examples
-
-\subsubsection{Non-relational databases}
-% Brief explanation with examples.
-
-Stuff to do with non-relational databses with examples
 
 \subsection{Web security}
 With any web application, security is a big concern that needs to be addressed.

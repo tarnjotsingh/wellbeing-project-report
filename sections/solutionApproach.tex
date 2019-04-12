@@ -1,41 +1,281 @@
+% The solution approach needs to outline the general approach that will be taken for the project
+% Specific implementation details should only be outlined and discussed in the design and implementation section.
 \section{Solution Approach}
-The software solution is going to be a web application that connects to some sort of data storage.
-In the modern web, there are many different approaches developers can take for creating scalable web applications.
-An \textit{n-layered} architecture approach will be taken as this can provide the most flexibility for future scalability 
-due to how vertical (more compute resources) or horizontal (more instances) scaling can be performed at each layer.
+This section will aim to cover the general outline the potential approaches that can be taken for this project.
+The selected solution approach will decide what development method and technologies will be used for the project with justifications
+for each decision made.
+It is important to take into consideration what was covered in the problem statement (section \ref{problemstatement}) and literature
+review (section \ref{litreview}) to ensure the best solution approach is taken.
 
-The 3 layer approach, typically used in industry, will be used for this project.
-A presentation layer, application layer and data layer will therefore have to be created.
+% Go over and discuss some of the different development approaches (waterfall/agile(scrum/kanban)) and decide which one to use
+\subsection{Development approach}
+Since this project will only be done by the author of this paper, it is important to decide on the most appropriate development approach.
 
-\subsection{Presentation layer}
-Talking about how ReactJS is going to be used.
-Also mention how React is just a library, it should be easy to port over the code to Android to build a native
-android application that is consistent in design with the main web application.
+\subsubsection*{Waterfall}
+Being the oldest, and most mature, software development model it makes sense to cover this one first.
+The waterfall model divides the software development life cycle into five distinct and linear  stages.
+Requirements analysis and definition, system and software design, implementation and unit testing, integration and system testing,
+operation and maintenance.
+This approach is mostly used when developing large and complex systems; with the success to prove its success.
+It also allows management teams to have a better understanding where, in the timeline, development is however is not flexible enough
+to deal with unexpected events.
+Once code has been written, it is unlikely people will have the opportunity to go back and improve on it or address certain flaws.
+Initial requirements and design may suggest that the software solution will work, nothing is certain until implementation has started
+Huge costs are involved to go back and redesign the solution before starting development again. 
+A single individual could work on the basis of waterfall, though may struggle due to flawed initial designs.
+
+\subsubsection*{Agile}
+Agile approaches are meant to be a way to solve the inflexibility that waterfall presents to developers. 
+Instead of sticking to a strict five stage process, there is an emphasis on iterating on the solution. 
+Simple planning, short iteration cycles and frequent consumer feedback are key principles to the agile methodology \cite{huo2004software}.
+Simple planning allows for key goals to be made while allowing for potential changes to any initial designs later on if problems are found.
+Short iteration cycles mean that progress an be reviewed in shorter intervals and direction of the project can be made earlier if
+the current outcome is not good enough or is not meeting customer demands.
+
+The problem with the agile methodology is that it may not provide project managers a clear indication of where a project is and where it is 
+headed; especially with the large, complex, ones.
+Tasks that work towards a Story or Epic that are not defined well, can lead to developers focusing on the wrong things; leading to wasted time 
+as time will need to be allocated for doing the task again.
+Typically, in industry, you may see companies adopt some sort of hybrid of the two approaches; an amusing term that encapsulates this would
+be the ``Wagile'' approach. 
+
+Scrum and Kanban are the two main methodologies that are classified as agile approaches.
+Scrum focuses more on the commitment to ship working software or software features through a set time period called sprint cycles.
+Team members also adopt certain roles, create artifacts (representing the work done) and hold ceremonies such as stand-ups and
+retrospectives \cite{max2019kanbanvscrum}.
+Scrum teams adopt specific roles, create special artifacts, and hold regular ceremonies to keep things moving forward. 
+The scrum approach is likely not the best solution due to how it is likely to be most effective with a team between three and
+nine people \cite{sutherlandschwaber2017scrum}. 
+
+Kanban is an alternative approach that takes advantage of visual representation of work that needs to be done.
+It allows people in a team to understand where jobs are in the pipeline and focuses effort on ensuring tasks are not left unfinished.
+Unlike Scrum, or even Waterfall, Kanban does not come with size limitations and allows for people to roll with it.
+No roles are required either, so it makes sense for smaller teams to utilise this development model.
+Just as it with agile approaches, poor planning and bad task definitions can lead to focus being compromised
+The flexibility with agile can also mean there could be a great discrepancy between what a client wanted and what is delivered could occur.
+
+\subsubsection*{Chosen development approach}
+Though there are many other development approaches, for a single person team, taking a Kanban or Kanban-like approach is likely to be the best
+fit for the project.
+A basic backlog can be created around the various features that need to be implemented and focus will be made on each individual feature to ensure
+that it meets a given definition of done (DoD). 
+The tasks in the backlog can organised some variation of a Kanban board where it provides the visual representation of tasks that need to be
+completed. 
+
+% Referencing the monolithic and n-layer approach, come to a decision which one to use and why
+\subsection{Architecture approach}
+It is important to understand what type of architecture will be used for the project as it greatly affects the planning of tasks.
+The two approaches that will be considered for this project will be monolithic and n-layer.
+
+\subsubsection*{Monolithic}
+For prototyping purposes, it can make sense to use a monolithic approach due to it being easier to deploy with.
+Initial prototypes, in the first couple of months, would make a lot of sense to app
+As mentioned in section \ref{monolithic}, it just is not a good approach for a long term project that requires scalability and is likely
+to be worked on by many people.
+Initial prototypes, in the first couple of months, will greatly benefit from being developed with a monolithic architecture approach.
+Treating initial prototypes, as a sandbox of sort, where the basics of the chosen technologies to use can be learnt before going
+ahead with a more organised architecture model.
+
+\subsubsection*{N-layer}
+The n-layered approach is commonly taken for modern web applications where client-side and server-side are completely separate
+from one another. As stated in section \ref{nlayer}, a three layer approach is typically used in the modern web and would make a great
+deal of sense to use considering the nature of this project.
+Flexible scaling opportunities are also available if this approach is taken as resources and instances can be increased at the desired
+layers rather than just creating more instances of an entire monolithic application.
+The application layer can also be utilised by more than one type of application-type in this situation; such as both web and android.
+ 
+
+\subsubsection*{Chosen architecture approach}
+An n-layered architecture approach will be taken as this can provide the most flexibility for future scalability.
+Vertical (more compute resources) and/or horizontal (more instances) scaling can occur at each architectural level compared to relying on
+creating multiple instances of a large monolithic application.
+Three distinct layers will be defined which will be the presentation layer, application layer and the data layer.
+A standalone, application layer, can allow multiple front-end clients to be incorporated as a part of the entire package.
+The monolithic approach will also be utilised, but will be reserved for initial prototyping only.
+
+% This will need to cover each of the technologies that you have covered already. Just dicuss why you think that the ones you want to use
+% are better than the alternatives that you have already mentioned. Again justify why believe them to be the best.
+\subsection{Client side technologies and frameworks}
+
+Along with the standard HTTP and CSS approach for creating a well structured and presented web page, JavaScript is required to
+transform it into a dynamic web page.
+Angular and React are two prominent JavaScript packages that allow developers to create interactive, dynamic, web applications.
+
+\subsubsection*{Angular}
+The Angular framework implements the Model View Controller (MVC) approach for developing applications.
+Due to this, developers need to adhere to what Angular provides. 
+A lot of time will be needed to understand how to use each aspect of Angular; can be confusing and time-consuming for those that
+have no established experience in JavaScript development.
+
+\subsubsection*{React}
+React is just a library, and merely provides functionality for creating a view; excluding the \textit{M} and \textit{C} aspects of
+MVC implementations \cite{mosh2018reactvangular}.
+Due to the simpler nature of React, it will be a lot easier for new-comers to start creating web applications.
+React Native also lets you build mobile applications using only JavaScript.
+It uses the same design as React, letting you compose a rich mobile UI using declarative components \cite{facebook2019reactnative}.
+
+\subsubsection*{Chosen client side approach}
+Due to author's lack of experience with JavaScript development, React would be the ideal approach for creating a dynamic front end application.
+Rather than having to learn an entire framework (Angular), React instead provides a library that can be used to create React components.
+Creating an Android application, that is consistent with the web application design, should be straightforward due to React-Native
+being an extension of ReactJS; allowing native mobile application to be written entirely in JavaScript.
 
 
-\subsection{Application layer}
-Functionality of the presentation layer will be dependant on the requests made to the application layer.
-An application programming interface (API) will need to be exposed to provide that desired functionality.
-As a modern web application, a set of RESTful API endpoints will be created.
-The Java Spring Framework will be used to create a library of RESTful API endpoints for managing the contents of a connected database.
+\subsection{Server side language and framework}
+There are range of available options for server side solutions.
+The two that will be considered for this project will be NodeJS and Java Spring 
+
+\subsubsection*{NodeJS}
+NodeJS is a great solution for building the server side component of an application due to the vast amount of support available online.
+The key advantages of using Node over other technologies comes down to lightweight nature; executing code on a single thread asynchronously.
+Asynchronous development, however, can get confusing if the developer has not done it before.
+Being bound to a single processor thread instantly makes NodeJS unsuitable for any type of high compute workloads, but is not likely to be an 
+issue for this project due to no reliance on heavy compute operations.
+NodeJS has the largest number of community packages available compared to other languages, through the use of the Node Package Manager (NPM).
+Though this is great, as it gives develops many different options, the high activity with NPM means frameworks and APIs provided by packages
+are changing way too often; leading to broken dependencies.
+
+\subsubsection*{Java Spring}
+The Spring framework for Java, aims to help make Java a great platform for creating web applications.
+Java has been around since 1995 (compared to NodeJS being released in 2009) and has developed a mature set of framework and utility packages.
+The maturity of the Java community means that many of the standard packages available are not likely to have drastic changes and lead to 
+broken dependences that are more common-place with Node.
+NodeJS is bound to using asynchronous calls for carrying out multiple operations at the same time, Java has the ability to do both
+multi-threaded and asynchronous executions; making it a great option for complex compute operations.
+Spring provides many different conveniences for creating a web application and generating SpringBoot (bootstrapped spring application) is 
+trivial.
+Many topics that may ordinarily be complicated in pure Java, become simplified in a SpringBoot application.
+Certain behaviour, such as the runtime port, in a Spring applications can be manipulated with the use of an application configuration file; removing the need
+to potentially add boilerplate code.
+API implementations, such as REST, can be easily implemented out of the box with the help of annotations that let you specify paths and HTTP request types.
+Compared to NodeJS, Java tends to require a lot more resources and is considered ``bloated'' by some developers.
+The more verbose nature of developing in a statically typed language can prove challenging to some and can take much longer to achieve a similar
+(or same) result with NodeJS.
+
+\subsubsection*{Chosen server side language and framework}
+%May need to redo this little explanation
+Due to the lacklustre experience the author has with asynchronous development (and JavaScript in general), it makes more sense to 
+use the Java approach with the Spring framework.
+The documentation that comes with Spring along with more standard code practices with Java Spring should allow for a more consistent
+coding approach.
 
 
-\subsubsection{Gradle}
-Gradle is an open-source build automation tool for Java, just like Apache Maven, and was initially release in 2007 \cite{muschko2014gradle}.
+\subsection{Web services API}
+In order for a client-side application to communicate and retrieve data from a server, a set of application programming interfaces (APIs)
+need to be exposed. As mentioned in section \ref{web services}, SOAP and REST are the two main approaches used in industry.
+As this is a web application that will likely need to carry out many calls to the server to retrieve and modify information in quick
+succession, it will be the main point to consider.
+How well the method can integrate into JavaScript and Android client applications is also an important point to consider.
+
+\subsubsection*{SOAP}
+The Simple Object Access Protocol (SOAP) is a messaging protocol and is typically used with Web Services Description Language (WSDL) to 
+provide API endpoints to be used by a client.
+As a very mature protocol, there are many enterprises that still utilise SOAP mostly out of legacy system support. 
+Applications that may require formal contract between the API and consumer can benefit from SOAP due to a contract being enforced through 
+the use of WSDL. Built in WS-Reliable messaging increases security with asynchronous executions and processes \cite{claire2015restvssoap}.
+The main problems with SOAP really come down to its complexity and how it may not be suitable for lots of back and forth communication
+between a server and client. Operations can be slow due to how they are stateful; more initialisation and state code is required.
+
+\subsubsection*{REST}
+Representational State Transfer (REST) has become the popular choice for new APIs that are developed.
+The main reasons why it has become so popular is due to its inherent simplicity. 
+Developers can define a set of endpoints, to expose to the public, which client applications can consume. 
+The URL endpoints provide an easy to understand representation of what resources can be accessed; nothing extra is publicly available.
+A problem with this approach would be that it may not be a reliable way to create an API for some use cases but that is where SOAP
+would be the better alternative.
+HTTP is typically used as the interface for carrying out operations on defined endpoints, utilising CRUD operations; making it very easy 
+to understand and write services for.
+Unlike SOAP, resources that are returned can be represented in more than just XML; JSON being the format of most interest. 
+Having JSON responses will allow clients, written in JavaScript, to be less complicated.
+The stateless and less verbose nature of REST means that less bandwidth is utilised in request between a server and client; allowing
+for greater performance and scalability.
+
+\subsubsection*{Chosen web API approach}
+From the comparisons made, it makes more sense to create a REST based API.
+The efficient use of bandwidth that REST provides is important with an application that will require many back and forth requests
+between a server and client. Any delay with requests will be noticeable by the end user can impede the overall experience.
+Future scalability is important so being able to keep bandwidth usage to a minimum will is a very good advantage over SOAP.
+Being able to utilise JSON as a means to represent resources is important as the client will need to use JavaScript to consume and 
+send requests. Simplifying this process will make the development process much easier.
+
+
+\subsection{Build automation and dependency management}
+Gradle is an open-source build automation tool for Java, just like Apache Maven. \cite{muschko2014gradle}.
 Considering the vast number of dependencies available for Java, a built tool such as Gradle makes it much easier to bring in
 a variety of different open-source components.
 The idea behind Gradle was to take the best aspects of existing tools, such as Apache Ant and Maven, and improve on them.
-Gradle is JVM native which allows for developers to write plugins and scripts with Java or Groovy; whichever is more convenient. 
+Gradle is JVM native which allows developers to write custom plugins and scripts with Java or Groovy; whichever is more convenient.
+This can be useful to create custom jobs for said project such as automating the creation of DockerFiles for containerising
+the project.
+The Project Object Model (POM) approach with Maven is most popular choice for build automation and dependency management but is not
+necessarily the best approach. 
+The biggest problem with the, XML based, POM file is that it can be quite hard to read through dependencies and other
+configurations. 
 
-\subsubsection{Springboot}
+\begin{figure}[htb]
+    \begin{lstlisting}[language=XML, numbers=none]
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.15</version>
+    </dependency>
+    \end{lstlisting}
+    \caption{Maven POM dependency entry}
+\end{figure}
 
-Stuff to do with springboot 
+\begin{figure}[htb]
+    \begin{lstlisting}[language=Java, numbers=none]
+    compile group:'mysql', name:'mysql-connector-java', version:'8.0.15'
+    compile('mysql:mysql-connector-java:8.0.15')
+    compile 'mysql:mysql-connector-java:8.0.15'
+    \end{lstlisting}
+    \caption{Three syntax variants for adding a dependency entry to Gradle build.gradle}
+\end{figure}
 
-\subsubsection{REST API endpoints}
+From these examples, it should be clear to the reader why it would be easier for a developer to read through dependencies in a Gradle build.gradle 
+file compared to a Maven POM file. 
 
-Stuff to do with rest api endpoints.
+
+\subsection{Data storage solution}
+
+Relational and non-relational databases are two approaches than can be taken for storing application information.
 
 
-\subsection{Data layer}
+\subsection{Data layer technologies}
+This web applications will need to store data to do with created surveys and user profile information.
+When thinking of databases, most people may start thinking about SQL (relational database management system) solutions such 
+as PostgreSQL or MySQL.
+While this is fine, there are actually other solutions available if a relational database does not meet a business' need. 
+Options such as MongoDB, which are relatively new, offer an alternative solution and come under the category of \textit{noSQL}. 
 
-Talk about the use of a relational database and include details about the initial approach to the schema.
+\subsubsection*{SQL databases}
+A SQL database is classified as a relational database management system (RDMS) and aims to have data stored in a set of tables that
+can be linked to one another through a number of relationship types. These relationships typically describe the structure of a certain dataset.
+The relationships that are used are as follows (with examples): 
+
+\begin{enumerate}
+    \item one-to-one: where an entity has singular relationship with another entity (e.g. a car has one engine)
+    \item one-to-many: where an entity can have more than one relationship with another entity (e.g. a car has many wheels)
+    \item many-to-many: where a number of entities have more than one relationship with another entity (e.g. a car has many wheels which have many tyres)
+\end{enumerate}
+
+\subsubsection*{noSQL databases}
+% Brief explanation with examples.
+As the name suggests, \textit{noSQL} is a type of database that does not use SQL and is therefore not classified as a relational database
+management system (RDMS).
+
+
+
+\subsubsection*{Chosen database approach}
+Considering that structured data, surveys and user data, are the two main types of data that will need to be stored by such a
+solution, it is logical to go with a relational database.
+
+\subsection{Version control}
+
+In order to manage the project, good version control processes should be put in place.
+Having a good commit strategy is vital to keeping a record of the work that has been done.
+The university hosts their own GitLab instance and will be used as the version control system.
+Each day work is done, progress should be detailed in the commit log with verbose fashion.
+It is vital to have detailed commit messages to understand what was done during that time period.
+Major features should be worked on branches to avoid ruining the codebase that exists on the master branch.
+Merge requests can be used to review work done on a branch and ensure that everything is ok before merging back to master.
