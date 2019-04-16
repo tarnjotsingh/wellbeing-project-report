@@ -1,0 +1,62 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Problem Articulation and Objectives}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Problem statement}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Technical specification}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Objectives}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Assumptions}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Constraints}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Stakeholders}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Literature Review}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Wellbeing of university students}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Existing survey creation tools}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.3}{Web-app architectures}{section.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Monolithic}{subsection.3.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.3.2}{N-layer}{subsection.3.3}% 14
+\BOOKMARK [2][-]{subsection.3.4}{Presentation layer \(front-end\) technologies}{section.3}% 15
+\BOOKMARK [3][-]{subsubsection.3.4.1}{W3C Document Object Model \(DOM\)}{subsection.3.4}% 16
+\BOOKMARK [3][-]{subsubsection.3.4.2}{Angular}{subsection.3.4}% 17
+\BOOKMARK [3][-]{subsubsection.3.4.3}{React}{subsection.3.4}% 18
+\BOOKMARK [3][-]{subsubsection.3.4.4}{Vue}{subsection.3.4}% 19
+\BOOKMARK [2][-]{subsection.3.5}{Web services API}{section.3}% 20
+\BOOKMARK [3][-]{subsubsection.3.5.1}{Web 2.0}{subsection.3.5}% 21
+\BOOKMARK [3][-]{subsubsection.3.5.2}{SOAP}{subsection.3.5}% 22
+\BOOKMARK [3][-]{subsubsection.3.5.3}{REST}{subsection.3.5}% 23
+\BOOKMARK [2][-]{subsection.3.6}{Application layer \(back-end\) technologies}{section.3}% 24
+\BOOKMARK [3][-]{subsubsection.3.6.1}{NodeJS}{subsection.3.6}% 25
+\BOOKMARK [3][-]{subsubsection.3.6.2}{Java Spring Framework}{subsection.3.6}% 26
+\BOOKMARK [2][-]{subsection.3.7}{Web security}{section.3}% 27
+\BOOKMARK [3][-]{subsubsection.3.7.1}{HTTPS, SSL and TLS}{subsection.3.7}% 28
+\BOOKMARK [3][-]{subsubsection.3.7.2}{Oauth2 and JSON Web Tokens}{subsection.3.7}% 29
+\BOOKMARK [1][-]{section.4}{Solution Approach}{}% 30
+\BOOKMARK [2][-]{subsection.4.1}{Development approach}{section.4}% 31
+\BOOKMARK [2][-]{subsection.4.2}{Architecture approach}{section.4}% 32
+\BOOKMARK [2][-]{subsection.4.3}{Client side technologies and frameworks}{section.4}% 33
+\BOOKMARK [2][-]{subsection.4.4}{Server side language and framework}{section.4}% 34
+\BOOKMARK [2][-]{subsection.4.5}{Web services API}{section.4}% 35
+\BOOKMARK [2][-]{subsection.4.6}{Build automation and dependency management}{section.4}% 36
+\BOOKMARK [2][-]{subsection.4.7}{Data storage solution}{section.4}% 37
+\BOOKMARK [2][-]{subsection.4.8}{Data layer technologies}{section.4}% 38
+\BOOKMARK [2][-]{subsection.4.9}{Version control}{section.4}% 39
+\BOOKMARK [1][-]{section.5}{Design and Implementation}{}% 40
+\BOOKMARK [2][-]{subsection.5.1}{System model design}{section.5}% 41
+\BOOKMARK [2][-]{subsection.5.2}{Flow diagram}{section.5}% 42
+\BOOKMARK [2][-]{subsection.5.3}{Database \(data layer\)}{section.5}% 43
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Java Persistence API}{subsection.5.3}% 44
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Final DB schema}{subsection.5.3}% 45
+\BOOKMARK [2][-]{subsection.5.4}{REST API}{section.5}% 46
+\BOOKMARK [3][-]{subsubsection.5.4.1}{API Design}{subsection.5.4}% 47
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Java implementation}{subsection.5.4}% 48
+\BOOKMARK [3][-]{subsubsection.5.4.3}{Swagger documentation}{subsection.5.4}% 49
+\BOOKMARK [2][-]{subsection.5.5}{Spring Security}{section.5}% 50
+\BOOKMARK [3][-]{subsubsection.5.5.1}{Web security configuration}{subsection.5.5}% 51
+\BOOKMARK [3][-]{subsubsection.5.5.2}{Oauth2 Authorisation server configuration}{subsection.5.5}% 52
+\BOOKMARK [3][-]{subsubsection.5.5.3}{Oauth2 Resource server configuration}{subsection.5.5}% 53
+\BOOKMARK [2][-]{subsection.5.6}{REACT client}{section.5}% 54
+\BOOKMARK [1][-]{section.6}{Testing: Verification and Validation}{}% 55
+\BOOKMARK [2][-]{subsection.6.1}{Unit Testing}{section.6}% 56
+\BOOKMARK [2][-]{subsection.6.2}{Module Testing}{section.6}% 57
+\BOOKMARK [2][-]{subsection.6.3}{Sub-system}{section.6}% 58
+\BOOKMARK [2][-]{subsection.6.4}{System Testing}{section.6}% 59
+\BOOKMARK [2][-]{subsection.6.5}{Testing Limitations}{section.6}% 60
+\BOOKMARK [1][-]{section.7}{Dicussion: Contribution and Reflection}{}% 61
+\BOOKMARK [1][-]{section.8}{Social, Legal, Health \046 Saftety and Ethical Issues}{}% 62

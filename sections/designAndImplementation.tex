@@ -264,22 +264,408 @@ The URL paths themselves will be based on the type of access needed to resources
 Since this is an application that focuses on creating and responding to surveys, the API defined will have to focus on that.
 The REST endpoints will be based on the system model diagram in section \ref{system model design} as it outlines the use cases 
 of the system.
+
+\subsubsection{API Design}
 Designing the API will heavily revolve around the database schema as shown in figure \ref{sqldbschamfull}.
+For this project, Swagger2 (OpenAPI2) will be used to define the API and produce the necessary API documentation.
+This section will just cover all the of API paths that have been implemented with a basic description for each; full 
+API documentation is available in the appendix.
+
+\subsubsection*{Surveys resource}
+Resource path: /api/surveys
+
+\begin{listliketab}
+    \begin{tabular}{lp{11cm}}
+      \textbullet~ GET & Get all surveys as a list \\
+      \textbullet~ POST & Create a new survey \\
+      \textbullet~ PUT & Update an existing survey \\
+    \end{tabular}
+\end{listliketab}
+
+\noindent
+Resource path: /api/surveys/\{id\}
+
+\begin{listliketab}
+    \begin{tabular}{lp{11cm}}
+      \textbullet~ GET & Get a survey with a given ID. \\
+      \textbullet~ DELETE & Delete a survey with a given ID. \\
+    \end{tabular}
+\end{listliketab}
+
+\subsubsection*{Questions resource}
+Resource path: /api/surveys/\{surveyId\}/questions
+
+\begin{listliketab}
+    \begin{tabular}{lp{11cm}}
+      \textbullet~ GET & Get all questions for a given survey with specified ID as a list. \\
+      \textbullet~ POST & Create a new question for survey with specified \\
+      \textbullet~ PUT & Update an existing question in a given survey with specified ID.
+    \end{tabular}
+\end{listliketab}
 
 
-% I think here i would want to get tables written with explanations of the api
-% After the tables are written, then talk about how it's implemented with code snippets of Controller classes.
+\noindent
+Resource path: /api/surveys/\{surveyId\}/question/\{questionId\}
+
+\begin{listliketab}
+    \begin{tabular}{lp{11cm}}
+      \textbullet~ GET & Get a specified question for a specified survey. \\
+      \textbullet~ DELETE & Delete a specified question for a specified survey. \\ 
+    \end{tabular}
+\end{listliketab}
 
 
+\subsubsection*{Choices resource}
 
-\subsection{Spring security}
+Resource path: /api/surveys/\{surveyId\}/question/\{questionId\}/choices
 
-Talk about spring security aspects that you have implemented
-oauth2 and jwt are good examples
-what else?
+\begin{listliketab}
+    \begin{tabular}{lp{11cm}}
+      \textbullet~ GET & Get all choices for a specified question for a specified survey. \\
+      \textbullet~ POST & Create a new choice for a specified question for a specified survey. \\ 
+      \textbullet~ PUT & Update an existing choice for a specified question for a specified survey.
+    \end{tabular}
+\end{listliketab}
+
+\noindent
+Resource path: /api/surveys/\{surveyId\}/question/\{questionId\}/choices/\{choiceId\}
+
+\begin{listliketab}
+    \begin{tabular}{lp{11cm}}
+      \textbullet~ GET & Get a specified choice for a specified question for a specified survey. \\
+      \textbullet~ DELETE & Delete a specified choice for a specified question for a specified survey. \\ 
+    \end{tabular}
+\end{listliketab}
+
+\subsubsection*{User resource}
+
+Resource path: /api/users
+
+\begin{listliketab}
+    \begin{tabular}{lp{11cm}}
+      \textbullet~ GET & Get all users as a list. \\
+      \textbullet~ POST & Create/Register a new user. \\ 
+      \textbullet~ PUT & Update user information.\\
+    \end{tabular}
+\end{listliketab}
+
+\clearpage
+\subsubsection{Java implementation}
+
+In REST, access to resources are controlled by REST controllers.
+These controller classes therefore need to be implemented.
+Spring comes with a set of annotations that be used to mark certain classes as REST controller.
+
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}[language=Java, escapechar=|]
+@RestController
+@RequestMapping("/api")
+public class QuestionResource {
+    private final Logger log = LoggerFactory.getLogger(QuestionResource.class);
+    private static final String ENTITY_NAME = "question";
+    private final SurveyRepository surveyRepository;
+    private final QuestionRepository questionRepository;
+
+    @Autowired
+    public QuestionResource(QuestionRepository questionRepository, SurveyRepository surveyRepository) {
+        this.questionRepository = questionRepository;
+        this.surveyRepository = surveyRepository;
+    }
+    ...
+    @PostMapping("/surveys/{surveyId}/questions")
+    public ResponseEntity<Question> createQuestionForSurvey(@PathVariable (value = "surveyId") Long surveyId, @RequestBody Question question) throws URISyntaxException {
+        log.debug("REST request to save Question : {} in survey : {}", question, surveyId);
+        if (question.getId() != null) {
+            throw new BadRequestAlertException("A new question cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        Question toReturn = surveyRepository.findById(surveyId).map(survey -> {     |\label{repousage}|
+            question.setSurvey(survey);
+            return questionRepository.save(question);
+        }).orElseThrow( () -> new ResourceNotFoundException("Survey with ID " + surveyId + " not found."));
+
+        return ResponseEntity.created(new URI("/api/surveys/" + surveyId + "/questions/" + toReturn.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, toReturn.getId().toString()))
+                .body(toReturn);
+    }
+    ...      
+    \end{lstlisting}
+    \caption{REST controller snippet for question resource}
+    \label{restcontrollerexample}
+\end{figure}
+
+The code shown in figure \ref{restcontrollerexample} is a snippet of code that is used in the REST controller for managing access to the question resouce.
+For the sake of simplicity, all the code was done under each of the mapping methods in the class.
+What you may see, in more flushed out examples, is that a lot of the functionality is reserved to REST service classes that can be used in the controllers.
+
+Tags such as \textit{@PostMapping} allows an API endpoint to be defined with the HTTP request type.
+The return type of the method is what will be returned in the body of the response of the request.
+If an error is encountered while trying to process the request, the appropriate error will be thrown and result in the associated response (such as 404 Not Found).
+This process is repeated for all the different endpoints that need to be implemented.
+Depending on the type of HTTP request, the underlying logic will obviously be different. 
+Line \ref{repousage} in figure \ref{restcontrollerexample} also demonstrates how queries to the underlying database can be made through the appropriate
+repository interface.
+
+\subsubsection{Swagger documentation}
+Swagger2 (OpenAPI2) is enabled for this project so swagger related endpoints are available.
+The most notable (and useful) endpoint provided is \textit{/swagger-ui.html} as it provides an interactive API documentation page.
+Other packages that are brought into the project, such as Spring Security, also provide a set of endpoints. 
+Using the swagger ui, these hidden endpoints are also exposed.
+Each of the endpoints listed can be expanded to show the type of body is accepted as a part of the request and lists all the potential 
+returns types and what to expect in the response body for each of them.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=250px]{images/swagger-ui.png}
+    \caption{View of the swagger ui from the browser}
+    \label{swaggerui}
+\end{figure}
+
+\clearpage
+\subsection{Spring Security}
+
+Restrictions needs to be made to who can access the API, particularly with endpoints related to accessing user data.
+To secure these endpoints, Spring Security using Oauth2 with Json Web Tokens will be used to authenticate and authorise users.
+
+% - Web security configuration
+% - Authorization server
+
+% In order to do this, there are three impor
+
+
+\subsubsection{Web security configuration}
+The first part to get security implemented into the Java Spring project is to configure the \textit{WebSecurityConfigurerAdapter}.
+This adapter, that is extended, allows customisations to both WebSecurity and HttpSecurity.
+The adapter class and the \textit{@EnableWebSecurity} annotation work together to provide web based security \cite{winch2013springsecurity}.
+Really basic authentication can be achieved by defining in-memory credentials which can be used with HTTP basic auth.
+
+Basic auth is not going to be secure enough for any modern system and credentials need to be stored in a database; not in memory.
+In order to get user details to be stored in the database, a custom authentication provider will need to be created.
+A DaoAuthenticationProvider object will need to be created and given to the authentication provider method.
+The authentication provider needs to have a Spring user details service and a password encoder to be specified.
+Specifying the password encoder is trivial as Spring Security comes bundled with them. 
+It is simple enough to just create a bean that returns a bcrypt password encoder that uses ten rounds of encryption.
+
+
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}[language=Java]
+@Autowired
+public void globalUserDetails(AuthenticationManagerBuilder auth) {
+    auth.authenticationProvider(authenticationProvider());
+}
+
+@Bean
+public DaoAuthenticationProvider authenticationProvider() {
+    DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
+    provider.setUserDetailsService(userDetailsService);
+    provider.setPasswordEncoder(passwordEncoder());
+    return provider;
+}       
+
+@Bean
+public BCryptPasswordEncoder passwordEncoder(){
+    return new BCryptPasswordEncoder(10);
+}
+    \end{lstlisting}
+    \caption{Setting the authentication provider in WebSecurityConfigurerAdapter}
+    \label{settingauthprovider}
+\end{figure}
+
+The UserDetailsService is a Spring Security interface that will allow for a custom implementation of loading users from a type of data store.
+In this case, the database created will be used.
+To allow the \textit{loadUserByUsername} method to work, a Spring UserDetails object needs to be returned which is a wrapper class for
+existing implementations for storing user details.
+User roles can also be specified under a GrantedAuthority collection which ensures that only a user with the correct role is able to 
+access particular resources.
+Restricting access based on the associated role what determines if a user is \textit{authorised} to access the corresponding resource.
+
+\clearpage
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+    private UserRepository userRepo;
+    @Autowired
+    public CustomUserDetailsService(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Users> user = userRepo.findByUsername(username);
+        if(!user.isPresent())
+            throw new UsernameNotFoundException("User with username " + username + " not found.");
+        return new CustomUserDetails(user.get());
+    }
+}
+    \end{lstlisting}
+    \caption{Implemented user details service for finding and loading users}
+    \label{userdetailsservice}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}
+public class CustomUserDetails implements UserDetails {
+    private final String username;
+    private final String password;
+    private final boolean isActive;
+    private final Collection<? extends GrantedAuthority> authorities;
+
+    public CustomUserDetails(Users user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.isActive = user.isActive();
+        this.authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+    }
+    ...
+    \end{lstlisting}
+    \caption{CustomUserDetails implementation}
+    \label{userdetailswrapper}
+\end{figure}
+
+
+\subsubsection{Oauth2 Authorisation server configuration}
+The authorization server is responsible for issuing access tokens to the client after successfully authenticating the resource owner (end user)
+and obtaining authorization \cite{hardt2012oauth}.
+Just like with the previous sections, Spring Security provides the necessary packages to create a Spring configuration for the authorization
+server.
+A visual representation of what the sequence of events are with oauth based requests can be seen in figure \ref{oauthgrantflow}.
+Credentials are required to be provided by the resource owner (end user in this case) to the client which is then passed onto the authorization
+server.
+The server will then carry out authentication, based on the credentials provided, and provide an access token if they were valid.
+Secured resources can then be accessed using the issued token.
+
+\clearpage
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=400px]{images/oauth_grant_flow.png}
+    \caption{Sequence diagram of the steps involved with accessing secured resources}
+    \label{oauthgrantflow}
+\end{figure}
+
+Authorization servers can be set up to only allow requests from trusted clients.
+This means that two sets of credentials can be provided by a client request for the authorization process.
+Clients in possession of a client password can use the HTTP Basic authentication scheme.
+For HTTP Basic, the client id and secret will need to be in format of \textit{client-id:client-secret} and then be encoded in the
+base64 format. The encoded string value will be included in the header of the request in the following form: 
+
+\begin{verbatim}
+    Authorization: Basic Y2xpZW50LWlkOmNsaWVudC1zZWNyZXQ=
+\end{verbatim}
+
+The implemented configuration uses in-memory client details as only one client has been implemented.
+As shown in figure \ref{authorizationconfigsnippet}, client details can allow for specific roles and scopes to be defined.
+Roles and scopes will restrict the type of access a client, providing these credentials, is able to make.
+Read and write permissions will be required as the client application will provide a survey management and response functionalities.
+Tokens issued to the defined client can expire after a set time, in the example blow this is after 100 seconds.
+There was no specific reason to why a value of 100 was chosen, this is really up to the developer of they think is best.
+Once the token has expired, a new one will need to be requested from the authorization server.
+
+Refresh tokens can also be issues alongside the regular access token, to the client, and are used to obtain a new access token when 
+the current one becomes invalid or expired. 
+The validity of the refresh token will therefore need to last longer than the access token.
+In this case a value of 200 seconds was used. 
+
+One of the design choices was to use Json Web Tokens (JWT) over normal session based tokens.
+%The main reasons behind this decision was the desire to create an Android application as a part of the overall software solution.
+Rather than dealing with cookies and sessions, it is much simpler to just store and use a JWT when making requests.
+For the authorization server to issue JWTs, a custom TokenStore object needs to be provided.
+In this case a new JwtTokenStore is created that applies the custom JwtAccessTokenConverter.
+The access token converter allows for a token secret to be specified which is a simple way to sign tokens that are issues.
+An alternative, that is more secure, to this would be use a RSA public/private key pair but was not used due to time constraints.
+
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}
+@Configuration
+@EnableAuthorizationServer
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+    ...
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+        oauthServer
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()");
+    }
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients
+                .inMemory()
+                .withClient("first-client")
+                .secret(passwordEncoder.encode("client-secret"))
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+                .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
+                .scopes("read", "write", "trust")
+                .accessTokenValiditySeconds(100)
+                .refreshTokenValiditySeconds(200);
+    }
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        endpoints.tokenStore(tokenStore())
+                .accessTokenConverter(accessTokenConverter())
+                .authenticationManager(authManager);
+    }
+    @Bean
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(accessTokenConverter());
+    }
+    @Bean
+    public JwtAccessTokenConverter accessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey("token-secret");
+        return converter;
+    }
+}
+    \end{lstlisting}
+    \caption{Authorization server configuration code snippet}
+    \label{authorizationconfigsnippet}
+\end{figure}
+
+
+\clearpage
+\subsubsection{Oauth2 Resource server configuration}
+The resource server handles authenticated requests after the application has obtained an access token \cite{oauth2016resourceserver}.
+This means that an access token is required before attempting to access resources on the server.
+Figure \ref{resourceserverconfig} is the Spring Security configuration used to enable the use of the resource server and dictate which 
+API endpoints need authentication.
+The implementation ensures all endpoints that are come under the \textit{/api/} parent path require valid authentication to be accessed.
+If some exception occurs with checking authentication, a general OAuth2AccessDeniedHandler exception is thrown; being represented in the
+response body.
+Normally the resource id specified can be used to ensure that an issued token allows access to a particular resource.
+It can also be used to ensure the correct version of the API is being used to access resources on the server.
+
+
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}
+@Configuration
+@EnableResourceServer
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+    private static final String RESOURCE_ID = "resource_id";
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) {
+        resources.resourceId(RESOURCE_ID).stateless(true);
+    }
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .anonymous().disable()
+                .authorizeRequests()
+                .antMatchers("/api/**").authenticated()
+                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+    } 
+    \end{lstlisting}
+    \caption{Resource server configuration}
+    \label{resourceserverconfig}
+\end{figure}
+
 
 
 
 \subsection{REACT client}
 Talk about everything to do with the implementation of the REST client
 State how you started off from that OKTA example and worked from there. 
+1

@@ -15,3 +15,7 @@
 *.log
 *.pdf
 __latexindent_temp.tex
+
+=== Other ===
+*.lck
+*.bak_*
