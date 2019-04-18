@@ -434,7 +434,7 @@ returns types and what to expect in the response body for each of them.
 \end{figure}
 
 \clearpage
-\subsection{Spring Security}
+\subsection{Security implementations}
 
 Restrictions needs to be made to who can access the API, particularly with endpoints related to accessing user data.
 To secure these endpoints, Oauth2 with Json Web Tokens will be used to authenticate and authorise users.
@@ -467,7 +467,6 @@ It is simple enough to just create a bean that returns a bcrypt password encoder
 public void globalUserDetails(AuthenticationManagerBuilder auth) {
     auth.authenticationProvider(authenticationProvider());
 }
-
 @Bean
 public DaoAuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
@@ -475,7 +474,6 @@ public DaoAuthenticationProvider authenticationProvider() {
     provider.setPasswordEncoder(passwordEncoder());
     return provider;
 }       
-
 @Bean
 public BCryptPasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder(10);

@@ -1,11 +1,93 @@
-\section{Testing: Verification and Validation}
+\section{Testing}
 
-\subsection{Unit Testing}
+To ensure that each component of the application functioned as expected, testing was carried out throughout development.
 
-\subsection{Module Testing}
+% \subsection{Testing the API with postman}
+% The API developed is a critical part of the system that has been developed and there should be some effort
 
-\subsection{Sub-system}
+\subsection{User acceptance testing}
 
-\subsection{System Testing}
+\subsubsection{Login page}
 
-\subsection{Testing Limitations}
+
+
+ \begin{longtable}{|p{.05\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.05\textwidth}|p{.11\textwidth}|}
+  \hline
+  ID          &   Test name            & Test                                                                                           & Acceptance \par criteria                                                                                                           & Actual \par outcome                                                                                                                                        & Pass/\par Fail & Comments\\
+  \hline\hline                                                                                                                             
+  LP1 & Login with invalid credentials & The user is presented with an error                                                            & The user is not redirected to another page. \par Username and password fields are emptied. \par An error is presented to the user. & The system told the user that their credentials were bad. \par System reset username and password fields for them to fill in their credentials again.      & Pass           &         \\
+  \hline                                                                                                                                   
+  LP2 & Login with no credentials      & The user is presented with an error                                                            & The user is not redirected to another page. \par Username and password fields are emptied. \par An error is presented to the user. & The system told the user that their credentials were bad. \par System reset username and password fields for them to fill in their credentials again.      & Pass           &         \\
+  \hline
+  LP3 & Login with valid credentials   & The user successfully logs in with the provided credentials and is redirected to the dashboard & The user is able to successfully log into the application with their credentials and is redirected to the dashboard.               & The system accepted their credentails and redirected the user to the dashboard.                                                                            & Pass           &         \\
+  \hline
+  LP4 & Logout of the system           & Use the logout button to revoke current authentication and be redirected to the login page     & The user is sent back to the login page and cannot go back to the dashboard                                                        & User is sent back to the login page and cannot access any other part of the system                                                                         & Pass           &         \\     
+  \hline
+\end{longtable}
+      
+\clearpage
+  \subsubsection{Survey list page}
+
+
+\begin{longtable}{|p{.05\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.05\textwidth}|p{.11\textwidth}|}
+  \hline
+  ID  & Test name                                       & Test                                                                                                                                                                  & Acceptance \par criteria                                                    & Actual \par outcome                                                                                                                 & Pass/\par Fail & Comments\\
+  \hline\hline                                                                                                                          
+  SL1 & User can view list of surveys they have created & Click on survey manager button from dashboard and user should be redirected to the survey manager page where they will see a list of surveys they have created        & User is redirected to the survey manager page and can see all their surveys & User was successfully transferred to the survey manager page and was able to see all their surveys                                  & Pass           &         \\ 
+  \hline
+  SL2 & Add a new survey                                & The user is redirected the Add Survey page                                                                                                                            & The user is successfully redirected to the Add Survey page                  & The user was redirected to the Add Survey page where they could entier details for the question name and description before saving. & Pass           &         \\
+  \hline                                                                                                                                                                                                                                 
+  SL3 & Edit an existing survey                         & The user is redirected to the Edit Survey page                                                                                                                        & The user is successfully redirected to the Edit Survey page                 & The user was redirected to the Edit Survey page where they could alter survey details                                               & Pass           &         \\
+  \hline
+  SL4 & Displaying delete prompt                        & Clicking the delete button against the survey created in SL2 and making sure a confirmation prompt is shown                                                           & Delete survey confirmation prompt shown                                     & The confirmation prompt for deleting a survey is shown                                                                              & Pass           &          \\ 
+  \hline
+  SL5 & Delete an existing survey                       & Following on from SL4 confirm deletion for the survey created in SL2                                                                                                  & The survey created in test SL2 is removed from the survey list              & The survey created in test SL2 is no longer present in the survey list                                                              & Pass           &          \\
+  \hline
+\end{longtable}
+
+
+  
+\subsubsection{Survey edit page}
+
+
+\begin{longtable}{|p{.05\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.05\textwidth}|p{.11\textwidth}|}
+  \hline
+  ID  & Test name                          & Test                                                                                                                                          & Acceptance \par criteria                                                                                                                                                               & Actual \par outcome                                                                                                                                                       & Pass/\par Fail & Comments\\
+  \hline\hline                                                                                                                                                                                                                                                                                                    
+  SE1 & Add a new survey                   & Click the Add Survey button, provide a name with description and save it                                                                      & User is sent back to the survey list with the new survey they added now present in the list                                                                                            & User was sent back to the survey list page and their survey was added to the list                                                                                         & Pass           &         \\ 
+  \hline                                                                                                                  
+  SE2 & Open survey editor for a survey    & Click on the edit button for the survey added in SE1 and user will be redirected to the survey edit page with all the survey details present  & User is sent to the survey edit page with all the survey details for the survey added in SE1 prsent                                                                                    & User was redirected to the survey edit page with all the fields filled with the details provided when creating the survey added in SE1                                    & Pass           &         \\
+  \hline                              
+  SE3 & Change the survey name             & Change the survey name for the survey created in SE1                                                                                          & User changes the survey name and presses the save button. User is then redirected back to the survey list page with the new survey name applied to the edited survey                   & User applied a new named to the survey and submitted the changes. They were sent back to the survey list page where the new name applied was reflected in the list        & Pass           &         \\  
+  \hline                      
+  SE4 & Change the survey description      & Change the survey description for the survey created in SE1                                                                                   & User changes the survey description and presses the save button. User is redirected back to the survey list page with the new survey description applied to the survey                 & User applied a new description to the survey and submitted the changes. They were sent back to the survey list page where the new name applied as reflected in the list   & Pass           &         \\
+  \hline                        
+  SE5 & Change survey name and description & Change both the survey name and description for the survey created in SE1                                                                     & User changes survey name and descrption and presses the save button. User is redirected back to the survey list page with both values being changed to the ones the user had submitted & User changed both name and desciption for the survey and submitted. They were sent back to the survey list page where the new values were shown against the edited survey & Pass           &         \\   
+  \hline     
+\end{longtable}
+
+  \subsubsection{Survey question editing}
+
+
+\begin{longtable}{|p{.05\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.05\textwidth}|p{.11\textwidth}|}
+  \hline
+  ID  & Test name                          & Test                                                                                                                                          & Acceptance \par criteria                                                                                       & Actual \par outcome                                                                                                                                                     & Pass/\par Fail & Comments                                                                   \\
+  \hline\hline                                                                                                                                                                                                                                                                              
+  QE1 & Add a new survey                   & Click the Add Survey button, provide a name with description and save it                                                                      & User is sent back to the survey list with the new survey they added now present in the list                    & User was sent back to the survey list page and their survey was added to the list                                                                                       & Pass           &                                                                            \\ 
+  \hline                                                                                            
+  QE2 & Open survey editor for a survey    & Click on the edit button for the survey added in SE1 and user will be redirected to the survey edit page with all the survey details present  & User is sent to the survey edit page with all the survey details for the survey added in SE1 prsent            & User was redirected to the survey edit page with all the fields filled with the details provided when creating the survey added in SE1                                  & Pass           &                                                                            \\
+  \hline        
+  QE3 & Add a new question with no choices & Attempt to add a new question with no question choices to the survey                                                                          & The question with no choices is added to the survey and can be viewed in the question list                     & The question with no choices is added to the survey and can be viewd in the questions list on the same page                                                             & Pass           & User feels this should not be allowed to happen                            \\
+  \hline  
+  QE4 & Add an empty question              & Attempt to add a new question with no name or choices                                                                                         & Empty question is not submitted or added to the question list                                                  & Question was not added to the list and refreshing the page did not load it in either                                                                                    & Pass           & User believes an error should be shown to them as more effective feedback  \\               
+  \hline  
+  QE5 & Add a question with choices        & Attempt to add a new question with at least one choices                                                                                       & The question is submitted and the question, with choices, is displayed in the list                             & The question and its choices were added to the question list and refreshing the page loaded them in again                                                               & Pass           &                                                                            \\
+  \hline  
+  QE6 & Edit a question choice             & Edit a question choice from the question added in QE5                                                                                         & Change a value in one of the question choices and submit. Value in the question list should also be updated    & The question choice that was edited was successfully submitted and value in the question list was updated. Force reload confirmed value was submitted to server         & Pass           &                                                                            \\        
+  \hline  
+  QE7 & Add an empty question choice       & Add a new question choice to question but leave one or more of the fields blank                                                               & The question choice with one or more empty fields is not added to the questions or listed in the question list & Submitting a question choice with one or more empty fields led to an exception thrown, crashing the client                                                              & Fail           & Error handling not present for this test scenario                          \\
+  \hline
+  QE8 & Delete an existing question choice & Delete a question choice that already exists under a question                                                                                 & Question is deleted from the question and is no longer listed in the question list                             & Question is successfully deleted and has been removed from the question list. Reloading the page confirmed that it was no longer being loaded from the server           & Pass           &                                                                            \\
+  \hline    
+\end{longtable}
+ 
