@@ -52,11 +52,15 @@
 \BOOKMARK [3][-]{subsubsection.5.5.2}{Oauth2 Authorisation server configuration}{subsection.5.5}% 52
 \BOOKMARK [3][-]{subsubsection.5.5.3}{Oauth2 Resource server configuration}{subsection.5.5}% 53
 \BOOKMARK [2][-]{subsection.5.6}{REACT client}{section.5}% 54
-\BOOKMARK [1][-]{section.6}{Testing: Verification and Validation}{}% 55
-\BOOKMARK [2][-]{subsection.6.1}{Unit Testing}{section.6}% 56
-\BOOKMARK [2][-]{subsection.6.2}{Module Testing}{section.6}% 57
-\BOOKMARK [2][-]{subsection.6.3}{Sub-system}{section.6}% 58
-\BOOKMARK [2][-]{subsection.6.4}{System Testing}{section.6}% 59
-\BOOKMARK [2][-]{subsection.6.5}{Testing Limitations}{section.6}% 60
-\BOOKMARK [1][-]{section.7}{Dicussion: Contribution and Reflection}{}% 61
-\BOOKMARK [1][-]{section.8}{Social, Legal, Health \046 Saftety and Ethical Issues}{}% 62
+\BOOKMARK [3][-]{subsubsection.5.6.1}{Client class diagram}{subsection.5.6}% 55
+\BOOKMARK [3][-]{subsubsection.5.6.2}{REACT Component}{subsection.5.6}% 56
+\BOOKMARK [3][-]{subsubsection.5.6.3}{Authentication service}{subsection.5.6}% 57
+\BOOKMARK [3][-]{subsubsection.5.6.4}{Survey manager}{subsection.5.6}% 58
+\BOOKMARK [1][-]{section.6}{Testing: Verification and Validation}{}% 59
+\BOOKMARK [2][-]{subsection.6.1}{Unit Testing}{section.6}% 60
+\BOOKMARK [2][-]{subsection.6.2}{Module Testing}{section.6}% 61
+\BOOKMARK [2][-]{subsection.6.3}{Sub-system}{section.6}% 62
+\BOOKMARK [2][-]{subsection.6.4}{System Testing}{section.6}% 63
+\BOOKMARK [2][-]{subsection.6.5}{Testing Limitations}{section.6}% 64
+\BOOKMARK [1][-]{section.7}{Dicussion: Contribution and Reflection}{}% 65
+\BOOKMARK [1][-]{section.8}{Social, Legal, Health \046 Saftety and Ethical Issues}{}% 66

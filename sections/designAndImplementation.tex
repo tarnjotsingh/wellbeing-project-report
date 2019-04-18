@@ -1,4 +1,3 @@
-\clearpage
 \section{Design and Implementation}
 
 At this point the project has a set of requirements to meet and basic solution approach has been outlined for each aspect of 
@@ -8,8 +7,10 @@ This section aims to inform the reader of the detailed design choices made and h
 \subsection{System model design} \label{system model design}
 
 \begin{figure}[ht]
+    \centering
     \includegraphics[width=450px]{images/system_model.png}
     \caption{Proposed system model}
+    \label{proposedsystemmodel}
 \end{figure}
 
 
@@ -101,9 +102,11 @@ relationship ManyToOne {
 
 Since initial prototyping is being done using the JHipster framework, it makes sense to take advantage of tools such as 
 JDL-studio to produce diagrams such as \ref{survey-jdl-graph}.
-To fully take advantage of the JDL written, it can be imported into the JHipster product being worked on. 
+To fully take advantage of the JDL written, it can be imported into the JHipster project currently being worked on. 
 The functionality of value that will be desired from the import process will be a set of generated classes that represent
-the database schema.
+the database schema and will serve as a starting point.
+Generating the classes from the schema is a great way to have the correct relationships set up however many adjustments will
+need to be made to achieve the desired behaviour.
 
 \subsubsection{Java Persistence API}
 An SQL database schema can be created in Java itself with the help of Hibernate. % You might want to go over this in the lit review.
@@ -120,25 +123,32 @@ with it are also removed; ensuring no orphan entries are produced in the databas
 \clearpage
 \begin{figure}[ht]
     \centering
-    \begin{lstlisting}[language=Java]
+    \begin{lstlisting}[language=Java, escapechar=|]
 @Entity
 @Table(name = "question")
 public class Question implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "question")
     private String question;
+    
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Set<Choice> questionChoices = new HashSet<>();
+    
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "survey_id", nullable = false)
     @JsonIgnore
     private Survey survey;
+    
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private Set<UserQuestionChoice> userQuestionChoices = new HashSet<>();
+    |\dots
+}    
     \end{lstlisting}
     \caption{Question object to be mapped to a database table}
     \label{question object}
@@ -388,7 +398,8 @@ public class QuestionResource {
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, toReturn.getId().toString()))
                 .body(toReturn);
     }
-    ...      
+    ...
+}      
     \end{lstlisting}
     \caption{REST controller snippet for question resource}
     \label{restcontrollerexample}
@@ -409,14 +420,15 @@ repository interface.
 \subsubsection{Swagger documentation}
 Swagger2 (OpenAPI2) is enabled for this project so swagger related endpoints are available.
 The most notable (and useful) endpoint provided is \textit{/swagger-ui.html} as it provides an interactive API documentation page.
-Other packages that are brought into the project, such as Spring Security, also provide a set of endpoints. 
+Other packages that are brought into the project, such as Spring Security, provide a set of endpoints as a part of their functionality which
+the developer would not know about unless the relevant documentation was read. 
 Using the swagger ui, these hidden endpoints are also exposed.
 Each of the endpoints listed can be expanded to show the type of body is accepted as a part of the request and lists all the potential 
 returns types and what to expect in the response body for each of them.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=250px]{images/swagger-ui.png}
+    \includegraphics[width=320px]{images/swagger-ui.png}
     \caption{View of the swagger ui from the browser}
     \label{swaggerui}
 \end{figure}
@@ -425,7 +437,8 @@ returns types and what to expect in the response body for each of them.
 \subsection{Spring Security}
 
 Restrictions needs to be made to who can access the API, particularly with endpoints related to accessing user data.
-To secure these endpoints, Spring Security using Oauth2 with Json Web Tokens will be used to authenticate and authorise users.
+To secure these endpoints, Oauth2 with Json Web Tokens will be used to authenticate and authorise users.
+The following subsections will cover the Spring Security related configurations required to get this functionality working.
 
 % - Web security configuration
 % - Authorization server
@@ -520,6 +533,7 @@ public class CustomUserDetails implements UserDetails {
         this.authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
     }
     ...
+}
     \end{lstlisting}
     \caption{CustomUserDetails implementation}
     \label{userdetailswrapper}
@@ -625,7 +639,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 
 \clearpage
-\subsubsection{Oauth2 Resource server configuration}
+\subsubsection{Oauth2 Resource server configuration} \label{oauthresourcesection}
 The resource server handles authenticated requests after the application has obtained an access token \cite{oauth2016resourceserver}.
 This means that an access token is required before attempting to access resources on the server.
 Figure \ref{resourceserverconfig} is the Spring Security configuration used to enable the use of the resource server and dictate which 
@@ -657,6 +671,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/**").authenticated()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     } 
+}
     \end{lstlisting}
     \caption{Resource server configuration}
     \label{resourceserverconfig}
@@ -664,8 +679,307 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 
 
-
+\clearpage
 \subsection{REACT client}
-Talk about everything to do with the implementation of the REST client
-State how you started off from that OKTA example and worked from there. 
-1
+%Talk about everything to do with the implementation of the REST client
+%State how you started off from that OKTA example and worked from there. 
+As mentioned in the solution approach (section \ref{chosenclientside}), REACT is going to be used to create an interactive client
+side application.
+To understand what this client application needs to do, it is worthwhile to create a break down of what will be needed by the 
+font-end client by referring back to figure \ref{proposedsystemmodel} outlining how the system is going to be used.
+From that diagram, the main aims are to: 
+
+\begin{itemize}
+    \tightlist
+    \item Be able to log in using registered user credentials.
+    \item Have access to different resources based on the user role.
+    \begin{itemize}
+        \item \textit{Expert} role for creating and publishing surveys.
+        \item \textit{Student} role for viewing available surveys and respond to them.
+    \end{itemize}
+    \item Be usable on Android devices, ideally as a native application.
+\end{itemize}
+
+\subsubsection{Client class diagram}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=300px]{images/client_architecture.png}
+    \caption{UML diagram representing the client architecture}
+    \label{clientarch}
+\end{figure}
+
+\noindent
+Figure \ref{clientarch} is an overview of the current implementation for the client.
+Rather than a set of associations between components, there are dependencies.
+This is because each component does not %TODO
+
+\subsubsection{REACT Component}
+Components are fundamental to a REACT application as they act as the main building block.
+These components that are created can have multiple levels of child components based on what is required.
+As REACT is just a library, there is no strict framework to adhere to like with the Java Spring application.
+This leads to a lot more flexibility and simplicity for the implementation.
+Many parts of this project will revolve around explaining implementations of the components for th client so it makes sense to cover
+some fundamentals as context before continuing on.
+
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}[language=Javascript]
+class Welcome extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = { name: "Foo" };
+    this.handleClick = this.handleClick.bind(this);
+    }
+    
+    render() {
+    return (
+        <div>
+            <h1>Hello, {this.props.name}</h1>
+            <ExampleClass prop1={"foo"}/>
+        </div>
+    );
+  }
+}
+    \end{lstlisting}
+    \caption{Basic component}   
+    \label{basiccomponent}
+\end{figure}
+
+Figure \ref{basiccomponent} is the basic outline of what makes a REACT component.
+The \textit{render} method is the main aspect that makes components as powerful as they are as they cause the component to re-render 
+if its state has been changed.
+JSX is the type of content to be returned by the method.
+It is similar to HTML in that tags are used to represent elements however the main difference is that you can explicitly use class
+names as the tag type. This is the way REACT works for rendering other components.
+This JSX is compiled, using Babel, into regular HTML and JavaScript for runtime purposes.
+A \textit{render} method is the only one that is explicitly required when implementing a component class.
+The \textit{state} is composed of the class specific values that can dictate what values and what behaviour is presented.
+The state, of a component, can have initial values set through an included constructor.
+
+
+\subsubsection{Authentication service}
+To be able to make requests, a service will need to be created to handle obtaining and storing access tokens.
+Validation will also need to be done against the token when required to ensure that it is still valid.
+Further validation against the actual server can also be done as a further measure to be sure.
+This authentication service is written in pure JavaScript and simply provides static methods.
+The static nature of the methods means that they can be used without having to instantiate an object of the service class.
+
+\subsubsection*{Token retrieval}
+
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}
+static async getToken(username, password) {
+    console.log("Requesting token...");
+    let path = `/oauth/token?grant_type=password&username=${username}&password=${password}`;
+    const response = await fetch(path, this.request)
+      .then(response => {
+        return response.json();
+      })
+      .catch(error => {
+        console.error("Error while fetching token...");
+        console.error(error);
+      });
+    localStorage.setItem("accessToken", response.access_token);
+    localStorage.setItem("refreshToken", response.refresh_token);
+    localStorage.setItem("bearer", "Bearer " + response.access_token);
+    return response.access_token;
+}
+    \end{lstlisting}
+    \caption{getToken method}
+    \label{gettokenmethod}
+\end{figure}
+
+As mentioned in section \ref{oauthresourcesection}, a valid token is required to access restricted resources.
+Rather than repeating similar lines of code in every code block that requires the token, it made sense to create this method that will
+retrieve a token using valid resource owner credentials.
+If the fields \textit{access\_token} and \textit{refresh\_token} are found in the response body, they will be stored to localStorage.
+Having these values in localStorage means that the values can be requested in any other part of the project.
+For convenience sake, a bearer value is also saved to localStorage as it combines the keyword \textit{Bearer} with the token value.
+Requests made with the bearer token will be sent as the following key value pair in the header:
+
+\begin{verbatim}
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+    eyJleHAiOjE1NTMwODg0ODIsInVzZXJfbmFtZSI6InRlc3QiLCJhdXRob3J
+    pdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiMTU0MTRiOTgtYzEzNy00Yz
+    k1LWFjNWEtNDIxYWE4YWMxMGI2IiwiY2xpZW50X2lkIjoiZmlyc3QtY2xpZ
+    W50Iiwic2NvcGUiOlsicmVhZCIsIndyaXRlIiwidHJ1c3QiXX0.Hh3ge1BY
+    gvyUw2Bz3PmnRwDm9nXoXny2ccOs6oMVI54
+\end{verbatim}
+
+
+\subsubsection*{Simple token validation}
+Payloads in Json Web Tokens include an expiry time represented in umber of milliseconds since midnight Jan 1 1970.
+When trying to access new resources, it makes sense to ensure that the token has not expired yet.
+If it has, then the user can either be redirected back to the login page or take advantage of the refresh token.
+The \textit{checkTokenExpire} method decodes and checks if the token has expired based on the current system time.
+A boolean value is then returned to indicate if it is still valid or not.
+
+% \begin{figure}[ht]
+%     \centering
+%     \begin{lstlisting}
+% const { exp } = decode(refreshToken);
+% if (exp < new Date().getTime() / 1000) {
+%   console.error("Expired token...");
+%   return false;        
+% }
+%     \end{lstlisting}
+%     \caption{Snippet from \textit{checkTokenExpired} method checking if the current token has expired or not}
+%     \label{checktokenexpired}
+% \end{figure}
+\clearpage
+\subsubsection{Survey manager}
+One of the main components to implement will be the survey editor as without it new surveys cannot be added to the database.
+Referring back to figure \ref{proposedsystemmodel}, an \textit{expert} will need to manage surveys.
+Survey management breaks down into a five different types of functionality which are:
+
+\begin{itemize}
+    \tightlist
+    \item Viewing a list of existing surveys 
+    \item Adding a new survey
+    \item Editing an existing survey
+    \item Deleting an existing survey
+    \item Viewing survey response statistics
+\end{itemize}
+
+From the breakdown of what is needed by the survey editor, it introduces a lot more complexity that was initially thought.
+Though the API can support such functionality, it is much more challenging to write front end code that can take advantage of it.
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=400px]{images/survey_manager_screen.png}
+    \caption{Survey editor page}
+    \label{surveyeditorpage}
+\end{figure}
+
+The main REACT component for managing surveys is called the SurveyList.
+This component renders a page that lists out all of the surveys that exist as a table, displaying the survey name alongside its 
+description.
+Buttons are presented alongside each entry, allowing a user to either edit or delete that specific survey.
+To add a new survey, 
+A button for creating a new survey is also available at the top right of the page.
+
+\subsubsection*{Viewing surveys}
+
+The simplest feature for the editor is the ability to view a list of surveys that already exist.
+A request against the \textit{/api/surveys} endpoint can be made to retrieve a list of all the surveys that currently populate
+the database.
+The API will return the list in JSON form, which can then be consumed by the REACT component using a mounting method.
+A mounting method is executed immediately after it has been inserted into the DOM tree and is used if resources need to be obtained
+from a remote endpoint.
+Due to the nature of JavaScript, to prevent blocking from occurring, this method is executed asynchronously.
+Figure \ref{serverlistcomponentmount} shows how such behaviour is implemented into a REACT component. 
+
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}[language=Javascript, escapechar=|]
+async componentDidMount() {
+    console.log("Getting survey list...");
+    this.setState({isLoading: true});
+    let request = {
+        method: 'GET',
+        headers: {'Authorization': localStorage.getItem('bearer')},
+    };
+    console.log(request);
+    let response = await fetch('api/surveys', request)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => this.setState({surveys: data, isLoading: false})); |\label{setsurveylistdata}|
+}
+    \end{lstlisting}
+    \caption{ComponentDidMount method for loading the list of surveys}
+    \label{serverlistcomponentmount}
+\end{figure}
+
+Line \ref{setsurveylistdata}, in figure \ref{serverlistcomponentmount}, is the operation which stores the JSON data into the component's state.
+The change to the state will cause the component to trigger the render method again with the updated values.
+Survey values are stored as a JSON array which can be iterated through.
+For rendering purposes, a mapping method can be called to create the required JSX for each entry in the table.
+The mapped values can then be rendered by referencing the const value, surrounded by brackets, in the return body.
+
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}[language=JavaScript, escapechar=|]
+const surveyList = surveys.map(survey => {
+    return <tr key={survey.id}>
+        <td style={{whiteSpace: 'nowrap'}}>{survey.name}</td>
+        <td>{survey.description}</td>
+        <td>
+            <ButtonGroup>
+                <Button size="sm" color="primary" tag={Link} to={"/surveys/" + survey.id}><MdEdit/></Button>
+                <Button size="sm" color="danger" onClick={() => this.remove(survey.id)}><MdDelete/></Button>
+            </ButtonGroup>
+        </td>
+    </tr>
+});
+    \end{lstlisting}
+    \caption{Mapping survey data into individual table row entries}
+    \label{surveylistmapping}
+\end{figure}  
+
+
+\subsubsection*{Adding new surveys}
+Clicking on the button to add a new survey will redirect the user to a page with empty fields for both the survey name and description.
+This page allows for the necessary JSON to be created to send in a HTTP POST request to the \textit{/api/surveys} endpoint.
+Submitting the survey will call an event handler for preparing and sending the request against to the survey.
+
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=400px]{images/add_survey_screen.png}
+%     \caption{Add survey page}
+%     \label{addsurveypage}
+% \end{figure}
+
+
+\subsubsection*{Editing an existing survey}
+A design choice was made to extend the functionalities of what was implemented for adding new surveys so that it can also edit them.
+This required a lot more code to be implemented as it needed to support the following features to be a competent survey editor:
+\begin{itemize}
+    \tightlist
+    \item Add new questions
+    \item Edit existing questions
+    \item Remove existing questions 
+    \item Add new question choices 
+    \item Edit existing question choices
+    \item Remove existing question choices
+\end{itemize}
+
+Referring back to figure \ref{clientarch}, the survey edit function is built of many more REACT components compared to others.
+In order to get the functionality that is required, a SurveyQuestionList component was created to allow survey details to be changed 
+and handle the rendering of many SurveyQuestionView components.
+Each SurveyQuestionView component is responsible for rendering the question name with all the choices that have been added to it.
+They also present options, to the user, for editing or deleting the question.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=400px]{images/edit_survey_screen.png}
+    \caption{Edit survey example page}
+    \label{editsurveyexample}
+\end{figure}
+
+Deleting a question is trivial as only a HTTP DELETE request against \textit{/api/surveys/{surveyId}/questions/{questionId}} needs to be done.
+Editing is a lot more involved as every aspect of a question needs to be editable by the user.
+This not only includes the actual question title itself, but each individual choice that is associated with it.
+This is where the SurveyQuestionEdit component becomes relevant.
+The SurveyQuestionEdit component is rendered as a dialogue box and is an all-in-one type interface for users to edit all aspects of 
+a question. 
+Adding a new question also uses the same component as the functionality required will be the same; it is just initialised
+with null values.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=400px]{images/edit_question_screen.png}
+    \caption{Edit question example}
+    \label{editquestionexample}
+\end{figure}
+
+\subsubsection*{Delete an existing survey}
+
+Similar to how deleting a question is trivial, this statement also applied to surveys.
+All that is required to delete a survey is to submit a HTTP DELETE request to the \textit{/api/surveys/{surveyId}} endpoint.
+Thanks to cascading options that are enabled in the Java Spring application, any children (questions and question choices) will also
+get deleted.
+Deleting is also set to be transactional, ensuring that the operation completes appropriately otherwise the operation will be cancelled
+and any will be rolled back.
