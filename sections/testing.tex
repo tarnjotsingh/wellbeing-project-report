@@ -1,14 +1,19 @@
 \section{Testing}
 
-To ensure that each component of the application functioned as expected, testing was carried out throughout development.
+To ensure that each component of the application functioned as expected, testing of the entire system is required.
+This section will mainly cover user acceptance testing scenarios of the currently implemented features in the software solution.
+Potential customers can write acceptance tests to determine if the system is behaving correctly \cite{miller2001acceptance} and 
+inherently tests all layers that form the overall architecture.
+Acceptance testing also allows the developer to understand if the initial requirements laid out have been met or not.
 
-% \subsection{Testing the API with postman}
-% The API developed is a critical part of the system that has been developed and there should be some effort
+As of the writing of this report, only the survey management side of the application has been mostly implemented.
+This means that, in the application's current state, it behaves more like a generic survey creation tool than something that is specialised
+for student wellbeing.
+For this reason it is acceptable to form a small group of students from the university to participate in the acceptance testing.
+They have been tasked with using the system normally but will also attempt to find faults and cause failures.
 
-\subsection{User acceptance testing}
-
+\clearpage
 \subsubsection{Login page}
-
 
 
  \begin{longtable}{|p{.05\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.05\textwidth}|p{.11\textwidth}|}
@@ -24,10 +29,12 @@ To ensure that each component of the application functioned as expected, testing
   LP4 & Logout of the system           & Use the logout button to revoke current authentication and be redirected to the login page     & The user is sent back to the login page and cannot go back to the dashboard                                                        & User is sent back to the login page and cannot access any other part of the system                                                                         & Pass           &         \\     
   \hline
 \end{longtable}
-      
-\clearpage
-  \subsubsection{Survey list page}
 
+\subsubsection*{Comments}
+Users were satisfied with the overall implementation of the login page and were unable to find any major flaws.
+They also appreciated the clean presentation and how credential autocomplete was also compatible with it.
+
+\subsubsection{Survey list page}
 
 \begin{longtable}{|p{.05\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.05\textwidth}|p{.11\textwidth}|}
   \hline
@@ -45,7 +52,9 @@ To ensure that each component of the application functioned as expected, testing
   \hline
 \end{longtable}
 
-
+\subsubsection*{Comments}
+Overall, users were happy with the way the survey list page has been implemented.
+The noted how the page was presented in a very clear manner and were easily able to add, edit and delete surveys. 
   
 \subsubsection{Survey edit page}
 
@@ -66,8 +75,10 @@ To ensure that each component of the application functioned as expected, testing
   \hline     
 \end{longtable}
 
-  \subsubsection{Survey question editing}
+\subsubsection*{Comments}
+Users encountered no problems with editing surveys, was very straightforward with everything being very clearly presented.
 
+\subsubsection{Survey question editing}
 
 \begin{longtable}{|p{.05\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.15\textwidth}|p{.05\textwidth}|p{.11\textwidth}|}
   \hline
@@ -91,3 +102,43 @@ To ensure that each component of the application functioned as expected, testing
   \hline    
 \end{longtable}
  
+\subsubsection*{Comments}
+For adding and editing questions to the survey, users found it intuitive while maintaining simplicity of use.
+When adding a new question without any choices, a couple users noted that they did not believe this should be allowed by the system.
+They believed that an error message should be presented to the user telling them they need at least two question choices.
+An attempt was made by more than one user to add a new question with no question name but include choices. 
+The outcome for this attempt was that nothing happened and the question add window was closed.
+Feedback for this particular behaviour was that there should be some sort of feedback to the user to confirm that the question was not added
+or that they performed and illegal action.
+Question editing raised one system failure when attempting to add a question with one or more empty field. 
+Users who had encountered it strongly suggested this needs to be fixed as they found they needed to go back to the login page and navigate 
+back to the survey edit page.
+
+
+\subsubsection{Further feedback}
+
+\subsubsection*{Login page}
+There was confusion with why users had to use a provided set of credentials to log into the system as they wanted to be able to register a new account.
+This is due to there not being enough development time to implement such a feature.
+
+\subsubsection*{Survey list page}
+One feature that was suggested, to be included in the future, is the ability to categorise surveys based on a particular topic or keyword.
+
+\subsubsection*{Survey question editing}
+One user suggested that questions should be editable directly from the question list rather than having to use a window.
+This suggestion was actually a desire for the developer but was not implemented due to the complexities involved.
+
+\subsubsection*{Testing conclusions}
+The use of acceptance testing has proven to be very successful.
+In software development not all scenarios are always considered and this is apparent with the tests users had carried out due to the one failure 
+found.
+Feedback provided by the users in the test group has been very valuable due to the type of quality of life improvements that would benefit users.
+When the number of survey becomes large enough, it would be really difficult for users to sort through. 
+Though this was never in the general scope of the project, the developer can see the potential value this has.
+Originally when developing the question lists, there was a desire to have all the questions be directly editable from the list itself rather than
+having to open a new window. 
+The developer agrees that this could provide a better experience to users however had to resort to the currently implemented solution due to the 
+large complexities encountered during development.
+
+Considering that not all features have been implemented yet, the ones that have have proven to be fit for purpose.
+Users were overall pleased with the performance and presentation that was provided by the application.
