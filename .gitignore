@@ -3,6 +3,7 @@
 
 === LaTeX build ===
 
+*.out
 *.bbl
 *.blg
 *.glo
@@ -19,3 +20,4 @@ __latexindent_temp.tex
 === Other ===
 *.lck
 *.bak_*
+*.bak
