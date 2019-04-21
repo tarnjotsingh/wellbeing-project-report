@@ -1,24 +1,111 @@
 \section{Evaluations}
 
+This section aims to be a reflection on the work that has been carried out over the course of the entirety of this project.
 
 \subsection{Application evaluation}
 
 \subsubsection{Successes of the application}
+Considering the complexities involved with this project, what has been implemented has been a success.
+The project has managed to cover the main groundwork with regards to both the server and client side of the overall 
+software solution.
+
+
+\subsubsection*{Scalability}
+One of the main requirements for the system was for it to support future scalability.
+Completely separating both the front and and back end components allows each layer to consist of multiple instances of the same application as 
+a form of load balancing.
+
+Adopting a session-less approach, with Oauth2 and JWT, means that many servers can be deployed at once without having to share user sessions.
+Having no sessions stored server side removes scalability issues as the memory capacity of a server will end up being a limiting factor.
+Tokens are just issued by an authorization server and are stored client side instead.
+It is also much easier to perform horizontal scaling as no data needs to be shared between each server instance.
+Another benefit is that there is no recovery required if a server needs to be restarted.
+
+\subsubsection*{Security}
+An emphasis was made on security for the application so time that could have been spent on features was spent on making the application more secure.
+Developing a secure set of API endpoints, from the ground up, specifically for the student wellbeing application, has been a great success.
+The problem was that this API is no good in a real world environment if any type of user can have access to resources that should be 
+The developer was able to successfully incorporate their own Oauth2 implementation to provide session-less authentication where a client is given
+a Json Web Token to access restricted resources.
+Any registered user must provide valid credentials before they are issued an access token and will only be valid for a limited period of time.
+Tokens that are issued have an associated token secret which only the server will know of, this is another method that is used to ensure requests are 
+being made with a legitimate token.
+
+\subsubsection*{Usability}
+The survey creation tool, that has been fully implemented, managed to pass the acceptance testing stage which serves as proof of 
+the sound functionality.
+Even though there was no upfront design created for the client application, what has been developed is clearly presented and logically laid
+out.
+The components that make up each of the pages have been created in a way that ensures they behave the way users expect them to.
+It would really frustrate the user if the application had not been updating other page components based on their own interactions.
+Utilising Twitter's Bootstrap library has allowed the application to have a reactive layout; adapting to the screen size of the device being used.
+In the absence of any mobile native application implementation, users can still access and use the web application as intended.
+
+\subsubsection{Features not implemented}
+Unfortunately due to the time constraints involved, the developer has not been able to implement a number of feature.
+Most of these features related to the student usage of the application have not been implemented.
+
+\subsubsection*{User registration}
+Being able to register new users to the system is obviously an important part to the overall application. 
+Before being able to handle user registrations, a secure method of authenticating users was considered a bigger priority.  
+At the moment, the current implementation automatically \emph{registers} a test user when the user information in the database is detected to be 
+empty.
+With more time, a set of user registration API endpoints would have been created to support this functionality as the main groundwork has already 
+been achieved.
+
+\subsubsection*{Survey response tool}
+The other major component of the application that was not included as a part of this release is the ability to respond to published surveys.
+This is mostly because of the complexities involved with the survey creation tool and it did not make sense to start with a survey response tool
+while there was no way to create them in the first place.
+
+\subsubsection*{Android application}
+The initial requirements stated that an android application needs to be provided as a part of the software solution.
+A design decision was made to use the REACTjs library for developing the clint side application, the main motivation for this was that it would a 
+lot easier to convert the existing code into REACT Native code which is used to create native applications for both Android and IOS.
+If more time was available, then being able to learn how to convert the code and actually create such an application would have been possible.
+The best alternative achieved that was achieved was the web application being fully usable on smart phones due to the taking advantage of
+the Bootstrap library.
+
 
 \subsubsection{Future considerations}
 
 
-%-------------------------------------------------------------------------------------------------------------%
+%--------------------------------------------------An emphasis was made on security for the application so time that could have been spent on features was spent on making the application more secure.-----------------------------------------------------------%
+
 \subsection{Social, legal \& ethical aspects}
+Social, legal and ethical concerns need to be addressed before this system can be deployed for public use.
 
 \subsubsection{Social}
 
+Regarding social aspects, this application revolves around the mental health of students within a university environment.
+The idea behind it is to provide resources to those individuals that find it difficult to engage in the initiative of going to their general practitioner
+(GP) to get assessed.
+This software solution is meant to be a way to give users the anonymity that they may need to participate in something that can help improve 
+various 
+Hopefully it will allow those attending university to improve results in assessments throughout the year and achieve a good degree level.
+Students can just use the application in a more informal way, utilising it to track the overall wellbeing and be able to compare it to other peers that
+they interact with.
+
+
 \subsubsection{Legal}
+Personally identifiable information, of users, will be stored in datbases for this application to function.
+Such identifiable information will include names, email addresses and data collected related to that person's wellbeing status.
+Under the General Data Protection Regulation (GDPR), such information needs to be processed lawfully, fairly and in a transparent manner \cite{unihighlands2018sevenprinciples}.
+The data itself must only be collected and used for legitimate purposes, in the case of this application it should only be used to calculate wellbeing 
+scores and have that data saved in a user created account.
+Data that is associated with a particular user needs to be removed from all parts of the system once the data is no longer needed or if the user makes
+an explicit request.
+Extra precautions should be taken to ensure that breaches do not occur to the database system and have that data leaked into the public domain.
 
+This also can be paired with the Data Protection Act (1998) where there are eight conditions to comply when storing data.
+These eight conditions include points that include keeping data secure, relevant and accurate for the relevant amount of time. 
+Ensuring that data is processed in a lawful manner is also something covered under the act.
+
+Before deploying the application into a full production environment where users will be able to use it, a full report will need to be generated that
+outlines how well the overall system complies with these laws.
+The involvement of data protection officers (DPO) is a fundamental part of GDPR. 
+They ensure that compliance is met with the requirements set out by GDPR.
 \subsubsection{Ethical}
-
-
-
 
 %-------------------------------------------------------------------------------------------------------------%
 \subsection{Developer performance}
