@@ -12,7 +12,11 @@
 \begin{frame}
 \begin{columns}
     \column{.4\textwidth}
-    15\% to 20\% of \emph{teens} suffer from some mental health issues
+    \begin{itemize}
+        \item 15\% to 20\% of youth suffer from some mental health issues
+        \vspace{.2cm}
+        \item 95\% of youth own a smartphone
+    \end{itemize}
 
     \column{.6\textwidth}
     \includegraphics[height=1\textheight]{images/Mental-Health-1.jpg}
@@ -21,39 +25,95 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Problem definition}
+    \frametitle{Motivation}
     \begin{itemize}
         \pause
-        \item Have health experts create surveys 
+        \item Help students track their own wellbeing 
         \pause
-        \item Subscribed students can respond to them 
+        \vspace{.2cm}
+        \item Potentially improve it too 
+        \pause 
+        \vspace{.2cm}
+        \item Anonymity removes potential shame
     \end{itemize}  
 \end{frame}  
 
 \begin{frame}
-    \frametitle{Objectives}
-    \begin{itemize}
-        \pause
-        \item Server side application 
-        \begin{itemize}
-            \item Manage databases
-            \item Provide an API for client
-        \end{itemize}
+    \frametitle{Current solutions}
+    \begin{columns}
+        \column{.5\textwidth}
+        \includegraphics[height=.35\textheight]{images/Google-Surveys-logo.png}
+        \includegraphics[height=.35\textheight]{images/2017-surveymonkey-new-logo-design-4.png}
 
-        \pause
-        \vspace{.2cm}
-        \item Client side application 
+        \column{.5\textwidth}
         \begin{itemize}
-            \item Consumes the API
-            \item Provide the necessary functionality
-            \item Fast, simple to use
-            \item Reusable code for future mobile app
+            \pause
+            \item Very generic 
+            \pause
+            \vspace{.2cm}
+            \item Aimed at covering as many use cases as possible
+            \pause
+            \vspace{.2cm} 
+            \item Unable to produce tailored feedback
         \end{itemize}
+    \end{columns}
+\end{frame}
 
-        \pause
-        \vspace{.2cm}
-        \item Allow for future scalability
-    \end{itemize}    
+\begin{frame}
+    \frametitle{Proposed solution} 
+    \begin{columns}
+        \column{.4\textwidth}
+        \includegraphics[width=1\textwidth]{images/icon-actions.png}
+        
+        \column{.6\textwidth}
+        \begin{itemize}
+            \pause
+            \item Create scorable surveys 
+            \pause
+            \vspace{.2cm}
+            \item Students can build up a score history
+            \pause
+            \vspace{.2cm}
+            \item Track wellbeing based on that
+            \pause
+            \vspace{.2cm}
+            \item Score decides what resources they get referred to
+        \end{itemize}
+    \end{columns}
+    
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Technical specification}
+    \begin{columns}
+        \column{.3\textwidth}
+        \includegraphics[width=.8\textwidth]{images/server_to_client.png}
+        \includegraphics[width=.7\textwidth]{images/api_icon.png}
+        \column{.7\textwidth}
+        \begin{itemize}
+            \pause
+            \item Server side application 
+            \begin{itemize}
+                \item Manage databases
+                \item Provide an API for client
+            \end{itemize}
+    
+            \pause
+            \vspace{.2cm}
+            \item Client side application 
+            \begin{itemize}
+                \item Consumes the API
+                \item Provide the necessary functionality
+                \item Fast, simple to use
+                \item Reusable code for future mobile app
+            \end{itemize}
+    
+            \pause
+            \vspace{.2cm}
+            \item Allow for future scalability
+        \end{itemize}    
+    \end{columns}
 
 \end{frame}
 
@@ -123,8 +183,6 @@
 
 \begin{frame}
     \frametitle{Technologies overview}
-
     \includegraphics[width=1.1\textwidth]{images/logo_splash.png}
-
 \end{frame}
 \end{document}
