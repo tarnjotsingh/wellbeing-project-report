@@ -38,6 +38,26 @@ from the latest version of master. RTM/Release of the component may be done when
 meeting is set and stakeholders are satisfied with the level of quality achieved in the latest release
 candidate.
 
+\subsection{Testing}
+\subsubsection{Performance testing }
+To test how stable the server application is, some form of performance testing will be carried out. 
+This will also help to find any issues in scalability and optimise the performance. 
+Depending on how many clients could be trying to access the server, performance could be seen to be very poor.
+Ensuring the software solution is stable under load will ensure that a level of quality and reliability is met.
+
+\subsubsection{Unit testing}
+Unit tests will be written along side the main code development. 
+A recommended guideline of code coverage between 70 -80\% \cite{cornett2006codecoverage} needs to be set. 
+Using software such as SonarQube \cite{sonarqube2017} in a CICD pipeline can raise flags when code coverage drops below the given figure; preventing it 
+from being merged to master.
+
+\subsubsection{User acceptance testing}
+User acceptance testing (UAT) is the last stage of the software testing process.
+A limited number of users will be given access to the system and their usage will determine if the application is able to handle real world 
+tasks \cite{techopedia2018uat}.
+It can also  be used to evaluate the system's compliance with the initial requirements.
+UAT is considered a form of black box testing as the users will have no underlying knowledge of the codebase.
+
 \subsection{Code commenting}
 An aim to have a consistent level of commenting. In order to keep the code maintainable, it is
 important that other developers can easily figure out what a piece of logic is doing. Another developer should be
@@ -136,7 +156,7 @@ protect users \cite{eu2016gdpr}.
 During development, to make the lives easier of the developers and code reviewers, it makes sense to adhere to some good practices. 
 This will ensure a level of quality is maintained when writing code as well as making it easier to maintain if anything is to be added as an 
 enhancement request or fixing defects. 
-With software solutions such as Sonarqube, checking metrics such as code coverage can be included as part of the CICD pipeline.
+With software solutions such as SonarQube, checking metrics such as code coverage can be included as part of the CICD pipeline.
 
 \begin{longtable}{|p{.15\textwidth}|p{.70\textwidth}|p{.15\textwidth}|}
     \hline
