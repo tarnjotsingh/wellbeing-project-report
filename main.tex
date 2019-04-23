@@ -5,7 +5,6 @@
 \setlength{\parindent}{1cm}
 \setlength{\parskip}{6pt}
 \usepackage{graphicx}
-\usepackage{glossaries}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{booktabs} % To thicken table lines
@@ -14,14 +13,17 @@
 \usepackage{float}
 \usepackage{tabu}
 \usepackage{longtable}
+\usepackage{glossaries}
+\makeglossaries
 
 \providecommand{\tightlist}{
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \input{codeDefinitions/javascript.tex}
 \input{codeDefinitions/jdl.tex}
+\input{sections/glossaries.tex}
 
-\makeglossaries
+
 
 \title{Web application targeted at measuring the wellbeing of students \\ \vspace{2cm}}
 \author{Tarnjot Singh Virdee (24009864) \\ gv009864@reading.ac.uk}
@@ -51,10 +53,12 @@
 \input{sections/designAndImplementation.tex}
 \input{sections/testing.tex}
 \input{sections/evaluations.tex}
+\input{sections/conclusion.tex}
 
 
+\clearpage
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{ieeetr}
 \bibliography{bibliography/references}
-
+\printglossary
 \end{document}
