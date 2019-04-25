@@ -1,8 +1,8 @@
 \section{Design and Implementation}
 
-At this point the project has a set of requirements to meet and basic solution approach has been outlined for each aspect of 
+At this point, the project has a set of requirements to meet, and a basic solution approach outlined for each aspect of 
 the project.
-This section aims to inform the reader of the detailed design choices made and how this was implemented to achieve the final product.
+This section aims to inform the reader of the individual design choices made and how this was implemented to achieve the final product.
 
 \subsection{System model design} \label{system model design}
 
@@ -14,20 +14,20 @@ This section aims to inform the reader of the detailed design choices made and h
 \end{figure}
 
 
-The proposed system model outlines the method in which an \textit{expert} can create, edit or delete a survey and how this can be 
+The proposed system model outlines the method in which an \emph{expert} can create, edit or delete a survey and how this can be 
 fed to a student.
-The main functionality to point out, that really links the two user types together, is how new survey send some sort notification 
+The main functionality to point out that links the two user types together is how new survey send some sort notification 
 to a (potentially) subscribed student; leading them to respond to the survey.
 From the diagram, the reader should be able to see how a student will be able to either view surveys at their own will or be prompted
 by a notification that had been sent out by some service.
-The system outlines that there are really only two different categories of user that will use the system, this makes sense when looking
+The system outlines that there are only two different categories of the user that will utilise the system, this makes sense when looking
 back at the articulation of the problem and the original brief given.
 
 \clearpage
 \subsection{Flow diagram}
 
-An important process for the software solution is to be able to add and modify surveys for students to respond to.
-The system model design does not go into much detail about this part of the system so it will be important to gain some clarity around this area.
+An essential process for the software solution is to be able to add and modify surveys for students to respond to.
+The system model design does not go into much detail about this part of the system, so it is essential to gain some clarity around this area.
 Below is the proposed process flow diagram for what will occur when a user, of the system, attempts to add a new survey.
 It outlines the need for authorisation (have permission to access such a resource) before carrying out two steps of validation of the
 data provided.
@@ -35,7 +35,7 @@ If validation passes, then the survey and survey questions entries will be added
 As mentioned in the system model design, there is a mention of the notification service that will alert students about a new survey they
 can participate in.
 The flow diagram shows how an expert can be prompted about sending out an alert to students, after submitting the survey.
-That is where the system will then move onto executing the notification service, or just conclude the current process flow.
+That is where the system will then move onto executing the notification service, or conclude the current process flow.
 
 \begin{figure}[ht]
     \centering
@@ -46,8 +46,8 @@ That is where the system will then move onto executing the notification service,
 \clearpage
 
 \subsection{Database (data layer)}
-The database is important to get right as the design needs to store surveys data in a logical structured manner.
-To understand what is required for the database, it makes sense to first break it down and understand relationships between
+The database is important to get right as the design needs to store surveys data in a logically structured manner.
+To understand the requirements for the database, it makes sense to first break it down and understand relationships between
 each entity.
 
 \begin{enumerate}
@@ -68,21 +68,21 @@ Below is the JDL written with the associated diagram representation.
     \centering
     \begin{lstlisting}[language=JDL]
 entity UserQuestionChoice {
-	timeStamp Timestamp
+    timeStamp Timestamp
 }
 entity Choice {
-	choice String,
+    choice String,
     weight Integer
 }
 entity Question {
-	question String
+    question String
 }
 entity Survey {
-	description String
+    description String
 }
 relationship OneToMany {
     Survey{survey} to Question{survey}
-	Question{question} to Choice
+    Question{question} to Choice
 }
 relationship ManyToOne {
     UserQuestionChoice to Question
@@ -102,22 +102,22 @@ relationship ManyToOne {
 
 Since initial prototyping is being done using the JHipster framework, it makes sense to take advantage of tools such as 
 JDL-studio to produce diagrams such as \ref{survey-jdl-graph}.
-To fully take advantage of the JDL written, it can be imported into the JHipster project currently being worked on. 
-The functionality of value that will be desired from the import process will be a set of generated classes that represent
+To fully take advantage of the JDL written, it can be imported into the JHipster project currently being worked on (the initial prototype). 
+The functionality of value that needed from the import process is a set of generated classes that represent
 the database schema and will serve as a starting point.
 Generating the classes from the schema is a great way to have the correct relationships set up however many adjustments will
 need to be made to achieve the desired behaviour.
 
 \subsubsection{Java Persistence API}
 An SQL database schema can be created in Java itself with the help of Hibernate. % You might want to go over this in the lit review.
-Hibernate will facilitate the mapping of object-orientated domains, created in Java, to the corresponding tables in a relational database.
-The Java Persistence API (JPA) set of packages will provide the necessary annotations to correctly set up classes that represent \textit{tables}.
+Hibernate facilitates the mapping of object-orientated domains, created in Java, to the corresponding tables in a relational database.
+The Java Persistence API (JPA) set of packages provides the necessary annotations to correctly set up classes that represent \emph{tables}.
 Figure \ref{question object} shows how a class, with all the required annotations, can be created.
 Domain classes that are created, as a part of the Java code, use the Java Persistence API (JPA) set of packages.
 The JPA packages provide the required annotations to be used in a class to allow a chosen mapping tool (Hibernate in this case) to understand how
 to map class objects into database tables.
 Cascading options are also available to allow actions on an entry in the table to be reflected on any child entities.
-In the example below, cascading is used to ensure that if a \textit{question} is removed from the database, any \textit{question choices} associated
+In the example below, cascading is used to ensure that if a \emph{question} is removed from the database, any \emph{question choices} associated
 with it are also removed; ensuring no orphan entries are produced in the database.
 
 \clearpage
@@ -155,11 +155,11 @@ public class Question implements Serializable {
 \end{figure}
 
 
-The benefit of this approach is that the database schema can be controlled programatically and also allows for repository interfaces to be created.
-Repository interfaces is what is used to invoke actions against the corresponding table in the database.
-A notable feature of these interfaces is that they allow for \textit{derived} methods to be written without having to write any logic for it.
+The benefit of this approach is that the database schema can be controlled programmatically and also allows for repository interfaces to be used.
+Repository interfaces are what is used to invoke actions against the corresponding table in the database.
+A notable feature of these interfaces is that they allow for \emph{derived} methods to be written without having to write any logic for it.
 The idea behind these derived methods is that it gives flexibility to the developer to incorporate query methods to a specific problem.
-It is also important to note that there is no SQL being written as a part of the code; only Java code is being written.
+It is also important to note that there is no SQL being written as a part of the code; only Java code.
 
 
 \begin{figure}[ht]
@@ -188,8 +188,8 @@ As shown in figure \ref{sqldocker}, the file allows for environment variables an
 Once the file is ready, the command \textit{docker-compose up compose.yml} can be run.
 This command will pull down the docker image and automatically start it along with applying the specified options in the file.
 After logs start appearing in the command-line, a connection attempt to the database can be made using a tool such as MySQLWorkbench.
-Using a tool such as MySQLWorkbench is important as it allows for manual SQL queries to be run against the database and verify that operations
-executed by hibernate are doing the right thing.
+Using a tool such as MySQLWorkbench is essential as it allows for manual SQL queries to be run against the database and verify operations
+executed by Hibernate are doing the right thing.
 
 
 \begin{figure}[ht]
@@ -219,12 +219,12 @@ services:
     \label{sqldocker}
 \end{figure}
 
-Spring still needs to be configured to actually connect to this database running in a container.
-The details required will be the database name with valid login credentials.
+Spring still needs to be configured to connect to this database running in a container.
+The details required are the database name with valid login credentials.
 An application.yml (yaml file) is used by spring to configure various aspects of the project, depending on what is required by the developer.
 Below, in figure \ref{springymldbconfig}, the reader can see the simple configuration needed to get a database connection set up.
-The SpringBoot application will automatically read and apply the configuration on the initial start up; if anything is wrong with the config,
-and exception will be thrown and stop the server.
+The SpringBoot application will automatically read and apply the configuration on the initial startup; if anything is wrong with the config,
+an exception will be thrown and stop the server.
 
 \begin{figure}[ht]
     \centering
@@ -266,19 +266,19 @@ The main difference between the two is that \textit{create} will always overwrit
 % Outline the main endpoints that need to be implemented
 % Detail the endpoints that have been implemented and what they do
 
-The REST API, to be implemented, is going to be a very important part of this project as it will be means of communicating between
+The REST API, to be implemented, is going to be a significant part of this project as it will form the means of communicating between
 the server and client. 
 As mentioned in section \ref{restliterature}, a set of URL based endpoints will need to be defined as a part of the API 
 documentation.
-The URL paths themselves will be based on the type of access needed to resources of the system, most notably survey and user data.
+The URL paths themselves are going to be based on the type of access needed to resources of the system, most notably survey and user data.
 Since this is an application that focuses on creating and responding to surveys, the API defined will have to focus on that.
 The REST endpoints will be based on the system model diagram in section \ref{system model design} as it outlines the use cases 
 of the system.
 
 \subsubsection{API Design}
 Designing the API will heavily revolve around the database schema as shown in figure \ref{sqldbschamfull}.
-For this project, Swagger2 (OpenAPI2) will be used to define the API and produce the necessary API documentation.
-This section will just cover all the of API paths that have been implemented with a basic description for each; full 
+For this project, Swagger2 (OpenAPI2) is going to be used to define the API and produce the necessary API documentation.
+This section will cover all the of API paths that have been implemented with a basic description for each; full 
 API documentation is available in the appendix.
 
 \subsubsection*{Surveys resource}
@@ -363,8 +363,8 @@ Resource path: /api/users
 \subsubsection{Java implementation}
 
 In REST, access to resources are controlled by REST controllers.
-These controller classes therefore need to be implemented.
-Spring comes with a set of annotations that be used to mark certain classes as REST controller.
+These controller classes, therefore, need to be implemented.
+Spring comes with a set of annotations that be used to mark certain classes as a REST controller.
 
 \begin{figure}[ht]
     \centering
@@ -405,24 +405,20 @@ public class QuestionResource {
     \label{restcontrollerexample}
 \end{figure}
 
-The code shown in figure \ref{restcontrollerexample} is a snippet of code that is used in the REST controller for managing access to the question resouce.
-For the sake of simplicity, all the code was done under each of the mapping methods in the class.
-What you may see, in more flushed out examples, is that a lot of the functionality is reserved to REST service classes that can be used in the controllers.
-
-Tags such as \textit{@PostMapping} allows an API endpoint to be defined with the HTTP request type.
+The code shown in figure \ref{restcontrollerexample} is a snippet of code that is used in the REST controller for managing access to the question resource. Tags such as \textit{@PostMapping} allows an API endpoint to be defined with the HTTP request type.
 The return type of the method is what will be returned in the body of the response of the request.
-If an error is encountered while trying to process the request, the appropriate error will be thrown and result in the associated response (such as 404 Not Found).
+If an error is encountered while trying to process the request, an appropriate error will be thrown with the corresponding response code and body (such as 404 Not Found).
 This process is repeated for all the different endpoints that need to be implemented.
-Depending on the type of HTTP request, the underlying logic will obviously be different. 
+Depending on the type of HTTP request, the underlying logic needs to perform the expected behaviour. 
 Line \ref{repousage} in figure \ref{restcontrollerexample} also demonstrates how queries to the underlying database can be made through the appropriate
 repository interface.
 
 \subsubsection{Swagger documentation}
-Swagger2 (OpenAPI2) is enabled for this project so swagger related endpoints are available.
+Swagger2 (OpenAPI2) is enabled for this project, so swagger related endpoints are available.
 The most notable (and useful) endpoint provided is \textit{/swagger-ui.html} as it provides an interactive API documentation page.
 Other packages that are brought into the project, such as Spring Security, provide a set of endpoints as a part of their functionality which
-the developer would not know about unless the relevant documentation was read. 
-Using the swagger ui, these hidden endpoints are also exposed.
+a developer would not aware of unless the relevant documentation had been read. 
+Using the swagger UI, these hidden endpoints are also exposed.
 Each of the endpoints listed can be expanded to show the type of body is accepted as a part of the request and lists all the potential 
 returns types and what to expect in the response body for each of them.
 
@@ -436,28 +432,28 @@ returns types and what to expect in the response body for each of them.
 \clearpage
 \subsection{Security implementations}
 
-Restrictions needs to be made to who can access the API, particularly with endpoints related to accessing user data.
-To secure these endpoints, Oauth2 with Json Web Tokens will be used to authenticate and authorise users.
+Restrictions need to be made to who can access the API, particularly with endpoints related to accessing user data.
+To secure these endpoints, Oauth2 with JSON Web Tokens will be used to authenticate and authorise users.
 The following subsections will cover the Spring Security related configurations required to get this functionality working.
 
 % - Web security configuration
 % - Authorization server
 
-% In order to do this, there are three impor
+% To do this, there are three import
 
 
 \subsubsection{Web security configuration}
 The first part to get security implemented into the Java Spring project is to configure the \textit{WebSecurityConfigurerAdapter}.
 This adapter, that is extended, allows customisations to both WebSecurity and HttpSecurity.
 The adapter class and the \textit{@EnableWebSecurity} annotation work together to provide web based security \cite{winch2013springsecurity}.
-Really basic authentication can be achieved by defining in-memory credentials which can be used with HTTP basic auth.
+Simple authentication can be achieved by defining in-memory credentials which can be used with HTTP basic auth.
 
-Basic auth is not going to be secure enough for any modern system and credentials need to be stored in a database; not in memory.
-In order to get user details to be stored in the database, a custom authentication provider will need to be created.
+Basic auth is not going to be secure enough for any modern system, and credentials need to be stored in a database; not in memory.
+To get user details to be stored in the database, a custom authentication provider needs to be created.
 A DaoAuthenticationProvider object will need to be created and given to the authentication provider method.
 The authentication provider needs to have a Spring user details service and a password encoder to be specified.
 Specifying the password encoder is trivial as Spring Security comes bundled with them. 
-It is simple enough to just create a bean that returns a bcrypt password encoder that uses ten rounds of encryption.
+It is simple enough to create a bean that returns a Bcrypt password encoder that uses ten rounds of encryption.
 
 
 \begin{figure}[ht]
@@ -487,7 +483,7 @@ The UserDetailsService is a Spring Security interface that will allow for a cust
 In this case, the database created will be used.
 To allow the \textit{loadUserByUsername} method to work, a Spring UserDetails object needs to be returned which is a wrapper class for
 existing implementations for storing user details.
-User roles can also be specified under a GrantedAuthority collection which ensures that only a user with the correct role is able to 
+User roles can also be specified under a GrantedAuthority collection which ensures that only a user with the correct role can 
 access particular resources.
 Restricting access based on the associated role what determines if a user is \textit{authorised} to access the corresponding resource.
 
@@ -539,12 +535,12 @@ public class CustomUserDetails implements UserDetails {
 
 
 \subsubsection{Oauth2 Authorisation server configuration}
-The authorization server is responsible for issuing access tokens to the client after successfully authenticating the resource owner (end user)
+The authorisation server is responsible for issuing access tokens to the client after successfully authenticating the resource owner (end user)
 and obtaining authorization \cite{hardt2012oauth}.
-Just like with the previous sections, Spring Security provides the necessary packages to create a Spring configuration for the authorization
+Just like with the previous sections, Spring Security provides the necessary packages to create a Spring configuration for the authorisation
 server.
-A visual representation of what the sequence of events are with oauth based requests can be seen in figure \ref{oauthgrantflow}.
-Credentials are required to be provided by the resource owner (end user in this case) to the client which is then passed onto the authorization
+A visual representation of what the sequence of events is with OAuth based requests can be seen in figure \ref{oauthgrantflow}.
+Credentials are required to be provided by the resource owner (end user in this case) to the client which is then passed onto the authorisation
 server.
 The server will then carry out authentication, based on the credentials provided, and provide an access token if they were valid.
 Secured resources can then be accessed using the issued token.
@@ -557,36 +553,36 @@ Secured resources can then be accessed using the issued token.
     \label{oauthgrantflow}
 \end{figure}
 
-Authorization servers can be set up to only allow requests from trusted clients.
-This means that two sets of credentials can be provided by a client request for the authorization process.
+Authorisation servers can be set up only to allow requests from trusted clients.
+Two sets of credentials can be provided by a client request for the authorisation process; one for the user and one for the client.
 Clients in possession of a client password can use the HTTP Basic authentication scheme.
-For HTTP Basic, the client id and secret will need to be in format of \textit{client-id:client-secret} and then be encoded in the
-base64 format. The encoded string value will be included in the header of the request in the following form: 
+For HTTP Basic, the client id and secret needs to be in the format of \emph{client-id:client-secret} and then encoded in the
+base64 format. The encoded string value can then be included in the header of the request in the following form: 
 
 \begin{verbatim}
     Authorization: Basic Y2xpZW50LWlkOmNsaWVudC1zZWNyZXQ=
 \end{verbatim}
 
-The implemented configuration uses in-memory client details as only one client has been implemented.
+The implemented configuration uses in-memory client details as only a single client application uses the API.
 As shown in figure \ref{authorizationconfigsnippet}, client details can allow for specific roles and scopes to be defined.
-Roles and scopes will restrict the type of access a client, providing these credentials, is able to make.
-Read and write permissions will be required as the client application will provide a survey management and response functionalities.
-Tokens issued to the defined client can expire after a set time, in the example blow this is after 100 seconds.
-There was no specific reason to why a value of 100 was chosen, this is really up to the developer of they think is best.
-Once the token has expired, a new one will need to be requested from the authorization server.
+Roles and scopes restrict the type of access a client, providing these credentials, can make.
+Read and write permissions are required as the client application provides survey management and response functionalities.
+Tokens issued to the defined client can expire after a set time, in the example below this is after 100 seconds.
+There was no specific reason to why a value of 100 seconds was chosen, it is up to the developer what is best.
+Further development is likely to result in the value changing due to specific requirements that have not been specified.
+Once the token has expired, a new one will need to be requested from the authorisation server.
 
-Refresh tokens can also be issues alongside the regular access token, to the client, and are used to obtain a new access token when 
-the current one becomes invalid or expired. 
-The validity of the refresh token will therefore need to last longer than the access token.
-In this case a value of 200 seconds was used. 
+Refresh tokens can also be issues alongside the regular access token, to the client, and are used to obtain a new access token when the current one becomes invalid or expired. 
+The validity of the refresh token will, therefore, need to last longer than the access token.
+In this case, a value of 200 seconds was used. 
 
-One of the design choices was to use Json Web Tokens (JWT) over normal session based tokens.
+One of the design choices was to use JSON Web Tokens (JWT) over regular session-based tokens.
 %The main reasons behind this decision was the desire to create an Android application as a part of the overall software solution.
-Rather than dealing with cookies and sessions, it is much simpler to just store and use a JWT when making requests.
-For the authorization server to issue JWTs, a custom TokenStore object needs to be provided.
-In this case a new JwtTokenStore is created that applies the custom JwtAccessTokenConverter.
-The access token converter allows for a token secret to be specified which is a simple way to sign tokens that are issues.
-An alternative, that is more secure, to this would be use a RSA public/private key pair but was not used due to time constraints.
+Rather than dealing with cookies and sessions, it is much simpler to store and use a JWT when making requests.
+For the authorisation server to issue JWTs, a custom TokenStore object needs to be provided.
+In this case, a new JwtTokenStore is created that applies the custom JwtAccessTokenConverter.
+The access token converter allows for a token secret to be specified which is a simple way to sign tokens that are issued.
+An alternative to this that is more secure would be to use a RSA public/private key pair but was not used due to time constraints.
 
 \begin{figure}[ht]
     \centering
@@ -645,7 +641,7 @@ API endpoints need authentication.
 The implementation ensures all endpoints that are come under the \textit{/api/} parent path require valid authentication to be accessed.
 If some exception occurs with checking authentication, a general OAuth2AccessDeniedHandler exception is thrown; being represented in the
 response body.
-Normally the resource id specified can be used to ensure that an issued token allows access to a particular resource.
+Usually, the resource ID specified can be used to ensure that an issued token allows access to a particular resource.
 It can also be used to ensure the correct version of the API is being used to access resources on the server.
 
 
@@ -680,11 +676,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 \clearpage
 \subsection{REACT client}
 %Talk about everything to do with the implementation of the REST client
-%State how you started off from that OKTA example and worked from there. 
+%State how you started from that OKTA example and worked from there. 
 As mentioned in the solution approach (section \ref{chosenclientside}), REACT is going to be used to create an interactive client
 side application.
-To understand what this client application needs to do, it is worthwhile to create a break down of what will be needed by the 
-font-end client by referring back to figure \ref{proposedsystemmodel} outlining how the system is going to be used.
+It is worthwhile to create a break down of what is needed by the 
+front-end client by referring back to figure \ref{proposedsystemmodel} outlining how the system is going to be used.
 From that diagram, the main aims are to: 
 
 \begin{itemize}
@@ -714,10 +710,10 @@ This is because each component does not %TODO
 \subsubsection{REACT Component}
 Components are fundamental to a REACT application as they act as the main building block.
 These components that are created can have multiple levels of child components based on what is required.
-As REACT is just a library, there is no strict framework to adhere to like with the Java Spring application.
+Since REACT is just a library, there is no strict framework to adhere to like with the Java Spring application.
 This leads to a lot more flexibility and simplicity for the implementation.
-Many parts of this project will revolve around explaining implementations of the components for th client so it makes sense to cover
-some fundamentals as context before continuing on.
+Many parts of this project revolve around explaining implementations of the components for the client, so it makes sense to cover
+some fundamentals as context before continuing.
 
 \begin{figure}[ht]
     \centering
@@ -744,22 +740,22 @@ class Welcome extends React.Component {
 \end{figure}
 
 Figure \ref{basiccomponent} is the basic outline of what makes a REACT component.
-The \textit{render} method is the main aspect that makes components as powerful as they are as they cause the component to re-render 
-if its state has been changed.
+The \emph{render} method is a core aspect that makes components as powerful as they are because they cause the component to re-render 
+if its state has changed.
 JSX is the type of content to be returned by the method.
 It is similar to HTML in that tags are used to represent elements however the main difference is that you can explicitly use class
 names as the tag type. This is the way REACT works for rendering other components.
 This JSX is compiled, using Babel, into regular HTML and JavaScript for runtime purposes.
-A \textit{render} method is the only one that is explicitly required when implementing a component class.
-The \textit{state} is composed of the class specific values that can dictate what values and what behaviour is presented.
+A \emph{render} method is the only one that is explicitly required when implementing a component class.
+The \emph{state} is composed of the class-specific values that can dictate the values and behaviour presented.
 The state, of a component, can have initial values set through an included constructor.
 
 
 \subsubsection{Authentication service}
-To be able to make requests, a service will need to be created to handle obtaining and storing access tokens.
-Validation will also need to be done against the token when required to ensure that it is still valid.
+To be able to make requests, a service class needs to be created to handle obtaining and storing access tokens.
+Validation also needs to be carried out against the token when required,  to ensure that it is still valid.
 Further validation against the actual server can also be done as a further measure to be sure.
-This authentication service is written in pure JavaScript and simply provides static methods.
+This authentication service is written in pure JavaScript and provides static methods.
 The static nature of the methods means that they can be used without having to instantiate an object of the service class.
 
 \subsubsection*{Token retrieval}
@@ -794,7 +790,7 @@ retrieve a token using valid resource owner credentials.
 If the fields \textit{access\_token} and \textit{refresh\_token} are found in the response body, they will be stored to localStorage.
 Having these values in localStorage means that the values can be requested in any other part of the project.
 For convenience sake, a bearer value is also saved to localStorage as it combines the keyword \textit{Bearer} with the token value.
-Requests made with the bearer token will be sent as the following key value pair in the header:
+Requests made with the bearer token will be sent as the following key-value pair in the header:
 
 \begin{verbatim}
     Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
@@ -807,7 +803,7 @@ Requests made with the bearer token will be sent as the following key value pair
 
 
 \subsubsection*{Simple token validation}
-Payloads in Json Web Tokens include an expiry time represented in umber of milliseconds since midnight Jan 1 1970.
+Payloads in JSON Web Tokens include an expiry time represented in the number of milliseconds since midnight Jan 1 1970.
 When trying to access new resources, it makes sense to ensure that the token has not expired yet.
 If it has, then the user can either be redirected back to the login page or take advantage of the refresh token.
 The \textit{checkTokenExpire} method decodes and checks if the token has expired based on the current system time.
@@ -829,7 +825,7 @@ A boolean value is then returned to indicate if it is still valid or not.
 \subsubsection{Survey manager}
 One of the main components to implement will be the survey editor as without it new surveys cannot be added to the database.
 Referring back to figure \ref{proposedsystemmodel}, an \textit{expert} will need to manage surveys.
-Survey management breaks down into a five different types of functionality which are:
+Survey management breaks down into five different types of functionality which are:
 
 \begin{itemize}
     \tightlist
@@ -840,7 +836,7 @@ Survey management breaks down into a five different types of functionality which
     \item Viewing survey response statistics
 \end{itemize}
 
-From the breakdown of what is needed by the survey editor, it introduces a lot more complexity that was initially thought.
+From the breakdown of what is needed by the survey editor, it introduces many complexities that had not been initially considered.
 Though the API can support such functionality, it is much more challenging to write front end code that can take advantage of it.
 
 
@@ -860,10 +856,10 @@ A button for creating a new survey is also available at the top right of the pag
 
 \subsubsection*{Viewing surveys}
 
-The simplest feature for the editor is the ability to view a list of surveys that already exist.
+The most straightforward feature for the editor is the ability to view a list of surveys that already exist.
 A request against the \textit{/api/surveys} endpoint can be made to retrieve a list of all the surveys that currently populate
 the database.
-The API will return the list in JSON form, which can then be consumed by the REACT component using a mounting method.
+The API returns the list in JSON form, which can then be consumed by the REACT component using a mounting method.
 A mounting method is executed immediately after it has been inserted into the DOM tree and is used if resources need to be obtained
 from a remote endpoint.
 Due to the nature of JavaScript, to prevent blocking from occurring, this method is executed asynchronously.
@@ -892,7 +888,7 @@ async componentDidMount() {
 \end{figure}
 
 Line \ref{setsurveylistdata}, in figure \ref{serverlistcomponentmount}, is the operation which stores the JSON data into the component's state.
-The change to the state will cause the component to trigger the render method again with the updated values.
+The change to the state causes the component to trigger the render method again with the updated values.
 Survey values are stored as a JSON array which can be iterated through.
 For rendering purposes, a mapping method can be called to create the required JSX for each entry in the table.
 The mapped values can then be rendered by referencing the const value, surrounded by brackets, in the return body.
@@ -919,9 +915,9 @@ const surveyList = surveys.map(survey => {
 
 
 \subsubsection*{Adding new surveys}
-Clicking on the button to add a new survey will redirect the user to a page with empty fields for both the survey name and description.
+Clicking on the button to add a new survey redirects the user to a page with empty fields for both the survey name and description.
 This page allows for the necessary JSON to be created to send in a HTTP POST request to the \textit{/api/surveys} endpoint.
-Submitting the survey will call an event handler for preparing and sending the request against to the survey.
+Submitting the survey calls an implemented event handler for preparing and sending the request to the server.
 
 % \begin{figure}[ht]
 %     \centering
@@ -945,7 +941,7 @@ This required a lot more code to be implemented as it needed to support the foll
 \end{itemize}
 
 Referring back to figure \ref{clientarch}, the survey edit function is built of many more REACT components compared to others.
-In order to get the functionality that is required, a SurveyQuestionList component was created to allow survey details to be changed 
+To get the functionality that is required, a SurveyQuestionList component was created to allow survey details to be changed 
 and handle the rendering of many SurveyQuestionView components.
 Each SurveyQuestionView component is responsible for rendering the question name with all the choices that have been added to it.
 They also present options, to the user, for editing or deleting the question.
@@ -959,10 +955,9 @@ They also present options, to the user, for editing or deleting the question.
 
 Deleting a question is trivial as only a HTTP DELETE request against \textit{/api/surveys/{surveyId}/questions/{questionId}} needs to be done.
 Editing is a lot more involved as every aspect of a question needs to be editable by the user.
-This not only includes the actual question title itself, but each individual choice that is associated with it.
+This not only includes the actual question title itself but each choice that is associated with it.
 This is where the SurveyQuestionEdit component becomes relevant.
-The SurveyQuestionEdit component is rendered as a dialogue box and is an all-in-one type interface for users to edit all aspects of 
-a question. 
+The SurveyQuestionEdit component is rendered as a dialogue box and is an all-in-one type interface for users to edit all aspects of a question. 
 Adding a new question also uses the same component as the functionality required will be the same; it is just initialised
 with null values.
 
@@ -977,7 +972,7 @@ with null values.
 
 Similar to how deleting a question is trivial, this statement also applied to surveys.
 All that is required to delete a survey is to submit a HTTP DELETE request to the \textit{/api/surveys/{surveyId}} endpoint.
-Thanks to cascading options that are enabled in the Java Spring application, any children (questions and question choices) will also
+Thanks to cascading options that enabled in the Java Spring application, any children (questions and question choices) will also
 get deleted.
 Deleting is also set to be transactional, ensuring that the operation completes appropriately otherwise the operation will be cancelled
-and any will be rolled back.
+and any changes will be rolled back.
