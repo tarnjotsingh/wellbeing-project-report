@@ -1,0 +1,220 @@
+* commit db472eab7fce8260921a573ac94101d4c3e12a64
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Apr 14 19:04:19 2019 +0100
+| 
+|     Removing deprecated API endpoint under the choice resource.
+| 
+* commit bb2e89b34726271949979b4eab3924c74bbab327
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Apr 14 17:29:31 2019 +0100
+| 
+|     Adding swagger-ui support to view api documentation for the project.
+|     * Also saving the database schema produced from mysqlworkbench.
+|   
+*   commit 9edcea82321116e7e3ecc0b0f3c59034fe45cd3c
+|\  Merge: 50af258 958199e
+| | Author: Tarnjot Virdee <gv009864@live.reading.ac.uk>
+| | Date:   Fri Mar 22 16:22:22 2019 +0000
+| | 
+| |     Merge branch 'feature/spring-security' into 'master'
+| |     
+| |     Feature/spring security
+| |     
+| |     See merge request gv009864/springboot-docker-mysql!1
+| | 
+| * commit 958199ea5d6c3f12487da3dfd8f2ef42d3d3ff16
+| | Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| | Date:   Fri Mar 22 16:10:52 2019 +0000
+| | 
+| |     Minor edit to the springboot banner.
+| | 
+| * commit 900a486f43913861a5ac8a1d63e30ee749b90ee0
+| | Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| | Date:   Tue Mar 19 17:41:19 2019 +0000
+| | 
+| |     Just fixing the coloration for the banner!
+| | 
+| * commit 30bfeabf89cf5d50bb4900ce98e620d8fc6bf4a1
+| | Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| | Date:   Tue Mar 19 17:10:06 2019 +0000
+| | 
+| |     Can now refer to database to user information.
+| |     
+| |     * Users with hashed passwords (using BCrypt) can now be stored into the
+| |     database under the users table.
+| |         * By default the test user with password test will be created which
+| |     can be used to authenticate and attain a JWT token.
+| |     
+| |     * JWT tokens are used for authorizing requests, at the moment values are
+| |     hard-coded into the AuthroizationServerConfig but is good enough for
+| |     now.
+| |         * Can verify the validity of a JWT token by using https://jwt.io/
+| |     
+| |     * CustomUserDetails and CustomUserDetailsService implemented to find
+| |     user data from the database via username and use it for authentication.
+| |     
+| |     * Users domain class has been simplified in order to get this working.
+| |         * Ideally the next steps would be to add extra flexibility for roles
+| |     so that different users can access different parts of the API.
+| | 
+| * commit 6660177fc9f81d7a56f160d68ca711669df965a3
+| | Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| | Date:   Tue Mar 19 10:38:31 2019 +0000
+| | 
+| |     Removing swagger configuration that is no longer needed.
+| |     
+| |     * Swagger configuration no longer needed.
+| |     * Minor tweak to build.gradle dependencies.
+| | 
+| * commit a6baa8f3e5d7c26b83b00b67503027abf267e9d0
+|/  Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+|   Date:   Mon Mar 18 15:44:40 2019 +0000
+|   
+|       Working spring-security done
+|       
+|       * Working with an in-memory client definition
+|       
+|       * Working with in-memory user credentials
+|       
+|       * Can now do a POST request against /oauth/token with
+|       ** grant_type = password
+|       ** username = in-mem-user
+|       ** password = in-mem-user-pswd
+|       
+|       * Can validate the token by using the /oauth/check_token endpoint
+|       ** token = asdfasdf     should return an error
+|       ** token = valid-token  will return the user information for the user
+|       that the token was assigned to.
+| 
+* commit 50af25875cecdbd108a7e5667c4290d47e41107a
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Mon Mar 18 09:23:29 2019 +0000
+| 
+|     Ensuring that a cascaded delete on a survey works.
+|     
+|     * Allow all child questions to be deleted when a request is sent to
+|     delete a survey.
+| 
+* commit 7bac7516029c6894924b7b9cce6a52dfa9b7f61c
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Mon Mar 11 12:37:48 2019 +0000
+| 
+|     Adding READ access only to question choices.
+|     
+|     * Fixes issue where orphan choices were being created when submitting a
+|     question (POST). If there were choices present in the JSON, Jackson was
+|     also serializing the choices but did not assign those choices with
+|     question ID so they became orphans.
+|     
+|     * Need to do this to maintain consistency. Did not want to use
+|     questionChoices in question body to add the new choices.
+|     
+|     * Only want to use the POST method in /choices endpoint to add the new
+|     questions to a question regarless if it is a new one or an existing one.
+|     
+|     ** Basically means that a question MUST EXIST before you any choices can
+|     be added.
+| 
+* commit fc3a85fc4ac976faf1ab7d121696569f90789c2c
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Fri Mar 8 10:57:22 2019 +0000
+| 
+|     Adding more choices REST endpoints.
+|     
+|     * Added another PUT endpoint that can PUT with an array of objects. Not
+|     sure if this conforms to REST standards, but it is what it is.
+|     
+|     * Included cascade option to oneToMany relationship for choices in the
+|     question class.
+|     
+|     * I think I may need to start breaking up the code to include interfaces
+|     and have them implemented by service classes. Mostly for the sake of
+|     organising the code and enabling code reuse in some areas where it may
+|     be necessary.
+| 
+* commit eda4e7974e8f3fca071516839ca9aad67df32be0
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Thu Mar 7 10:22:45 2019 +0000
+| 
+|     Quesiton choice endpoints properly implemented to REST standards.
+|     
+|     * Choice endpoints have now been properly implemented to conform to REST
+|     standards.
+|     
+|     * Have no tested, endpoints. Will need to test the endpoints out before
+|     it can be said that the endpoints are working as intended.
+|     
+|     * Tweaked quesion endpoints to conform what I want to do with the front
+|     end application.
+| 
+* commit 106e9f19d33dd65a31a784fd9a717935bd4d4fca
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Feb 10 18:59:16 2019 +0000
+| 
+|     I have not been committing enough.
+|     
+|     - Enabled transactions in the configuration to allow custom repository
+|     methods to work such as deleteByIdAndSurveyId().
+|     
+|     - Improved implementation in QuestionResource for managing questions.
+|     I.e. REST paths make sense now that I learnt you can actually make
+|     custom, derived, methods for poking at the database. E.g.
+|     findByIdAndSurveyId() which lets you implement the REST path of
+|     /api/surveys/{surveyId}/questions/{questionId}
+|     
+|     - Other genearl tweaks.
+|     
+|     - Need to avoid this fat committs lol.
+|     
+|     - Though then again this just for a uni project so not like anybody
+|     cares really. Will be handy to go back and look at though!
+| 
+* commit 4fcea8613acff000e673e6b281a9e0e23940be1f
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Fri Feb 1 16:46:14 2019 +0000
+| 
+|     Fixed up the project so that it actually does what I want it to do.
+|     
+|     Entities are correctly created and schema present in database is updated as per the hibernate.ddl-auto value being set to update.
+|     
+|     rest controllers set up so that they return what is required, spring jpa is cool since it will just convert whatever is in the database into the correct JSoN
+| 
+* commit 910eaa37675632ef7e2108d321c493e158818f33
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Fri Jan 25 17:39:35 2019 +0000
+| 
+|     Preparing to generate swagger for the project.
+|     Need to get ready to generate a client, which can be done via swagger.
+|     Hopefully everythin goes well enough and I have a client ready for an initial demo.
+| 
+* commit c57f6cbfc8dab8c644ff9f3fcbca6a4d979729da
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Jan 20 19:26:23 2019 +0000
+| 
+|     Finally got liquibase to work the way I want it to.
+|     
+|     Can now successfully execute ./gradlew generateChangeLog to generate a change log file based on the java implementation via connecting to hibernate as a referenceUrl.
+| 
+* commit 16ace9275731895ab2c8991ebc2c5a98dc5c2e7b
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Jan 20 13:56:22 2019 +0000
+| 
+|     More tinkering for liquibase
+| 
+* commit cf4ad1bb15939e2db11ce572a3753a2b90aeaee5
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Thu Jan 17 20:47:55 2019 +0000
+| 
+|     Adding more database entities.
+|     
+|     Playing around with spring security.
+|     
+|     Tinkering with liquibase and adding the necessary gradle to support liquibase.
+|     
+|     Exploration of the liquibase gradle plugin.
+| 
+* commit 0d7665f205e376067c860b8e60a1979eb6a85120
+  Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+  Date:   Sun Jan 13 18:32:55 2019 +0000
+  
+      Initial commit for this tinkering project to learn the various components.

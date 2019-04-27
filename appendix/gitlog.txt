@@ -1,0 +1,239 @@
+* commit e73b883db7029b127cfa7f76cc00de860148cdc3
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sat Apr 27 17:13:55 2019 +0100
+| 
+|     Finished introduction
+|     * Included PID into the appendix of the document
+| 
+* commit 8f73b8ee61a02775bf6bc81b7764985fab110ed4
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Thu Apr 25 17:45:13 2019 +0100
+| 
+|     Proof reading with grammerly
+| 
+* commit c575ed33ceb017a3b3b0f928d474de8387f18eee
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Tue Apr 23 19:46:29 2019 +0100
+| 
+|     Added testing section to quality plan.
+|     * Also made adjustments to the refrences of acceptance testing to user
+|     acceptance testing.
+| 
+* commit c7237bda90e339f1ff1cf6e8d97379dcaf7d88c7
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Tue Apr 23 19:24:16 2019 +0100
+| 
+|     Adding the software quality plan into the project.
+|     * Quality plan based on the work done previously as coursework...
+| 
+* commit f2db9e7f06bb38b17ea3215dff2fec89dedb45be
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Tue Apr 23 17:53:57 2019 +0100
+| 
+|     Completed and proof read conclusion section
+| 
+* commit 6900ae66bd180f5d2e7735be6de7bea47bb3e631
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Mon Apr 22 20:39:22 2019 +0100
+| 
+|     Completed first draft of the evaluation
+| 
+* commit 160b9bf005fa75c7e03b83b27ff6da53b2c56367
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Mon Apr 22 17:59:43 2019 +0100
+| 
+|     Updating presentation to first draft
+| 
+* commit a6e40efec60e1b1b5a4177864f630e66db5ac81a
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Apr 21 19:50:16 2019 +0100
+| 
+|     Started presentation
+|     * Worked through a lot of the evaulation too
+| 
+* commit a5256f5faf910eae71dd5f79c7af2a5c110ae939
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Apr 21 09:11:50 2019 +0100
+| 
+|     Fixing up the intial problem statement
+| 
+* commit 598f58091b27ccdd93f055210d5ea08487741960
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sat Apr 20 20:08:09 2019 +0100
+| 
+|     Mostly finished problem articulation
+| 
+* commit 9363131c0706058e13fc7a450213fb04f805ba08
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Fri Apr 19 13:25:44 2019 +0100
+| 
+|     Finishing testing section
+|     * Renamed slease section to evaluation and prepared sections
+| 
+* commit cdb613f734281d828bfece48657e731421eff234
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Thu Apr 18 19:09:58 2019 +0100
+| 
+|     Added all the necessary testing tables.
+|     * Still need to add a minor comment under each
+|     * Still need to expand on the testing a bit more
+| 
+* commit 0c47f76e5dee43de81100fd55e8952e5829ea848
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Thu Apr 18 09:31:15 2019 +0100
+| 
+|     Changing directory name to something more appropriate
+| 
+* commit d8fb24b90c0d8ec3c6e8148b68fb7038fc2452f8
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Thu Apr 18 09:26:49 2019 +0100
+| 
+|     Finishing first draft of the implementation section
+|     * Included the relevant digrams for the client architecture
+|     * Included screenshots of the web application while explaining the
+|     client implementation.
+| 
+* commit 8e78fde606f018b7f6ed3a5631e5dcf9095e6106
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Tue Apr 16 13:42:19 2019 +0100
+| 
+|     Mostly finishd Oauth auth and resource sections in security
+| 
+* commit 4e82fe9ef5c1d1f3e9cdf8ce96586869745c9486
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Apr 14 19:46:51 2019 +0100
+| 
+|     Working on design and implementation section
+|     * Up to the REST API section, need to get tables with explanations of
+|     the API design and also include code snippets of how it's been
+|     implemented.
+| 
+* commit 1296b177f236c1774779dd9f9408c16f368b1cfb
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Fri Apr 12 19:05:47 2019 +0100
+| 
+|     Solution approach and starting design + implemtnation
+|     * Finishing off solution approach
+|     * Started the design and implementation section
+|         * Included new files that represent the diagrams made in Visual
+|     Paradigm.
+| 
+* commit 9bcda30fac998e8d3e3cd7c2dcc8e8cbde44cd64
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Apr 7 19:47:22 2019 +0100
+| 
+|     Starting the solution approach
+| 
+* commit fb5a4d834615b5acea9d901c0bfcb1072e2ef812
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sat Apr 6 19:52:53 2019 +0100
+| 
+|     Adding plateau-to-be section.
+|     * Adding abstract
+|     * Adding plateau-to-be
+| 
+* commit dff2dbaa971ffd4e0598fb3771ab4adc788dbe2b
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sat Apr 6 13:56:48 2019 +0100
+| 
+|     Updating title with university logo and rearranging some of the
+|     elements.
+| 
+* commit b3ac5fa2ccc9938406b9aa699c35777aaa4e044c
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Fri Apr 5 17:06:49 2019 +0100
+| 
+|     Mostly completed literature review...
+|     * Literature review almost done, passed the 4k words mark too.
+|     * Have started working on the Problem articulation and objectives
+|     section.
+|     * Preparing to start the introduction.
+| 
+* commit bc5222acaf2a3e19c538de052c31557a5adb2c18
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Wed Apr 3 16:45:28 2019 +0000
+| 
+|     Minor update to nodejs section
+| 
+* commit 59ed6e287fbcd567d10d8fe1bccaa13f73a7ce65
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Wed Apr 3 16:01:04 2019 +0000
+| 
+|     NodeJS section completed
+|     * Also included tex file to enable syntax highlighting for javascript
+|     code snippets.
+| 
+* commit 55edeb80d5ac66f69303934f896d6a27b8462067
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Tue Apr 2 22:17:37 2019 +0100
+| 
+|     Extra stuff
+| 
+* commit dd337923780e738036dd5a8dcb401daef6d31d08
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Tue Apr 2 19:54:19 2019 +0100
+| 
+|     Populating sections on web service APIs.
+|     
+|     * Started on the backend technologies sections...
+| 
+* commit 20eea77777a2d8cbcfa6e51106336782504be31f
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Tue Apr 2 13:08:23 2019 +0000
+| 
+|     Reorganising some sections in lit review
+| 
+* commit 25892e8a534d7d41e76a1d859acbce2fbe9f7196
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Mar 31 18:44:12 2019 +0000
+| 
+|     Adding link for reference later...
+| 
+* commit 2b98c4729838a092a4b75a0e522b61e0c8b6001c
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Mar 31 18:40:35 2019 +0000
+| 
+|     Expanding on javascript technology subsubsections...
+| 
+* commit ebce510a6e9d033fbb2772e7d2a421daca8d4ab4
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sat Mar 30 13:02:30 2019 +0000
+| 
+|     Working on technologies section on literature review.
+| 
+* commit 9d798b726d3afae670914d6ff752bccc27a5354d
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Wed Mar 27 16:06:43 2019 +0000
+| 
+|     Working on architecture section for literature review...
+| 
+* commit 9e3b307f58a4999a0706e740c14bb04fee074be8
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Mar 24 19:44:53 2019 +0000
+| 
+|     Discussing how the youth are more likely to be affected by mental health
+|     issues....
+| 
+* commit 5d0e00dba2f2c996a062324c310f76a4cf23ed9f
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Mar 24 18:44:52 2019 +0000
+| 
+|     Working on literature review...
+| 
+* commit 392f95e577a3167858cc1367b3916b51c43aa883
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sat Mar 23 17:15:35 2019 +0000
+| 
+|     Getting references to work...
+| 
+* commit 477f0ae188af005f5ac4bb00d417cc3b129ce3b0
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sat Mar 23 15:29:44 2019 +0000
+| 
+|     Creating basic template with empty sections
+| 
+* commit 93f8c5df310a16bbef21f26d5d471e98837df127
+  Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+  Date:   Fri Mar 15 09:51:55 2019 +0000
+  
+      First commit.

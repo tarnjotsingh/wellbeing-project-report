@@ -14,6 +14,8 @@
 \usepackage{float}
 \usepackage{tabu}
 \usepackage{longtable}
+\usepackage{filecontents}
+\usepackage{fancyvrb}
 \usepackage[title]{appendix}
 \usepackage{glossaries}
 \makeglossaries
@@ -69,14 +71,14 @@
   \includepdf[pages=1,pagecommand={\section{Project Initiation Document} \thispagestyle{empty} \label{appendix:pid}}, fitpaper=true]{appendix/tarnjot_virdee_pid.pdf} 
   \includepdf[pages=2-,pagecommand={\thispagestyle{empty}}, fitpaper=true]{appendix/tarnjot_virdee_pid.pdf}
 
-  \section{Logbook  Git commit history}
+  \section{Logbook - Git commit history}
 
   \subsection{Server application}
-
+  \VerbatimInput{appendix/servergitlog.txt}
   \subsection{Client application}
-
+  \VerbatimInput{appendix/clientgitlog.txt}
   \subsection{Report}
-
+  \VerbatimInput{appendix/gitlog.txt}
 \end{appendices}
 
 \end{document}

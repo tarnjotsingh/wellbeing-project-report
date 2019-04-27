@@ -1,0 +1,153 @@
+* commit 8a66fc86a08191b5448998f5175039b770ddbe13
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sat Mar 23 11:53:32 2019 +0000
+| 
+|     Blocked question list when adding a new survey.
+|     
+|     * Added a conditional style option for the container that will display
+|     the SurveyQuestionList.
+|             * If a survey ID does not exist, then a style 'hidden' will be
+|     applied to the container. Otherwise no style will be applied.
+|     
+|     * Just fixing some authentication stuff that wasn't saved before. This
+|     prevents a dialog from appearing in the browser prompting the user to
+|     enter username and password details for oauth2/client.
+|     
+|     * Minor formatting fixes.
+| 
+* commit a688b646b7bfa8161e7f2a6e04ed68722484d4c0
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Fri Mar 22 17:54:26 2019 +0000
+| 
+|     Resolving bugs
+|     
+|     * Hard coded bearer token rather than storing into localStorage just for
+|     the sake of making it a bit more secure.
+|     
+|     * Issues with how Auth was provided, resolved mistakes in request
+|     headers that prevented successful requests from occuring.
+| 
+* commit feb20a80d00e7c9a0648d94aa7e090c1bc2d2d9e
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Fri Mar 22 15:56:19 2019 +0000
+| 
+|     Adding oauth authentication support
+|     
+|     * Adding AuthService which provides methods for obtaining an
+|     access_token to make requests with.
+|     
+|     * Adding a LoginPage component that will call methods in the AuthService
+|     to get a token and validate that the token is legitmate.
+|     
+|     * Editing components to make requests with bearer token.
+|     
+|     * Editing App.js to redirect users that try to access content without a
+|     valid token. By default, to minimise lag, a quick check to see if the
+|     bearer token has expired is done.
+| 
+* commit b0e90a49ed29436bba547859299af185c09bd023
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Wed Mar 13 14:57:38 2019 +0000
+| 
+|     Removing paragraph
+| 
+* commit 1dfbef1fe34a45c504bda0059db6d6d3dc1eea9b
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Wed Mar 13 14:48:35 2019 +0000
+| 
+|     Can now delete question choices
+|     
+|     * Can now successfully delete any question choices.
+|     
+|     * All CRUD operations have now been implemented for question editing.
+|     
+|     * All CRUD operations have now been implemented for survey editing.
+| 
+* commit ba03916f625c741b17941f4f5514602238c76494
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Mon Mar 11 12:55:20 2019 +0000
+| 
+|     Removing deprecated "Questions" button from survey list view.
+| 
+* commit 5c054146a4345941593c7ed181a3a90adda68433
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Mon Mar 11 12:50:31 2019 +0000
+| 
+|     Fixed add new question with choices.
+|     
+|     * Fixed code so that it correctly submits questions and question
+|     choices.
+|     
+|     * Implemented methods to use async correctly in order to make the
+|     requests syncronous (need to ensure that a question existed before
+|     adding choices to it).
+|     
+|     * This also involved fixing java spring app, commit located here: https://csgitlab.reading.ac.uk/gv009864/springboot-docker-mysql/commit/7bac7516029c6894924b7b9cce6a52dfa9b7f61c
+|     
+|     * Next step will be to implement a way to delete/remove question
+|     choices.
+| 
+* commit 2f4e74488529eca006b65100c42cea51ec01b5a2
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sun Mar 10 18:48:44 2019 +0000
+| 
+|     Able to continously add new questions.
+|     
+|     * Though bug introduced was that there are now duplicate choices now
+|     being thrown into the database with null question id (forigen key). Need
+|     to fix this.
+| 
+* commit 9aaffb4bebf4dc813c044de1b895c1e7c1462a61
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Sat Mar 9 16:30:28 2019 +0000
+| 
+|     Choice editing almost fully working.
+|     
+|     * Can create a new question with associated choices.
+|     
+|     * Can edit existing choices
+|     
+|     * Can add new choicse for an existing question, though this
+|     functionality is not fully working. Question view not properly updating
+|     when the updated values are updated.
+| 
+* commit ae5d069f39fa65d4cae2bfe452d7fd5c04f7b543
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Tue Mar 5 09:32:39 2019 +0000
+| 
+|     Working to get question choice editing working.
+|     
+|     * Have started to use ReactTable as a way to get tables that can display
+|     the question choice data and allow for inline editing of that data.
+|     
+|     * Having to re-adjust some of the code in order to get the question
+|     choice stuff working as intended. Now passing in the entire response
+|     (Question json that is returned by the server) as an argument for
+|     updating and adding to a list.
+|     
+|     * Will need to now look into updating the back end (java springboot) to
+|     incorporate the correct REST endpoints to allow updating and deletion of
+|     question choices as a part of the question body as this will probably be
+|     the easiest way to get this working.
+|     
+|     * Can also include the endpoints to manage the curd opeations on the
+|     question choices alone but I do want to just add in new question choices
+|     by doing a PUT/POST request with that question json body.
+| 
+* commit dd43bba93984fd2bf7e5acf30b5f3531881b6900
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Thu Feb 14 16:41:22 2019 +0000
+| 
+|     Questions can now be added, edited and deleted from the survey edit page.
+| 
+* commit 3e6b6fba73fa32aac49ea6ea3984ba8ea0bb1ff1
+| Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+| Date:   Thu Jan 31 15:11:55 2019 +0000
+| 
+|     Getting some of the groundwork done
+| 
+* commit 7aa3daa2983cb6c24aa4bf3ccdb5024caa84cdc3
+  Author: Tarnjot Singh Virdee <gv009864@reading.ac.uk>
+  Date:   Mon Jan 28 14:42:43 2019 +0000
+  
+      Initial commit from Create React App
