@@ -5,6 +5,7 @@
 \setlength{\parindent}{1cm}
 \setlength{\parskip}{6pt}
 \usepackage{graphicx}
+\usepackage{pdfpages}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{booktabs} % To thicken table lines
@@ -13,6 +14,7 @@
 \usepackage{float}
 \usepackage{tabu}
 \usepackage{longtable}
+\usepackage[title]{appendix}
 \usepackage{glossaries}
 \makeglossaries
 
@@ -60,5 +62,21 @@
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{ieeetr}
 \bibliography{bibliography/references}
-\printglossary
+
+\clearpage
+\begin{appendices}
+  % \section{Project Initiation Document}
+  \includepdf[pages=1,pagecommand={\section{Project Initiation Document} \thispagestyle{empty} \label{appendix:pid}}, fitpaper=true]{appendix/tarnjot_virdee_pid.pdf} 
+  \includepdf[pages=2-,pagecommand={\thispagestyle{empty}}, fitpaper=true]{appendix/tarnjot_virdee_pid.pdf}
+
+  \section{Logbook  Git commit history}
+
+  \subsection{Server application}
+
+  \subsection{Client application}
+
+  \subsection{Report}
+
+\end{appendices}
+
 \end{document}
