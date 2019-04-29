@@ -1,6 +1,6 @@
 \section{Evaluations}
 
-This section aims to be a reflection on the work that has been carried out over the course of the entirety of this project.
+This section aims to be a reflection on the work that has been carried throughout the entirety of this project.
 
 \subsection{Application evaluation}
 
@@ -12,41 +12,40 @@ software solution.
 
 \subsubsection*{Scalability}
 One of the main requirements for the system was for it to support future scalability.
-Completely separating both the front and and back end components allows each layer to consist of multiple instances of the same application as 
+Completely separating both the front and back end components allows each layer to consist of multiple instances of the same application as 
 a form of load balancing.
 
 Adopting a session-less approach, with Oauth2 and JWT, means that many servers can be deployed at once without having to share user sessions.
-Having no sessions stored server side removes scalability issues as the memory capacity of a server will end up being a limiting factor.
-Tokens are just issued by an authorization server and are stored client side instead.
+Having no sessions stored server-side removes scalability issues as the memory capacity of a server ends up being a limiting factor.
+Tokens are just issued by an authorisation server and are stored client side instead.
 It is also much easier to perform horizontal scaling as no data needs to be shared between each server instance.
 Another benefit is that there is no recovery required if a server needs to be restarted.
 
 \subsubsection*{Security}
-An emphasis was made on security for the application so time that could have been spent on features was spent on making the application more secure.
+An emphasis was made on security for the application, so the time that could have been spent on features was spent on making the application more secure.
 Developing a secure set of API endpoints, from the ground up, specifically for the student wellbeing application, has been a great success.
-The problem was that this API is no good in a real world environment if any type of user can have access to resources that should be 
+The problem was that this API is no good in a real-world environment if any type of user can have access to resources that should be 
 The developer was able to successfully incorporate their own Oauth2 implementation to provide session-less authentication where a client is given
-a Json Web Token to access restricted resources.
-Any registered user must provide valid credentials before they are issued an access token and will only be valid for a limited period of time.
-Tokens that are issued have an associated token secret which only the server will know of, this is another method that is used to ensure requests are 
-being made with a legitimate token.
+a JSON Web Token to access restricted resources.
+Any registered user must provide valid credentials before they are issued an access token and will only be valid for a limited period.
+Tokens that are issued have an associated token secret which only the server will know of. This is another method that is used to ensure requests are being made with a legitimate token.
 
 \subsubsection*{Usability}
-The survey creation tool, that has been fully implemented, managed to pass the user acceptance testing stage which serves as proof of 
+The survey creation tool that has been fully implemented managed to pass the user acceptance testing stage which serves as proof of 
 the sound functionality.
 Even though there was no upfront design created for the client application, what has been developed is clearly presented and logically laid
 out.
 The components that make up each of the pages have been created in a way that ensures they behave the way users expect them to.
-It would really frustrate the user if the application had not been updating other page components based on their own interactions.
+It would frustrate the user if the application had not been updating other page components based on their interactions.
 Utilising Twitter's Bootstrap library has allowed the application to have a reactive layout; adapting to the screen size of the device being used.
 In the absence of any mobile native application implementation, users can still access and use the web application as intended.
 
 \subsubsection{Features not implemented}
-Unfortunately due to the time constraints involved, the developer has not been able to implement a number of feature.
+Unfortunately, due to the time constraints involved, the developer has not been able to implement some feature.
 Most of these features related to the student usage of the application have not been implemented.
 
 \subsubsection*{User registration}
-Being able to register new users to the system is obviously an important part to the overall application. 
+Being able to register new users to the system is an important part of the overall application. 
 Before being able to handle user registrations, a secure method of authenticating users was considered a bigger priority.  
 At the moment, the current implementation automatically \emph{registers} a test user when the user information in the database is detected to be 
 empty.
@@ -55,18 +54,18 @@ been achieved.
 
 \subsubsection*{Survey response tool}
 The other major component of the application that was not included as a part of this release is the ability to respond to published surveys.
-This is mostly because of the complexities involved with the survey creation tool and it did not make sense to start with a survey response tool
+This is mostly because of the complexities involved with the survey creation tool, and it did not make sense to start with a survey response tool
 while there was no way to create them in the first place.
 
 \subsubsection*{Android application}
-The initial requirements stated that an android application needs to be provided as a part of the software solution.
-A design decision was made to use the REACTjs library for developing the clint side application, the main motivation for this was that it would a 
-lot easier to convert the existing code into REACT Native code which is used to create native applications for both Android and IOS.
-If more time was available, then being able to learn how to convert the code and actually create such an application would have been possible.
-The best alternative achieved that was achieved was the web application being fully usable on smart phones due to the taking advantage of
+The initial requirements stated that an Android application needs to be provided as a part of the software solution.
+A design decision was made to use the REACTjs library for developing the client-side application, the primary motivation for this was that it would a 
+a lot easier to convert the existing code into REACT Native code which is used to create native applications for both Android and IOS.
+If more time was available, then being able to learn how to convert the code and create such an application would have been possible.
+The best alternative achieved was the web application being entirely usable on smartphones due to the taking advantage of
 the Bootstrap library.
 
-%--------------------------------------------------An emphasis was made on security for the application so time that could have been spent on features was spent on making the application more secure.-----------------------------------------------------------%
+%--------------------------------------------------An emphasis was made on security for the application, so the time that could have been spent on features was spent on making the application more secure.-----------------------------------------------------------%
 
 \subsection{Social, legal \& ethical aspects}
 Social, legal and ethical concerns need to be addressed before this system can be deployed for public use.
@@ -74,28 +73,28 @@ Social, legal and ethical concerns need to be addressed before this system can b
 \subsubsection{Social}
 
 Regarding social aspects, this application revolves around the mental health of students within a university environment.
-The idea behind it is to provide resources to those individuals that find it difficult to engage in the initiative of going to their general practitioner
+The idea behind it is to provide resources to those individuals that find it challenging to engage in the initiative of going to their general practitioner
 (GP) to get assessed.
 This software solution is meant to be a way to give users the anonymity that they may need to participate in something that can help improve 
 various 
-Hopefully it will allow those attending university to improve results in assessments throughout the year and achieve a good degree level.
-Students can just use the application in a more informal way, utilising it to track the overall wellbeing and be able to compare it to other peers that
+Hopefully, it will allow those attending university to improve results in assessments throughout the year and achieve a good degree level.
+Students can still use the application in a more informal way, utilising it to track the overall wellbeing and be able to compare it to other peers that
 they interact with.
 
 
 \subsubsection{Legal}
-Personally identifiable information, of users, will be stored in datbases for this application to function.
+Personally identifiable information, of users, will be stored in databases for this application to function.
 Such identifiable information will include names, email addresses and data collected related to that person's wellbeing status.
 Under the General Data Protection Regulation (GDPR), such information needs to be processed lawfully, fairly and in a transparent manner \cite{unihighlands2018sevenprinciples}.
 The data itself must only be collected and used for legitimate purposes, in the case of this application it should only be used to calculate wellbeing 
-scores and have that data saved in a user created account.
+scores and have that data saved in a user-created account.
 Data that is associated with a particular user needs to be removed from all parts of the system once the data is no longer needed or if the user makes
 an explicit request.
 Extra precautions should be taken to ensure that breaches do not occur to the database system and have that data leaked into the public domain.
 
 This also can be paired with the Data Protection Act (1998) where there are eight conditions to comply when storing data.
-These eight conditions include points that include keeping data secure, relevant and accurate for the relevant amount of time. 
-Ensuring that data is processed in a lawful manner is also something covered under the act.
+These eight conditions include points that include keeping data secure, relevant and accurate for the appropriate amount of time. 
+Ensuring that data is processed lawfully is also something covered under the act.
 
 Before deploying the application into a full production environment where users will be able to use it, a full report will need to be generated that
 outlines how well the overall system complies with these laws.
@@ -120,29 +119,27 @@ To understand the type of skills and knowledge revolving the technologies used i
 \subsubsection*{Initial struggles with focus} \label{focusissues}
 During the initial stages of the project, the developer was finding it very difficult to focus on the initial planning and prototyping stages.
 This often meant that not enough progress was being made during the first few months of the academic year, leading to a lot of wasted time.
-Thankfully due to the support given by their supervisor, they were able to add much needed limits the scope for the project and get the required 
-focus to deliver frequent demonstrations.
+Thankfully due to the support given by their supervisor, they were able to add much-needed limits to the scope for the project and obtain the required focus to deliver frequent demonstrations.
 
 \subsubsection*{SpringBoot}
 Though the developer had some basic prior experience with the Java Spring framework, there were still many challenges to overcome 
-in order to get the necessary features implemented.
+to get the necessary features implemented.
 A lot of the issues revolved around the particular \emph{Spring way} of configuring the application.
 Akin to how someone with Java experience may want to start developing with Android, there is an entire structure and set of libraries
 that need to be understood before anything can truly be created.
 
 One of the biggest challenges with Spring was regards to the security configuration.
-Understanding how technologies such as Ouath2 worked was the first hurdle but the main issue was attempting to implement that into the project.
+Understanding how technologies such as Ouath2 worked was the first hurdle, but the main issue was attempting to implement that into the project.
 While researching for the correct way to implement it, there proved to be many outdated or incorrect examples. 
 The developer should have instead just referred to official guides rather than relying on these examples that are commonly posted on forums
 such as StackOverflow.
 This is one of the issues when working with technologies that are under constant development due to the growing demand.
 
 \subsubsection*{Using Swagger2}
-A lot of time was spent attempting to incorporate Swagger into the project as it was something they had learnt while on industrial placement.
-The problem with this was that the developer did not properly understand the usage of the technology and how it is meant to be incorporated.
-It was only after discussion with a former colleague that the understood how it is meant to be used which led to them determining that it did 
-not fully meet their needs. 
-The idea behind it was that you create the API upfront and then generate Java interfaces from it, these interfaces can then have implementations.
+Much time was spent attempting to incorporate Swagger into the project as it was something they had learnt while on an industrial placement.
+The problem with this was that the developer did not correctly understand the usage of the technology and how it is meant to be incorporated.
+It was only after discussion with a former colleague that the understood how it is meant to be used which led to them determining that it did not fully meet their needs. 
+The idea behind it was that you create the API up front and then generate Java interfaces from it; these interfaces can then have implementations.
 Instead, the approach taken was to develop the API directly in the Java code and use the documentation interface feature for keeping track of
 all the API endpoints created.
 The API could then be exported in JSON format and imported into testing tools such as Postman.
@@ -151,21 +148,20 @@ The API could then be exported in JSON format and imported into testing tools su
 
 Unlike Java (and Spring), the developer has never used JavaScript or REACT to develop an application that can be used from a web browser 
 environment.
-This posed many issues at the start as there was little clarity on how to actually implement functionalities such as the survey editor.
-Coding techniques for implementing asynchronous calls proved to be challenging at first due to the lack of understand of how they worked within the 
+This posed many issues at the start as there was little clarity on how to implement functionalities such as the survey editor.
+Coding techniques for implementing asynchronous calls proved to be challenging at first due to the lack of understanding of how they worked within the 
 JavaScript language.
-Once the initial learning stage had passed, and a good foundation was created, a sense of momentum started to build; being able to implement new 
-functionalities every week.
+Once the initial learning stage had passed, and a good foundation was created, a sense of momentum started to build; being able to implement new functionalities every week.
 
 \subsubsection*{Test Driven Development}
 
-Unfortunately a test driving approach to the development of the application was not done as intended.
-This is due to how the author was learning many of the technologies while developing, so it made it hard for them to actually write proper tests
+Unfortunately, a test driving approach to the development of the application was not achieved as intended.
+This is due to how the author was learning many of the technologies while developing, so it made it hard for them to write proper tests
 before implementing a feature.
 Learning technologies such as Mockito to mock instances of classes for testing Java Spring components is needed.
 Mockito in itself is not a very straightforward topic and was taking time away from actually developing features.
 
-Similarly with REACT, many technologies were being learnt while developing the front end application.
+Similarly, with REACT, many technologies were being learnt while developing the front end application.
 This led to a lack of clarity of what is required for a TDD based approach with this type of code.
 
 Ultimately manual testing, while developing, was adopted rather than proper unit testing.
@@ -178,28 +174,28 @@ Manual testing in a web browser was done while developing the REACT client to ch
 \subsubsection{Strengths}
 
 \subsubsection*{Taking the view of a user}
-It was important to the developer that the application ends up having a well thought out design approach.
+It was essential to the developer that the application ends up having a well thought out design approach.
 Before implementing any feature, they took time to think about how this would affect the user's experience. 
-This lead to more time being spend on how the client application function, implementing functionality that would likely be seen in more professional
+This lead to more time being spent on how the client application function, implementing functionality that would likely be seen in more professional
 applications.
 
 \subsubsection*{Taking industry practices into account}
-Many of the choices that relates to the choices in design and technologies came down to what the developer thought would make most sense if this application
-was to made for a real client.
+Many of the choices that relate to the choices in design and technologies came down to what the developer thought would make the most sense if this application
+was to be made for a real client.
 This is mostly due to the experiences gained from the time they had spent on placement.
 Using technologies such as SpringBoot was heavily based on the exposure they had to the technology on their industrial placement.
 
 \subsubsection*{Time management}
-Once the challenge mentioned in section \ref{focusissues} had been overcome, the author was able to manage time very well.
-They utilised a Kanban agile approach for the entirely of the development which meant that they focused on completing individual tasks before starting
+Once the challenge mentioned in section \ref{focusissues} had been overcome, the author was able to manage their time very well.
+They utilised a Kanban agile approach for the entirety of the development which meant that they focused on completing individual tasks before starting
 another one. 
-With a number of modules setting up assignments throughout the year, time had to be correctly spent to ensure that enough focus was still being maintained 
+With many modules setting up assignments throughout the year, time had to be correctly spent to ensure that enough focus was still being maintained 
 on this project.
-Planning was done on a weekly basis and was typically agreed by both the developer and supervisor in their weekly catch up sessions. 
+Planning was done weekly and was typically agreed by both the developer and supervisor in their weekly catch up sessions. 
 
 \subsubsection*{Willingness to be challenged}
 Rather than going with relatively easy approaches, such as using PHP for the server, the developer wanted to learn the best technologies for modern web applications.
-This often meant that more complex approaches, such as using Java Spring, were chosen over other solutions.
+This often meant that more sophisticated approaches, such as using Java Spring, were chosen over other solutions.
 A focus was made therefore made on trying to achieve the best implementation possible for as many features as possible, even if it meant that all components 
 could not be implemented on time.
 
@@ -209,7 +205,7 @@ could not be implemented on time.
 
 \subsubsection*{Technologies}
 The developer has been exposed to a vast number of different technologies throughout this development.
-Just taking the server side application into account the following technologies have been used:
+Just taking the server side application into account, the following technologies have been used:
 \begin{itemize}
     \tightlist
     \item Java
@@ -223,13 +219,13 @@ Just taking the server side application into account the following technologies 
 \end{itemize}
 
 Modern web security practices were learnt and utilised in the project which the developer found satisfaction with.
-Oauth2 with Json Web Tokens is now widely used across the web and having the motivation to implement such modern techniques made the developer aware 
+Oauth2 with JSON Web Tokens is now widely used across the web and having the motivation to implement such modern techniques made the developer aware 
 of how they work.
 That base knowledge allowed them to understand the Spring documentation of configuring the project correctly to add support for this.
-Moving forward, they should be able to easily 
+Moving forward, they should be able to easily. 
 
-With regards to the font end client, there were plenty of technologies used.
-The full list of that were used for the client are: 
+With regards to the front end client, there were plenty of technologies used.
+The full list of that was used for the client are: 
 \begin{itemize}
     \tightlist
     \item JavaScript
@@ -239,9 +235,9 @@ The full list of that were used for the client are:
     \item Yarn (Build tool)
 \end{itemize}
 
-REACT proved to be a very simple way of creating well structured code for something the user will actually interact with.
+REACT proved to be a very simple way of creating well-structured code for something the user will interact with.
 Everything is represented as components that can be individually refreshed depending if their states were updated or not.
-Twitter's Bootstrap library was also incorporated to provide an easy approach to creating well presented pages to the user without having to spend time
+Twitter's Bootstrap library was also incorporated to provide an easy approach to creating well-presented pages to the user without having to spend time
 toying around with CSS.
 
 All of these technologies that were used have proven to be a great choice for web application that are to be used in the modern day incarnation of the
@@ -251,7 +247,7 @@ The developer is sure that they are likely to utilise many of these technologies
 
 \subsubsection*{Project management}
 Due to this being a one person project, the project management side was also a responsibility for the developer.
-They have been able to mananage from the initial idea stages to making up the initial designs and carrying through with the implemntations.
+They have been able to manage from the initial idea stages to making up the initial designs and carrying through with the implementation.
 Typically this is not the case in the real worlds when these different responsibilities can be assigned to different people who are specialised in 
 those areas.
 Being forced to be responsible with the imposed time limitations has led to a better understanding of what it takes to plan out and follow through
