@@ -26,16 +26,55 @@ By acknowledging this, one can understand how it is difficult for these individu
 Anonymising feedback for those that wish to get help without anybody judging would be an excellent place to start. 
 
 \subsection{Existing survey creation tools}
-% Still need to do this bit
-The main objective of this project is to provide the necessary tools for health experts to curate surveys for students to respond to.
-Data from completed surveys can be used to direct students to appropriate resources depending on choices for each question.
+As this project aims to build a survey tool, it is important to look at existing solutions.
+Existing solutions should give the developer a better understanding of what is expected out of such an application.
 
+\subsubsection{Google forms}
+A popular survey/form creation tool that is used by many people is Google Forms and is offered to users free of charge.
+It allows users to create their own surveys and send them out via invitation links or by email.
+Google has provides many options to the user that is creating the survey form, being able to choose from multiple choice, drop-down and linear-scale.
+Responses to the survey are collected and the data can be presented to the creator in a multitude of different ways, depending on how they wish to
+view it. 
+The way the application has been developed means that it is reactive to the screen it is displayed on, being able to fit the screen based on its size \cite{google2015forms}.
+Users can therefore use a user interface hat is consistent across all devices. 
+Due to the free nature of this service, users can create as many surveys as they want with as many questions as they please.
+There is no restriction on the number of users that can collaborate on surveys which can be very helpful when scaling the number of experts for curating 
+a set of survey for students.
+
+\subsubsection{Google opinion rewards}
+Google opinion polls is an application specific to the Android plat form and is used by marketers to collection some basic data around a particular topic \cite{google2018opinionrewards}.
+Polls that are sent to users are Usually very quick to fill out and require no form filling, simply just choosing between multiple available options.
+To encourage users to complete the polls, users are rewarded with Google Play credit which can be used to buy anything on that store. 
+One aspect of this application has that this project aims to incorporate is the Android application that can notify users when new surveys are available.
+Inspiration can possibly be taken with the way this application handles the feature.
+
+\subsubsection{Survey Monkey}
+Survey Monkey is an internet application and hosting site that enables a person to develop a survey for use over the internet \cite{waclawski2012use}.
+As is with other solutions, Survey Monkey is commonly used for market research but can also be applied to other areas such as health.
+Unlike options, such as Google Forms, Survey Monkey includes pricing structures with certain features locked behind pay walls.
+
+At a basic level, users can create an unlimited number of surveys but are restricted to only 10 questions for each of them with only 100 respondents.
+This can potentially be an issue if it were to be used with the number of potential users in a university environment. 
+Unless the university themselves are willing to pay for it, it may prove to be a barrier for usage.
+Some level of branding could be required in the future to represent an organisation such as a university.
+In this case costs are likely to increase by a substantial amount; likely in excess of £1200 just for a single premier account.
+
+Another issue with this service is that only account holders included in the pricing plan are able to create the surveys.
+This could make it hard to bring more health experts on board for curating surveys due to the costs involved.
+
+\subsubsection{ZOHO}
+ZOHO is an option that is similar to Survey Monkey in many ways; mostly due to the pricing strategy involved.
+Some of the key features that are listed are the many templates, create surveys with drag and drop questions along with ability to include scoring \cite{zoho2018features}.
+The scoring part of surveys is something that is of great interest in this project as it will be one of the key factors into being able to understand 
+where students fall within a range.
+Inspiration may be taken from this service for the development of this project.
 
 \subsection{Web-app architectures}
 In the world of software engineering, there are many approaches to solve a single problem.
-Throughout the years, along with the evolution of technology, approaches have changed to ensure that products can be developed and maintained in a manner and time that allows businesses to adapt and react to ever-changing markets. 
-One of the main concerns of a business is to grow [citation], this is why having an architecture in place that is scalable is
-critical to maintain a competitive edge and meet the demands of customers.
+Throughout the years, along with the evolution of technology, approaches have changed to ensure that products can be developed and maintained in a 
+manner and time that allows businesses to adapt and react to ever-changing markets. 
+One of the main concerns of a business is to grow, this is why having an architecture in place that is scalable is critical to maintain a competitive 
+edge and meet the demands of customers.
 
 There are conventional architecture approaches used when developing a web application.
 A recent article by Microsoft listed approaches typically taken as of 2019. 

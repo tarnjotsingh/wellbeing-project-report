@@ -66,10 +66,6 @@ If more time was available, then being able to learn how to convert the code and
 The best alternative achieved that was achieved was the web application being fully usable on smart phones due to the taking advantage of
 the Bootstrap library.
 
-
-\subsubsection{Future considerations}
-
-
 %--------------------------------------------------An emphasis was made on security for the application so time that could have been spent on features was spent on making the application more secure.-----------------------------------------------------------%
 
 \subsection{Social, legal \& ethical aspects}
@@ -160,6 +156,22 @@ Coding techniques for implementing asynchronous calls proved to be challenging a
 JavaScript language.
 Once the initial learning stage had passed, and a good foundation was created, a sense of momentum started to build; being able to implement new 
 functionalities every week.
+
+\subsubsection*{Test Driven Development}
+
+Unfortunately a test driving approach to the development of the application was not done as intended.
+This is due to how the author was learning many of the technologies while developing, so it made it hard for them to actually write proper tests
+before implementing a feature.
+Learning technologies such as Mockito to mock instances of classes for testing Java Spring components is needed.
+Mockito in itself is not a very straightforward topic and was taking time away from actually developing features.
+
+Similarly with REACT, many technologies were being learnt while developing the front end application.
+This led to a lack of clarity of what is required for a TDD based approach with this type of code.
+
+Ultimately manual testing, while developing, was adopted rather than proper unit testing.
+Postman, an API testing tool, was used to manually test each of the REST endpoints to ensure that they were behaving as expected and were producing
+the correct output.
+Manual testing in a web browser was done while developing the REACT client to check if any forced errors caused a failure.
 
 %-----------------------------------%
 

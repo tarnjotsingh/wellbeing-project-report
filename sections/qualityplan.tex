@@ -65,11 +65,13 @@ able to utilize a previously written program (or function) without ever having t
 by reading the comments \cite{germain2010commenting}.
 
 \subsection{Source control}
-Git will be used as the version control for this project. Development branches will exist alongside the
-master branch. Restrictions need to be in place to prevent code being committed directly to master.
-Branches of branches are to be avoided, as this will increase the likelihood of merge conflicts; time
-resolving conflicts can be spent doing something more productive. Master branch will be latest,
-stable, version of the project.
+To manage the project, proper version control processes should be put in place.
+Having a good commit strategy is vital to keeping a record of the work that has been done.
+The university hosts their own GitLab instance and will be used as the version control system.
+Each day work is done, progress should be detailed in the commit log in a verbose fashion.
+It is vital to have detailed commit messages to understand what was done during that development period.
+Major features should be worked on branches to avoid ruining the codebase that exists on the master branch.
+Merge requests can be used to review work done on a branch and ensure that everything is ok before merging back to master.
 
 
 \subsection{Continuous integration}
@@ -158,6 +160,7 @@ This will ensure a level of quality is maintained when writing code as well as m
 enhancement request or fixing defects. 
 With software solutions such as SonarQube, checking metrics such as code coverage can be included as part of the CICD pipeline.
 
+\clearpage
 \begin{longtable}{|p{.15\textwidth}|p{.70\textwidth}|p{.15\textwidth}|}
     \hline
     Metric                              & Description                                                                                                                                                                                             & Expected value      \\

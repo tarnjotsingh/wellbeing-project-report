@@ -264,14 +264,20 @@ management system (RDMS).
 \subsubsection*{Chosen database approach}
 Considering that structured data, surveys and user data, are the two main types of data that need to be stored by such a solution, it is logical to go with a relational database.
 
-\subsection{Version control}
 
-To manage the project, proper version control processes should be put in place.
-Having a good commit strategy is vital to keeping a record of the work that has been done.
-The university hosts their own GitLab instance and will be used as the version control system.
-Each day work is done, progress should be detailed in the commit log with verbose fashion.
-It is vital to have detailed commit messages to understand what was done during that development period.
-Major features should be worked on branches to avoid ruining the codebase that exists on the master branch.
-Merge requests can be used to review work done on a branch and ensure that everything is ok before merging back to master.
+\subsection{Prototyping}
+Since Java Spring and React have been chosen as the core technologies to use for this project, the author felt there may be value in using something
+A technology framework called JHipster aims to unify many of these great technologies to create \cite{jhipster2015whatisit}: 
+\begin{itemize}
+    \tightlist
+    \item A high-performance and robust Java stack on the server side with Spring Boot
+    \item A sleek, modern, mobile-first front-end with Angular, React and Bootstrap
+    \item A robust microservice architecture with the JHipster Registry, Netflix OSS, the Elastic Stack and Docker
+    \item A powerful workflow to build your application with Yeoman, Webpack and Maven/Gradle
+\end{itemize}
+
+As a starting point, JHipster will be used to generate a basic Spring project to start prototyping some initial ideas and develop a
+base understanding of the technologies that have been chosen for the project.
+
 
 \clearpage
