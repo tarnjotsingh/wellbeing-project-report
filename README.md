@@ -6,5 +6,5 @@ This report discusses the work done for the student wellbeing final year project
 
 Link to the repositories for both the springboot backend and the reactjs front end:
 
-* Springboot application: https://csgitlab.reading.ac.uk/gv009864/springboot-docker-mysql
-* ReactJS front end application: https://csgitlab.reading.ac.uk/gv009864/student-wellbeing-react-app 
+* Springboot application: https://github.com/tarnjotsingh/wellbeing-springboot-server
+* ReactJS front end application: https://github.com/tarnjotsingh/wellbeing-react-app
